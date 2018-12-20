@@ -13,6 +13,9 @@ public class ReplyEntity {
     private Integer userId;
     private Integer postId;
 
+    private UserEntity userByUserId;
+    private PostEntity postByPostId;
+
     @Id
     @Column(name = "reply_id", nullable = false)
     public int getReplyId() {
@@ -78,7 +81,9 @@ public class ReplyEntity {
     }
 
     @Basic
-    @Column(name = "user_id", nullable = true)
+
+
+    @Column(name = "user_id")
     public Integer getUserId() {
         return userId;
     }
@@ -88,12 +93,33 @@ public class ReplyEntity {
     }
 
     @Basic
-    @Column(name = "post_id", nullable = true)
+
+    @Column(name = "post_id")
     public Integer getPostId() {
         return postId;
     }
 
     public void setPostId(Integer postId) {
         this.postId = postId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    public UserEntity getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(UserEntity userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id")
+    public PostEntity getPostByPostId() {
+        return postByPostId;
+    }
+
+    public void setPostByPostId(PostEntity postByPostId) {
+        this.postByPostId = postByPostId;
     }
 }

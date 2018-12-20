@@ -2,6 +2,7 @@ package cn.edu.ncu.jiluan.bbs.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Collection;
 
 @Entity
 @Table(name = "post", schema = "bbs", catalog = "")
@@ -13,9 +14,15 @@ public class PostEntity {
     private int views;
     private int likes;
     private int replies;
+
+    private Timestamp lastreply;
     private Integer plateId;
     private Integer userId;
     private Timestamp lastReply;
+    private PlateEntity plateByPlateId;
+    private UserEntity userByUserId;
+    private Collection<PostLikedEntity> postLikedsByPostId;
+    private Collection<ReplyEntity> repliesByPostId;
 
     @Id
     @Column(name = "post_id", nullable = false)
@@ -118,7 +125,9 @@ public class PostEntity {
     }
 
     @Basic
-    @Column(name = "plate_id", nullable = true)
+
+    @Column(name = "plate_id")
+
     public Integer getPlateId() {
         return plateId;
     }
@@ -128,7 +137,8 @@ public class PostEntity {
     }
 
     @Basic
-    @Column(name = "user_id", nullable = true)
+
+    @Column(name = "user_id")
     public Integer getUserId() {
         return userId;
     }
@@ -138,12 +148,52 @@ public class PostEntity {
     }
 
     @Basic
-    @Column(name = "last_reply", nullable = false)
+
+    @Column(name = "last_reply")
     public Timestamp getLastReply() {
         return lastReply;
     }
 
     public void setLastReply(Timestamp lastReply) {
         this.lastReply = lastReply;
+    }
+
+
+    @ManyToOne
+    @JoinColumn(name = "plate_id", referencedColumnName = "plate_id")
+    public PlateEntity getPlateByPlateId() {
+        return plateByPlateId;
+    }
+
+    public void setPlateByPlateId(PlateEntity plateByPlateId) {
+        this.plateByPlateId = plateByPlateId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    public UserEntity getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(UserEntity userByUserId) {
+        this.userByUserId = userByUserId;
+    }
+
+    @OneToMany(mappedBy = "postByPostId")
+    public Collection<PostLikedEntity> getPostLikedsByPostId() {
+        return postLikedsByPostId;
+    }
+
+    public void setPostLikedsByPostId(Collection<PostLikedEntity> postLikedsByPostId) {
+        this.postLikedsByPostId = postLikedsByPostId;
+    }
+
+    @OneToMany(mappedBy = "postByPostId")
+    public Collection<ReplyEntity> getRepliesByPostId() {
+        return repliesByPostId;
+    }
+
+    public void setRepliesByPostId(Collection<ReplyEntity> repliesByPostId) {
+        this.repliesByPostId = repliesByPostId;
     }
 }

@@ -6,6 +6,9 @@ spring:
     password: 123456
   jpa:
     show-sql: true
+  thymeleaf:
+    cache: false
+
 logging:
   level:
     cn.edu.ncu.bootjpademo: debug

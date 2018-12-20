@@ -2,6 +2,7 @@ package cn.edu.ncu.jiluan.bbs.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "user", schema = "bbs", catalog = "")
@@ -13,6 +14,12 @@ public class UserEntity {
     private String icon;
     private Integer provinceId;
     private Integer cityId;
+
+    private Collection<PostEntity> postsByUserId;
+    private Collection<PostLikedEntity> postLikedsByUserId;
+    private Collection<ReplyEntity> repliesByUserId;
+    private ProvinceEntity provinceByProvinceId;
+    private CityEntity cityByCityId;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -91,7 +98,8 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "province_id", nullable = true)
+
+    @Column(name = "province_id")
     public Integer getProvinceId() {
         return provinceId;
     }
@@ -101,12 +109,60 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "city_id", nullable = true)
+
+    @Column(name = "city_id")
     public Integer getCityId() {
         return cityId;
     }
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<PostEntity> getPostsByUserId() {
+        return postsByUserId;
+    }
+
+    public void setPostsByUserId(Collection<PostEntity> postsByUserId) {
+        this.postsByUserId = postsByUserId;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<PostLikedEntity> getPostLikedsByUserId() {
+        return postLikedsByUserId;
+    }
+
+    public void setPostLikedsByUserId(Collection<PostLikedEntity> postLikedsByUserId) {
+        this.postLikedsByUserId = postLikedsByUserId;
+    }
+
+    @OneToMany(mappedBy = "userByUserId")
+    public Collection<ReplyEntity> getRepliesByUserId() {
+        return repliesByUserId;
+    }
+
+    public void setRepliesByUserId(Collection<ReplyEntity> repliesByUserId) {
+        this.repliesByUserId = repliesByUserId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "province_id", referencedColumnName = "province_id")
+    public ProvinceEntity getProvinceByProvinceId() {
+        return provinceByProvinceId;
+    }
+
+    public void setProvinceByProvinceId(ProvinceEntity provinceByProvinceId) {
+        this.provinceByProvinceId = provinceByProvinceId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "city_id", referencedColumnName = "city_id")
+    public CityEntity getCityByCityId() {
+        return cityByCityId;
+    }
+
+    public void setCityByCityId(CityEntity cityByCityId) {
+        this.cityByCityId = cityByCityId;
     }
 }
