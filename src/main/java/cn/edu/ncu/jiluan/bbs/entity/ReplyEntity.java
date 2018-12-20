@@ -10,6 +10,8 @@ public class ReplyEntity {
     private String replyCont;
     private Integer replyRef;
     private Timestamp replyTime;
+    private Integer userId;
+    private Integer postId;
 
     @Id
     @Column(name = "reply_id", nullable = false)
@@ -73,5 +75,25 @@ public class ReplyEntity {
         result = 31 * result + (replyRef != null ? replyRef.hashCode() : 0);
         result = 31 * result + (replyTime != null ? replyTime.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "user_id", nullable = true)
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    @Basic
+    @Column(name = "post_id", nullable = true)
+    public Integer getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Integer postId) {
+        this.postId = postId;
     }
 }

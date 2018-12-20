@@ -11,6 +11,8 @@ public class UserEntity {
     private byte gender;
     private Date birthday;
     private String icon;
+    private Integer provinceId;
+    private Integer cityId;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -86,5 +88,25 @@ public class UserEntity {
         result = 31 * result + (birthday != null ? birthday.hashCode() : 0);
         result = 31 * result + (icon != null ? icon.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "province_id", nullable = true)
+    public Integer getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Integer provinceId) {
+        this.provinceId = provinceId;
+    }
+
+    @Basic
+    @Column(name = "city_id", nullable = true)
+    public Integer getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
     }
 }

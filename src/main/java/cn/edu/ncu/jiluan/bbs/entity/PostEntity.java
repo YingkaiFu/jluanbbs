@@ -14,6 +14,8 @@ public class PostEntity {
     private int likes;
     private int replies;
     private Timestamp lastreply;
+    private Integer plateId;
+    private Integer userId;
 
     @Id
     @Column(name = "post_id", nullable = false)
@@ -125,5 +127,25 @@ public class PostEntity {
         result = 31 * result + replies;
         result = 31 * result + (lastreply != null ? lastreply.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "plate_id", nullable = true)
+    public Integer getPlateId() {
+        return plateId;
+    }
+
+    public void setPlateId(Integer plateId) {
+        this.plateId = plateId;
+    }
+
+    @Basic
+    @Column(name = "user_id", nullable = true)
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 }

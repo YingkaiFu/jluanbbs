@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class CityEntity {
     private int cityId;
     private String cityName;
+    private Integer provinceId;
 
     @Id
     @Column(name = "city_id", nullable = false)
@@ -46,5 +47,15 @@ public class CityEntity {
         int result = cityId;
         result = 31 * result + (cityName != null ? cityName.hashCode() : 0);
         return result;
+    }
+
+    @Basic
+    @Column(name = "province_id", nullable = true)
+    public Integer getProvinceId() {
+        return provinceId;
+    }
+
+    public void setProvinceId(Integer provinceId) {
+        this.provinceId = provinceId;
     }
 }
