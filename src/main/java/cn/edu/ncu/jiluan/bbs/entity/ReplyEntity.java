@@ -12,6 +12,7 @@ public class ReplyEntity {
     private Timestamp replyTime;
     private Integer userId;
     private Integer postId;
+
     private UserEntity userByUserId;
     private PostEntity postByPostId;
 
@@ -80,6 +81,8 @@ public class ReplyEntity {
     }
 
     @Basic
+
+
     @Column(name = "user_id")
     public Integer getUserId() {
         return userId;
@@ -90,6 +93,7 @@ public class ReplyEntity {
     }
 
     @Basic
+
     @Column(name = "post_id")
     public Integer getPostId() {
         return postId;

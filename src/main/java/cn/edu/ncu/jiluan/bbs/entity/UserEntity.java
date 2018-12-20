@@ -14,6 +14,7 @@ public class UserEntity {
     private String icon;
     private Integer provinceId;
     private Integer cityId;
+
     private Collection<PostEntity> postsByUserId;
     private Collection<PostLikedEntity> postLikedsByUserId;
     private Collection<ReplyEntity> repliesByUserId;
@@ -97,6 +98,7 @@ public class UserEntity {
     }
 
     @Basic
+
     @Column(name = "province_id")
     public Integer getProvinceId() {
         return provinceId;
@@ -107,6 +109,7 @@ public class UserEntity {
     }
 
     @Basic
+
     @Column(name = "city_id")
     public Integer getCityId() {
         return cityId;

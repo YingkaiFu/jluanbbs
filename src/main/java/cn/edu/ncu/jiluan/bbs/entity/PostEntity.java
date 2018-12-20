@@ -14,6 +14,7 @@ public class PostEntity {
     private int views;
     private int likes;
     private int replies;
+
     private Timestamp lastreply;
     private Integer plateId;
     private Integer userId;
@@ -93,16 +94,6 @@ public class PostEntity {
         this.replies = replies;
     }
 
-    @Basic
-    @Column(name = "lastreply", nullable = false)
-    public Timestamp getLastreply() {
-        return lastreply;
-    }
-
-    public void setLastreply(Timestamp lastreply) {
-        this.lastreply = lastreply;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -117,7 +108,6 @@ public class PostEntity {
         if (postTopic != null ? !postTopic.equals(that.postTopic) : that.postTopic != null) return false;
         if (postCont != null ? !postCont.equals(that.postCont) : that.postCont != null) return false;
         if (postTime != null ? !postTime.equals(that.postTime) : that.postTime != null) return false;
-        if (lastreply != null ? !lastreply.equals(that.lastreply) : that.lastreply != null) return false;
 
         return true;
     }
@@ -131,12 +121,13 @@ public class PostEntity {
         result = 31 * result + views;
         result = 31 * result + likes;
         result = 31 * result + replies;
-        result = 31 * result + (lastreply != null ? lastreply.hashCode() : 0);
         return result;
     }
 
     @Basic
+
     @Column(name = "plate_id")
+
     public Integer getPlateId() {
         return plateId;
     }
@@ -146,6 +137,7 @@ public class PostEntity {
     }
 
     @Basic
+
     @Column(name = "user_id")
     public Integer getUserId() {
         return userId;
@@ -156,6 +148,7 @@ public class PostEntity {
     }
 
     @Basic
+
     @Column(name = "last_reply")
     public Timestamp getLastReply() {
         return lastReply;
@@ -164,6 +157,7 @@ public class PostEntity {
     public void setLastReply(Timestamp lastReply) {
         this.lastReply = lastReply;
     }
+
 
     @ManyToOne
     @JoinColumn(name = "plate_id", referencedColumnName = "plate_id")

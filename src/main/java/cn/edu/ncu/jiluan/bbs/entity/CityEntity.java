@@ -9,6 +9,7 @@ public class CityEntity {
     private int cityId;
     private String cityName;
     private Integer provinceId;
+
     private ProvinceEntity provinceByProvinceId;
     private Collection<UserEntity> usersByCityId;
 
@@ -53,7 +54,9 @@ public class CityEntity {
     }
 
     @Basic
+
     @Column(name = "province_id")
+  
     public Integer getProvinceId() {
         return provinceId;
     }
