@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://119.23.223.137:3306/bbs
+    username: krito
+    password: 123456
+  jpa:
+    show-sql: true
+logging:
+  level:
+    cn.edu.ncu.bootjpademo: debug
