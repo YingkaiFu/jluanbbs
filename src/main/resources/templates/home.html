@@ -4,13 +4,73 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{js/bootstrap.js}"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div class="container-fluid" style="background-color: #ffc107">
     <nav class="navbar">
-        导航栏
+        <div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SignIn" data-whatever="@mdo">登陆</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#SignUp" data-whatever="@fat">注册</button>
+        </div>
     </nav>
+</div>
+<div class="modal fade" id="SignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">登陆</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="SignIn_username" class="col-form-label">用户名:</label>
+                        <input type="text" class="form-control" id="signIn_username">
+                    </div>
+                    <div class="form-group">
+                        <label for="signIn_password" class="col-form-label">密码:</label>
+                        <input type="password" class="form-control" id="signIn_password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="SignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabe2">注册</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="SignUp_username" class="col-form-label">用户名:</label>
+                        <input type="text" class="form-control" id="SignUp_username">
+                    </div>
+                    <div class="form-group">
+                        <label for="SignUp_password" class="col-form-label">密码:</label>
+                        <input type="password" class="form-control" id="SignUp_password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
@@ -47,5 +107,16 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('#SignIn').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
+    })
+    $('#SignUp').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
+    })
+</script>
 </body>
 </html>
