@@ -4,32 +4,98 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{css/bootstrap.css}" rel="stylesheet" type="text/css">
-    <script th:src="@{js/bootstrap.js}"></script>
+    <script th:src="@{js/jquery.min.js}"></script>
+    <script th:src="@{js/bootstrap.min.js}"></script>
 </head>
 <body>
 <div class="container-fluid" style="background-color: #ffc107">
-    <nav class="navbar">
-        导航栏
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">jluanBBS</a>
+        <div class="my-2 my-sm-0">
+            <button type="button" class="btn btn-outline-success " data-toggle="modal" data-target="#SignIn"
+                    data-whatever="@mdo">登陆
+            </button>
+            <button type="button" class="btn btn-outline-success " data-toggle="modal" data-target="#SignUp"
+                    data-whatever="@fat">注册
+            </button>
+        </div>
     </nav>
+
+</div>
+<div class="modal fade" id="SignIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">登陆</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="SignIn_username" class="col-form-label">用户名:</label>
+                        <input type="text" class="form-control" id="signIn_username">
+                    </div>
+                    <div class="form-group">
+                        <label for="signIn_password" class="col-form-label">密码:</label>
+                        <input type="password" class="form-control" id="signIn_password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="SignUp" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabe2">注册</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="SignUp_username" class="col-form-label">用户名:</label>
+                        <input type="text" class="form-control" id="SignUp_username">
+                    </div>
+                    <div class="form-group">
+                        <label for="SignUp_password" class="col-form-label">密码:</label>
+                        <input type="password" class="form-control" id="SignUp_password">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-md-8 " style="height: 900px;">
             <ul class="list-group">
-            <li class="list-group-item" th:each="post:${posts}">
-                <div>
+                <li class="list-group-item" th:each="post:${posts}">
                     <div>
-                        <a class="mb-1" th:text="${post.postTopic}"></a>
+                        <div>
+                            <a class="mb-1" th:text="${post.postTopic}"></a>
+                        </div>
+                        <div>
+                            <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
+                            <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
+                            <span class="small text-muted" th:text="查看+${post.views}"></span>
+                            <span class="small text-muted" th:text="喜欢+${post.likes}"></span>
+                            <span class="small text-muted" th:text="最后回复+${post.replies}"></span>
+                        </div>
                     </div>
-                    <div>
-                        <span class="small" th:text="${post.userId}"></span>
-                        <span class="small" th:text="${post.plateId}"></span>
-                        <span class="small" th:text="${post.views}"></span>
-                        <span class="small" th:text="${post.likes}"></span>
-                        <span class="small" th:text="${post.replies}"></span>
-                    </div>
-                </div>
-            </li>
+                </li>
             </ul>
         </div>
         <div class="col-md-4" style="height: 300px;">
@@ -37,15 +103,31 @@
                 <button type="button" class="btn btn-primary btn-block">发帖</button>
             </div>
             <div class="col" style="height: 300px">
-                <div th:each="plate:${plates}">
-                    <button type="button" class="btn btn-outline-primary btn-lg" th:text="${plate.plateName}"></button>
-                </div>
+                <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
+
+                <tr th:each="plate:${plates}">
+                    <td>
+                        <button type="button" class="btn btn-outline-primary btn-lg"
+                                th:text="${plate.plateName}"></button>
+                    </td>
+                </tr>
             </div>
-            <div class="col" style="background-color: #31ad9b;height: 400px">
-                这是其他
-            </div>
+        </div>
+        <div class="col" style="background-color: #31ad9b;height: 400px">
+            这是其他
         </div>
     </div>
 </div>
+
+<script>
+    $('#SignIn').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
+    })
+    $('#SignUp').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var modal = $(this)
+    })
+</script>
 </body>
 </html>

@@ -3,11 +3,7 @@ package cn.edu.ncu.jiluan.bbs.entity;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
-import java.util.Objects;
 
-/**
- * Created by krito on 2018/12/20
- */
 public class PostLikedEntityPK implements Serializable {
     private int postId;
     private int userId;
@@ -36,13 +32,19 @@ public class PostLikedEntityPK implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+
         PostLikedEntityPK that = (PostLikedEntityPK) o;
-        return postId == that.postId &&
-                userId == that.userId;
+
+        if (postId != that.postId) return false;
+        if (userId != that.userId) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(postId, userId);
+        int result = postId;
+        result = 31 * result + userId;
+        return result;
     }
 }
