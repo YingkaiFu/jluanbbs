@@ -1,5 +1,8 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -66,7 +69,8 @@ public class CityEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "province_id", referencedColumnName = "province_id")
+    @JoinColumn(name = "province_id", referencedColumnName = "province_id", insertable = false, updatable = false)
+    @JsonBackReference
     public ProvinceEntity getProvinceByProvinceId() {
         return provinceByProvinceId;
     }
@@ -76,6 +80,7 @@ public class CityEntity {
     }
 
     @OneToMany(mappedBy = "cityByCityId")
+    @JsonManagedReference
     public Collection<UserEntity> getUsersByCityId() {
         return usersByCityId;
     }

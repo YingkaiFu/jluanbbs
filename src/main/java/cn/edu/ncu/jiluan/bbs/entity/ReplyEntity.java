@@ -1,5 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 
@@ -104,7 +106,8 @@ public class ReplyEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+    @JsonBackReference
     public UserEntity getUserByUserId() {
         return userByUserId;
     }
@@ -114,7 +117,8 @@ public class ReplyEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "post_id")
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id", insertable = false, updatable = false)
+    @JsonBackReference
     public PostEntity getPostByPostId() {
         return postByPostId;
     }

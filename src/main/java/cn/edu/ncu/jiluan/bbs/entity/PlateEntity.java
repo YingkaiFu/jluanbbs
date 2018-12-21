@@ -1,5 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -64,6 +66,7 @@ public class PlateEntity {
     }
 
     @OneToMany(mappedBy = "plateByPlateId")
+    @JsonManagedReference
     public Collection<PostEntity> getPostsByPlateId() {
         return postsByPlateId;
     }

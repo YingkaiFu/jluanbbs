@@ -1,5 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -52,6 +54,7 @@ public class ProvinceEntity {
     }
 
     @OneToMany(mappedBy = "provinceByProvinceId")
+    @JsonManagedReference
     public Collection<CityEntity> getCitiesByProvinceId() {
         return citiesByProvinceId;
     }
@@ -61,6 +64,7 @@ public class ProvinceEntity {
     }
 
     @OneToMany(mappedBy = "provinceByProvinceId")
+    @JsonManagedReference
     public Collection<UserEntity> getUsersByProvinceId() {
         return usersByProvinceId;
     }
