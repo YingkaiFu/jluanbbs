@@ -1,5 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -52,7 +54,8 @@ public class PostLikedEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false)
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false, insertable = false, updatable = false)
+    @JsonBackReference
     public PostEntity getPostByPostId() {
         return postByPostId;
     }
@@ -62,7 +65,8 @@ public class PostLikedEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false, insertable = false, updatable = false)
+    @JsonBackReference
     public UserEntity getUserByUserId() {
         return userByUserId;
     }

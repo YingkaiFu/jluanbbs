@@ -1,5 +1,8 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -160,7 +163,8 @@ public class PostEntity {
 
 
     @ManyToOne
-    @JoinColumn(name = "plate_id", referencedColumnName = "plate_id")
+    @JoinColumn(name = "plate_id", referencedColumnName = "plate_id", insertable = false, updatable = false)
+    @JsonBackReference
     public PlateEntity getPlateByPlateId() {
         return plateByPlateId;
     }
@@ -170,7 +174,8 @@ public class PostEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+    @JsonBackReference
     public UserEntity getUserByUserId() {
         return userByUserId;
     }
@@ -180,6 +185,7 @@ public class PostEntity {
     }
 
     @OneToMany(mappedBy = "postByPostId")
+    @JsonManagedReference
     public Collection<PostLikedEntity> getPostLikedsByPostId() {
         return postLikedsByPostId;
     }
@@ -189,6 +195,7 @@ public class PostEntity {
     }
 
     @OneToMany(mappedBy = "postByPostId")
+    @JsonManagedReference
     public Collection<ReplyEntity> getRepliesByPostId() {
         return repliesByPostId;
     }

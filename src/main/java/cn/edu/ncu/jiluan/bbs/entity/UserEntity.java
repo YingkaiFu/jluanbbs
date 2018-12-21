@@ -1,5 +1,8 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
@@ -120,6 +123,7 @@ public class UserEntity {
     }
 
     @OneToMany(mappedBy = "userByUserId")
+    @JsonManagedReference
     public Collection<PostEntity> getPostsByUserId() {
         return postsByUserId;
     }
@@ -129,6 +133,7 @@ public class UserEntity {
     }
 
     @OneToMany(mappedBy = "userByUserId")
+    @JsonManagedReference
     public Collection<PostLikedEntity> getPostLikedsByUserId() {
         return postLikedsByUserId;
     }
@@ -138,6 +143,7 @@ public class UserEntity {
     }
 
     @OneToMany(mappedBy = "userByUserId")
+    @JsonManagedReference
     public Collection<ReplyEntity> getRepliesByUserId() {
         return repliesByUserId;
     }
@@ -147,7 +153,8 @@ public class UserEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "province_id", referencedColumnName = "province_id")
+    @JoinColumn(name = "province_id", referencedColumnName = "province_id", insertable = false, updatable = false)
+    @JsonBackReference
     public ProvinceEntity getProvinceByProvinceId() {
         return provinceByProvinceId;
     }
@@ -157,7 +164,8 @@ public class UserEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "city_id", referencedColumnName = "city_id")
+    @JoinColumn(name = "city_id", referencedColumnName = "city_id", insertable = false, updatable = false)
+    @JsonBackReference
     public CityEntity getCityByCityId() {
         return cityByCityId;
     }
