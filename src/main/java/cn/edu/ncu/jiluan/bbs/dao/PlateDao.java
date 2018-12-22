@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PlateDao extends JpaRepository<PlateEntity,Integer> {
-
+    PlateEntity findPlateEntityByPlateId(Integer plateId);
 }
