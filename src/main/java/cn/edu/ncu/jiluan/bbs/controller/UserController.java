@@ -3,6 +3,7 @@ package cn.edu.ncu.jiluan.bbs.controller;
 import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
 import cn.edu.ncu.jiluan.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +15,7 @@ import java.util.List;
 /**
  * Created by krito on 2018/12/19
  */
-@RestController
+@Controller
 @RequestMapping(value = "user")
 public class UserController {
     @Autowired
