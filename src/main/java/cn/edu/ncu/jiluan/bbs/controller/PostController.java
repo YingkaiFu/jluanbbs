@@ -1,6 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.controller;
 
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
+import cn.edu.ncu.jiluan.bbs.service.PlateService;
 import cn.edu.ncu.jiluan.bbs.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,19 +17,23 @@ import java.util.List;
  * Created by krito on 2018/12/20
  */
 @Controller
-@RequestMapping(value = "post")
+@RequestMapping(value = "")
 public class PostController {
     @Autowired
     private PostService postService;
+    @Autowired
+    private PlateService plateService;
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value = "post",method = RequestMethod.GET)
     public List<PostEntity> findAll(){
         return postService.findAll();
     }
 
-    @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
-    public String deletePostEntityByPostId(@PathVariable Integer postId){
+    @RequestMapping(value = "/plateMgr/{plateId}/postDel/{postId}",method = RequestMethod.GET)
+    public String deletePostEntityByPostId(@PathVariable Integer plateId, @PathVariable Integer postId){
         postService.deletePostEntityByPostId(postId);
-        return "postMgr";
+        return "redirect:/plateMgr/{plateId}";
     }
+
+
 }

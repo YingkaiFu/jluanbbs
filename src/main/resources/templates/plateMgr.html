@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">管理帖子</a><h5>欢迎您，管理员</h5>
+        <div class="my-2 my-sm-0">
+            <a href="/" class="btn btn-outline-success" role="button">登出
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 " style="height: 900px;">
+            <div class="container">
+                <h3 th:text="${plate.plateName}"></h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="post:${posts}">
+                    <div class="row">
+                        <div class="col-md-8 ">
+                            <div>
+                                <a class="mb-1" th:text="${post.postTopic}"></a>
+                            </div>
+                            <div>
+                                <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
+                                <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
+                            </div>
+
+                        </div>
+                        <div class="col-md-4 ">
+                            <div style="text-align: right"><a th:href="@{'/plateMgr/'+${plate.plateId}+'/postDel/'+${post.postId}}"  class="btn btn-outline-danger" role="button">删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4" style="height: 300px;">
+            <div class="col" style="height: 300px">
+                <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
+
+                <tr th:each="plate:${plates}">
+                    <td>
+                        <a th:href="@{'/plateMgr/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
+                           th:text="${plate.plateName}"></a>
+
+                    </td>
+                </tr>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
