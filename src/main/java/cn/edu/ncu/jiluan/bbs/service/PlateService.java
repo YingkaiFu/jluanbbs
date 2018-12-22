@@ -32,4 +32,8 @@ public class PlateService    {
     public void deletePlateEntityByPlateId(Integer plateId){
         plateDao.deletePlateEntityByPlateId(plateId);
     }
+
+    public PlateEntity savePlate(PlateEntity plateEntity){
+        return plateDao.save(plateEntity);
+    }
 }
