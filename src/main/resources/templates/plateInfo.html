@@ -81,8 +81,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 " style="height: 900px;">
+            <div class="container">
+                <h3 th:text="${plate.plateName}"></h3>
+            </div>
             <ul class="list-group">
-                <li class="list-group-item" th:each="post:${posts}">
+                <li class="list-group-item" th:each="post:${postList}">
                     <div>
                         <div>
                             <a class="mb-1" th:text="${post.postTopic}"></a>
@@ -105,11 +108,11 @@
             <div class="col" style="height: 300px">
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
 
-                <tr th:each="plate:${plates}">
+                <tr th:each="plate:${plateList}">
                     <td>
-                        <button type="button" class="btn btn-outline-primary btn-lg"
-                            th:text="${plate.plateName}"
-                                onclick="/plate/1"></button>
+                        <a th:href="@{'/plate/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
+                            th:text="${plate.plateName}"></a>
+
                     </td>
                 </tr>
             </div>

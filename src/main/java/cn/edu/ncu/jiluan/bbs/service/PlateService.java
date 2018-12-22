@@ -24,4 +24,8 @@ public class PlateService    {
     public List<PostEntity> findPostEntitiesByPlateId(Integer plateId){
         return postDao.findPostEntitiesByPlateId(plateId);
     }
+
+    public PlateEntity findPlateEntityByPlateId(Integer plateId){
+        return plateDao.findPlateEntityByPlateId(plateId);
+    }
 }

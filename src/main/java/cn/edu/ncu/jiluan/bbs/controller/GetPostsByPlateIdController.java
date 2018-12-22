@@ -17,8 +17,9 @@ public class GetPostsByPlateIdController {
 
     @RequestMapping(value = "/plate/{plateId}",method = RequestMethod.GET)
     public String findPostEntitiesByPlateId(@PathVariable Integer plateId, Model model){
-        model.addAttribute("posts",plateService.findPostEntitiesByPlateId(plateId));
-        model.addAttribute("plates",plateService.findAll());
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+        model.addAttribute("plateList",plateService.findAll());
+        model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
         return "plateInfo";
     }
 }
