@@ -39,6 +39,10 @@ public class UserService {
         return userRepository.QueryUser(email);
     }
 
+    public void deleteUserEntityByUserId(Integer userId){
+        userDao.deleteUserEntityByUserId(userId);
+    }
+
 
     public User saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
