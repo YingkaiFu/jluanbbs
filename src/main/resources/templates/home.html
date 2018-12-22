@@ -22,6 +22,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 " style="height: 900px;">
+            <div class="container">
+                <h3 th:text="所有帖子"></h3>
+            </div>
             <ul class="list-group">
                 <li class="list-group-item" th:each="post:${posts}">
                     <div>
@@ -48,14 +51,11 @@
 
                 <tr th:each="plate:${plates}">
                     <td>
-                        <button type="button" class="btn btn-outline-primary btn-lg"
-                                th:text="${plate.plateName}"></button>
+                        <a th:href="@{'/plate/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
+                           th:text="${plate.plateName}"></a>
                     </td>
                 </tr>
             </div>
-        </div>
-        <div class="col" style="background-color: #31ad9b;height: 400px">
-            这是其他
         </div>
     </div>
 </div>

@@ -22,4 +22,12 @@ public class GetPostsByPlateIdController {
         model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
         return "plateInfo";
     }
+
+    @RequestMapping(value = "/postMgr/{plateId}",method = RequestMethod.GET)
+    public String findPostEntitiesByPlateId_Mgr(@PathVariable Integer plateId, Model model){
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+        model.addAttribute("plateList",plateService.findAll());
+        model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
+        return "postMgr";
+    }
 }
