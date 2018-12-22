@@ -2,10 +2,13 @@ package cn.edu.ncu.jiluan.bbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name = "user", schema = "bbs", catalog = "")
@@ -45,7 +48,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "gender", nullable = false)
+    @Column(name = "gender", nullable = true)
     public byte getGender() {
         return gender;
     }
@@ -55,7 +58,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "birthday", nullable = false)
+    @Column(name = "birthday", nullable = true)
     public Date getBirthday() {
         return birthday;
     }
@@ -65,7 +68,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "icon", nullable = false, length = 256)
+    @Column(name = "icon", nullable = true, length = 256)
     public String getIcon() {
         return icon;
     }
@@ -101,7 +104,6 @@ public class UserEntity {
     }
 
     @Basic
-
     @Column(name = "province_id")
     public Integer getProvinceId() {
         return provinceId;
@@ -112,7 +114,6 @@ public class UserEntity {
     }
 
     @Basic
-
     @Column(name = "city_id")
     public Integer getCityId() {
         return cityId;
