@@ -27,8 +27,8 @@ public class User {
     private String email;
 
     @Column(name = "password")
-    @Length(min = 5, message = "*Your password must have at least 5 characters")
-    @NotEmpty(message = "*Please provide your password")
+    @Length(min = 5, message = "*密码长度需要大于6")
+    @NotEmpty(message = "*请输入你的密码")
     private String password;
 
     public String getEmail() {
