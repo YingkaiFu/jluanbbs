@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -41,6 +40,7 @@ public class LoginController {
         if(n==0) {
             //获取session并将userName存入session对象
             session.setAttribute("userName", userEntity.getUserName());
+            session.setAttribute("userId", userEntity.getUserId());
             if(userEntity.getUserName().equals("admin"))
                 return "redirect:/adminPage";
             return "redirect:/";
@@ -58,6 +58,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         HttpSession session=request.getSession();
         session.removeAttribute("userName");//获取session并将userName存入session对象
+        session.removeAttribute("userId");
         return "redirect:/";
     }
 

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>JluanBBS</title>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
@@ -13,6 +15,8 @@
         <a class="navbar-brand" href="#">jluanBBS</a>
 
         <div class="my-2 my-sm-0" th:if="${session.userName==null}">
+            <a href="/" class="btn btn-outline-success" role="button">首页
+            </a>
             <a href="/login" class="btn btn-outline-success" role="button">登陆
             </a>
             <a href="/registration" class="btn btn-outline-success" role="button">注册
@@ -20,12 +24,18 @@
         </div>
 
         <div class="my-2 my-sm-0" th:if="${session.userName}">
+
+            <a href="/" class="btn btn-outline-success" role="button">首页
+            </a>
+            <a th:href="@{'/user/userInfo/'+${session.userId}}" class="btn btn-outline-success" role="button">个人中心
+            </a>
             <a href="/logOut" class="btn btn-outline-success" role="button">注销</a>
         </div>
     </nav>
 </div>
 <div class="container">
     <div class="row">
+        <i class="m"></i>
         <div class="col-md-8 " style="height: 900px;">
             <div class="container">
                 <h3 th:text="所有帖子"></h3>
@@ -36,13 +46,24 @@
                         <div>
                             <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
                         </div>
-                        <div>
-                            <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
-                            <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
-                            <span class="small text-muted" th:text="查看+${post.views}"></span>
-                            <span class="small text-muted" th:text="喜欢+${post.likes}"></span>
-                            <span class="small text-muted" th:text="最后回复+${post.replies}"></span>
+                        <div class="row">
+                            <div class="col">
+                                <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
+                                <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
+
+                            </div>
+
+                            <div class="col" style="text-align: right">
+                                <i class="far fa-eye"></i>
+                                <span class="small text-muted" th:text="${post.views}"></span>
+                                <i class="fas fa-heart"></i>
+                                <i class="far fa-heart"></i>
+                                <span class="small text-muted" th:text="${post.likes}"></span>
+                                <i class="far fa-comment-dots"></i>
+                                <span class="small text-muted" th:text="${post.replies}"></span>
+                            </div>
                         </div>
+
                     </div>
                 </li>
             </ul>
@@ -55,7 +76,7 @@
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
                 <tr th:each="plate:${plateList}">
                     <td>
-                        <a th:href="@{'/plate/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
+                        <a th:href="@{'/plate/'+${plate.plateId}}" class="btn btn-outline-success" role="button"
                            th:text="${plate.plateName}"></a>
                     </td>
                 </tr>
