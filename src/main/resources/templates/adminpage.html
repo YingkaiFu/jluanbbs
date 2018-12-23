@@ -6,34 +6,68 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 <div class="container-fluid" style="background-color: #ffc107">
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">jluanBBS</a>
-        <div class="my-2 my-sm-0">
-            <p>欢迎您，管理员</p>
-            <a href="/" class="btn btn-outline-success" role="button">登出
-            </a>
+        <a class="navbar-brand" href="#">管理帖子</a><h5>欢迎您，管理员</h5>
+        <div class="my-2 my-sm-0" th:if="${session.userName}">
+            <a href="/logOut" class="btn btn-outline-success" role="button">注销</a>
         </div>
     </nav>
 </div>
+
 <div class="container">
     <div class="row">
-
-
-        <a href="userMgr.html" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">管理用户名单</a>
-        <a href="plateMgr.html" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">管理板块内容</a>
-        <a href="plateMgr.html" class="btn btn-primary btn-lg btn-block" role="button" aria-pressed="true">管理发帖内容</a>
         <div class="col-md-8 " style="height: 900px;">
-
+            <div class="container">
+                <h3 th:text="所有帖子"></h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item" th:each="post:${posts}">
+                    <div class="row">
+                        <div class="col-md-8">
+                        <div>
+                            <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
+                        </div>
+                        <div>
+                            <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
+                            <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
+                            <span class="small text-muted" th:text="查看+${post.views}"></span>
+                            <span class="small text-muted" th:text="喜欢+${post.likes}"></span>
+                            <span class="small text-muted" th:text="最后回复+${post.replies}"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align: right">
+                            <a th:href="@{'/postDel/'+${post.postId}}" class="btn btn-outline-danger" role="button" >删除</a>
+                        </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
         </div>
         <div class="col-md-4" style="height: 300px;">
-
+            <div class="col" style="height: 50px">
+                <a th:href="@{addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
+            </div>
+            <div class="col" style="height: 50px">
+                <a href="/user/userMgr" class="btn btn-primary btn-block" role="button">查看用户名单</a>
+            </div>
+            <div class="col" style="height: 300px">
+                <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
+                <tr th:each="plate:${plates}">
+                    <td>
+                        <a th:href="@{'/plateMgr/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
+                           th:text="${plate.plateName}"></a>
+                    </td>
+                </tr>
+            </div>
         </div>
-
     </div>
 </div>
+
 
 
 </body>

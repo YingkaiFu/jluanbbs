@@ -41,7 +41,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
-    public String deletePostEntityByPostId2(@PathVariable Integer postId){
+    public String deletePostEntityByPostId2(@PathVariable Integer postId, Model model){
         postService.deletePostEntityByPostId(postId);
         return "redirect:/adminPage";
     }
