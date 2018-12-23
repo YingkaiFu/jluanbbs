@@ -29,9 +29,10 @@ public class PostController {
     @Autowired
     private PlateService plateService;
 
-    @RequestMapping(value = "/list",method = RequestMethod.GET)
+    @RequestMapping(value = "/postList",method = RequestMethod.GET)
     public String  findAll(Model model){
         model.addAttribute("postList",postService.findAll());
+        model.addAttribute("plateList",plateService.findAll());
         return "home";
 
     }
@@ -43,23 +44,17 @@ public class PostController {
     }
 
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
-    public String getPlate(PostEntity postEntity, Model model){
+    public String getPlate(Model model){
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("post",new PostEntity());
-//        postService.addPost(postEntity);
         return "postAdd";
     }
 
     @RequestMapping(value = "/addPost",method = RequestMethod.POST)
-    public String postAdd(@Valid PostEntity postEntity, Model model){
-        System.out.println(postEntity.getPostCont());
-
+    public String postAdd(@Valid PostEntity postEntity){
         postEntity.setPostTime(new Timestamp(System.currentTimeMillis()));
         postService.addPost(postEntity);
-        model.addAttribute("topic",postEntity.getPostTopic());
-        model.addAttribute("plate",postEntity.getPlateId());
-        model.addAttribute("content",postEntity.getPostCont());
-        return "testResult";
+        return "redirect:/postList";
     }
 
 }

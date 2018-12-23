@@ -21,20 +21,10 @@ public class MainController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/")
+    @RequestMapping("/home")
     public String viewPlate(Model model){
-        List<PlateEntity> platelist = plateService.findAll();
-        List<PostEntity> postlist = postService.findAll();
-        model.addAttribute("plates",platelist);
-        model.addAttribute("posts",postlist);
-        return "home";
-    }
-    @RequestMapping("/aa/a")
-    public String viewPlate1(Model model){
-        List<PlateEntity> platelist = plateService.findAll();
-        List<PostEntity> postlist = postService.findAll();
-        model.addAttribute("plates",platelist);
-        model.addAttribute("posts",postlist);
+        model.addAttribute("plateList",plateService.findAll());
+        model.addAttribute("postList",postService.findAll());
         return "home";
     }
 }
