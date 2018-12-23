@@ -35,11 +35,16 @@ public class PostController {
     }
 
     @RequestMapping(value = "/plateMgr/{plateId}/postDel/{postId}",method = RequestMethod.GET)
-    public String deletePostEntityByPostId(@PathVariable Integer plateId, @PathVariable Integer postId){
+    public String deletePostEntityByPostId1(@PathVariable Integer plateId, @PathVariable Integer postId){
         postService.deletePostEntityByPostId(postId);
         return "redirect:/plateMgr/{plateId}";
     }
 
+    @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
+    public String deletePostEntityByPostId2(@PathVariable Integer postId){
+        postService.deletePostEntityByPostId(postId);
+        return "redirect:/adminPage";
+    }
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
     public String getPlate(Model model){
         model.addAttribute("plateList",plateService.findAll());
