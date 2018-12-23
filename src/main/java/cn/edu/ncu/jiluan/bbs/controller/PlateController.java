@@ -35,4 +35,7 @@ public class PlateController {
         plateService.savePlate(plateEntity);
         return "plateMgr";
     }
+
+
+
 }

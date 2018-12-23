@@ -20,4 +20,11 @@ public class PostService {
     public void deletePostEntityByPostId(Integer postId){
         postDao.deletePostEntityByPostId(postId);
     }
+
+    public PostEntity addPost(PostEntity postEntity){
+        return postDao.save(postEntity);
+    }
+    public PostEntity editPost(PostEntity postEntity){
+        return postDao.save(postEntity);
+    }
 }
