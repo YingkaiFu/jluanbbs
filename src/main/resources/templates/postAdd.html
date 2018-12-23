@@ -22,21 +22,25 @@
 </div>
 
 <div>
-    <form th:action="@{/postAdd}" method="post">
+    <form th:action="@{/addPost}" th:object="${post}" method="post">
         <div class="form-group" style="margin-top: 30px">
             <label for="theme" style="margin-left: 20px">主题：</label>
-            <input type="text" class="form-control" id="theme" style="width: 80%;margin: 10px auto auto 20px">
+            <input type="text" th:field="*{postTopic}" class="form-control" id="theme" style="width: 80%; margin: 10px auto auto 20px">
         </div>
         <div class="form-group" >
             <label style="margin-left: 20px">选择发帖版块：</label>
-            <select   class="form-control" id="postTopic" style="width: 80%;margin: 10px auto auto 20px" >
-                <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"></option>
-
+            <select th:field="*{plateId}" class="form-control" id="postTopic" style="width: 80%;margin: 10px auto auto 20px" >
+                <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"
+                    ></option>
             </select>
         </div>
         <div class="form-group">
             <label for="content" style="margin-left: 20px">发帖内容：</label>
-            <textarea class="form-control" id="content" rows="3"style="width: 80%;margin: 10px auto auto 20px"></textarea>
+            <textarea  th:field="*{postCont}" class="form-control" id="content" rows="3"style="width: 80%;margin: 10px auto auto 20px"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="content" style="margin-left: 20px">userId：</label>
+            <textarea  th:field="*{userId}" class="form-control" id="test" rows="3"style="width: 80%;margin: 10px auto auto 20px"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary" style="margin-left: 25px">发布</button>

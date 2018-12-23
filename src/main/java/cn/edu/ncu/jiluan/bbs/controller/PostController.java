@@ -15,13 +15,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
  * Created by krito on 2018/12/20
  */
 @Controller
-@RequestMapping(value = "post")
 public class PostController {
     @Autowired
     private PostService postService;
@@ -41,19 +42,24 @@ public class PostController {
         return "postMgr";
     }
 
-    @RequestMapping(value = "/add_a_post",method = RequestMethod.GET)
+    @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
     public String getPlate(PostEntity postEntity, Model model){
         model.addAttribute("plateList",plateService.findAll());
+        model.addAttribute("post",new PostEntity());
 //        postService.addPost(postEntity);
         return "postAdd";
     }
 
-    @RequestMapping(value = "/postAdd",method = RequestMethod.POST)
-    public String postAdd(PostEntity postEntity){
-        ModelAndView modelAndView=new ModelAndView();
-        modelAndView.addObject("content",new PostEntity());
+    @RequestMapping(value = "/addPost",method = RequestMethod.POST)
+    public String postAdd(@Valid PostEntity postEntity, Model model){
+        System.out.println(postEntity.getPostCont());
+
+        postEntity.setPostTime(new Timestamp(System.currentTimeMillis()));
         postService.addPost(postEntity);
-        return "redirect:/list";
+        model.addAttribute("topic",postEntity.getPostTopic());
+        model.addAttribute("plate",postEntity.getPlateId());
+        model.addAttribute("content",postEntity.getPostCont());
+        return "testResult";
     }
 
 }
