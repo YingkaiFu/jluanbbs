@@ -21,6 +21,8 @@ public class UserService {
         return userDao.findAll();
     }
 
+    public UserEntity findUserEntityByUserId(Integer userId) { return userDao.findUserEntityByUserId(userId); }
+
     public UserEntity findUserEntityByUserName(String username) {
         return userDao.findUserEntityByUserName(username);
     }
