@@ -62,7 +62,7 @@ public class LoginController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userName", "Welcome");
         modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
-        modelAndView.setViewName("admin/home");
+        modelAndView.setViewName("emm");
         return modelAndView;
     }
 

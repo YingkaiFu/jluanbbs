@@ -28,4 +28,12 @@ public class PlateService    {
     public PlateEntity findPlateEntityByPlateId(Integer plateId){
         return plateDao.findPlateEntityByPlateId(plateId);
     }
+
+    public void deletePlateEntityByPlateId(Integer plateId){
+        plateDao.deletePlateEntityByPlateId(plateId);
+    }
+
+    public PlateEntity savePlate(PlateEntity plateEntity){
+        return plateDao.save(plateEntity);
+    }
 }

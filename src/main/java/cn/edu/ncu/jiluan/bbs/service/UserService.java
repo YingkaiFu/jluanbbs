@@ -25,6 +25,10 @@ public class UserService {
         return userDao.findUserEntityByUserName(username);
     }
 
+    public void deleteUserEntityByUserId(Integer userId){
+        userDao.deleteUserEntityByUserId(userId);
+    }
+
 
     public UserEntity saveUser(UserEntity user) {
         user.setPassword(user.getPassword());
