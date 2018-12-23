@@ -24,7 +24,7 @@
                 <h3 th:text="所有帖子"></h3>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" th:each="post:${posts}">
+                <li class="list-group-item" th:each="post:${postList}">
                     <div class="row">
                         <div class="col-md-8">
                         <div>
@@ -56,7 +56,7 @@
             </div>
             <div class="col" style="height: 300px">
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
-                <tr th:each="plate:${plates}">
+                <tr th:each="plate:${plateList}">
                     <td>
                         <a th:href="@{'/plateMgr/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
                            th:text="${plate.plateName}"></a>
