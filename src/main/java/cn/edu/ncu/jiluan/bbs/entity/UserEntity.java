@@ -26,6 +26,7 @@ public class UserEntity {
     private Collection<ReplyEntity> repliesByUserId;
     private ProvinceEntity provinceByProvinceId;
     private CityEntity cityByCityId;
+    private String password;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -48,7 +49,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "gender", nullable = true)
+    @Column(name = "gender", nullable = false)
     public byte getGender() {
         return gender;
     }
@@ -68,7 +69,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "icon", nullable = true, length = 256)
+    @Column(name = "icon", nullable = false, length = 256)
     public String getIcon() {
         return icon;
     }
@@ -173,5 +174,15 @@ public class UserEntity {
 
     public void setCityByCityId(CityEntity cityByCityId) {
         this.cityByCityId = cityByCityId;
+    }
+
+    @Basic
+    @Column(name = "password", nullable = false, length = 15)
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

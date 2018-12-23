@@ -13,6 +13,8 @@ import java.util.List;
  */
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, Integer> {
+    UserEntity findUserEntityByUserName(String username);
+  
     @Modifying
     @Transactional
     void deleteUserEntityByUserId(Integer userId);
