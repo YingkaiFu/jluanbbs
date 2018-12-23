@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.userName}+'的个人空间'">用户个人信息</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">jluanBBS</a>
+
+        <div class="my-2 my-sm-0" th:if="${session.userName==null}">用户名
+            <a href="/login" class="btn btn-outline-success" role="button">登陆
+            </a>
+            <a href="/registration" class="btn btn-outline-success" role="button">注册
+            </a>
+        </div>
+
+        <div class="my-2 my-sm-0" th:if="${session.userName}">用户名
+            <a href="/logOut" class="btn btn-outline-success" role="button">注销</a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 " style="height: 900px;">
+            <div class="container">
+                <h3 th:text="${user.userName}+'的个人空间'">用户信息</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'用户名：     '+${user.userName}">
+                            用户名：     123
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'性别：      '+(${user.gender} ? '男' : '女')">
+                            性别：      男
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'出生年月：   '+${user.birthday}">
+                            出生年月：   1999-06-12
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'工作地点：    '+${user.provinceByProvinceId.provinceName}+${user.cityByCityId.cityName}">
+                            工作地点：   北京市北京市
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4" style="height: 300px;">
+            <div class="col" style="height: 50px">
+                <a th:href="@{addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
+            </div>
+            <div class="col" style="height: 300px">
+                <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
+                <tr th:each="plate:${plates}">
+                    <td>
+                        <a th:href="@{'/plate/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
+                           th:text="${plate.plateName}"></a>
+                    </td>
+                </tr>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

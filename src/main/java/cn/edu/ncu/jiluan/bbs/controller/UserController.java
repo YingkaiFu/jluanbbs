@@ -1,6 +1,8 @@
 package cn.edu.ncu.jiluan.bbs.controller;
 
 import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
+import cn.edu.ncu.jiluan.bbs.service.PlateService;
+import cn.edu.ncu.jiluan.bbs.service.PostService;
 import cn.edu.ncu.jiluan.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,21 @@ import java.util.List;
 public class UserController {
     @Autowired
     private UserService userService;
-    /**
-     @Description 获取全部分类信息
-     @Param
-     @Return List<UserEntity>
-     */
+
+    @Autowired
+    private PlateService plateService;
+
+    @Autowired
+    private PostService postService;
+
+    @RequestMapping(value = "userInfo/{userId}")
+    public String findUserEntityByUserId(Model model, @PathVariable Integer userId){
+        model.addAttribute("user", userService.findUserEntityByUserId(userId));
+        model.addAttribute("plates",plateService.findAll());
+        model.addAttribute("posts",postService.findAll());
+        return "userInfo";
+    }
+
     @RequestMapping(value = "userMgr",method = RequestMethod.GET)
     public String findAll(Model model){
         model.addAttribute("userList",userService.findAll());

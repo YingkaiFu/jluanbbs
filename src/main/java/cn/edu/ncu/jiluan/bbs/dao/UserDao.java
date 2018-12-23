@@ -14,6 +14,7 @@ import java.util.List;
 @Repository
 public interface UserDao extends JpaRepository<UserEntity, Integer> {
     UserEntity findUserEntityByUserName(String username);
+    UserEntity findUserEntityByUserId(Integer userId);
   
     @Modifying
     @Transactional
