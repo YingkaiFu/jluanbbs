@@ -2,8 +2,8 @@ package cn.edu.ncu.jiluan.bbs.controller;
 
 import cn.edu.ncu.jiluan.bbs.entity.PlateEntity;
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
-import cn.edu.ncu.jiluan.bbs.service.PlateService;
-import cn.edu.ncu.jiluan.bbs.service.PostService;
+import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
+import cn.edu.ncu.jiluan.bbs.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
@@ -25,6 +27,13 @@ public class PostController {
     private PostService postService;
     @Autowired
     private PlateService plateService;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private ReplyService replyService;
+    @Autowired
+    private PostLikedService postLikedService;
+
 
     @RequestMapping(value = "/postList",method = RequestMethod.GET)
     public String  findAll(Model model){
@@ -43,6 +52,9 @@ public class PostController {
     @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
     public String deletePostEntityByPostId2(@PathVariable Integer postId){
         postService.deletePostEntityByPostId(postId);
+        replyService.deleteReplyEntitiesByPostId(postId);
+        postLikedService.deleteReplyEntitiesByPostId(postId);
+
         return "redirect:/adminPage";
     }
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
@@ -53,7 +65,10 @@ public class PostController {
     }
 
     @RequestMapping(value = "/addPost",method = RequestMethod.POST)
-    public String postAdd(@Valid PostEntity postEntity){
+    public String postAdd(@Valid PostEntity postEntity, HttpServletRequest request){
+        HttpSession session=request.getSession();
+        UserEntity user = userService.findUserEntityByUserName((String)session.getAttribute("userName"));
+        postEntity.setUserId(user.getUserId());
         postEntity.setPostTime(new Timestamp(System.currentTimeMillis()));
         postService.addPost(postEntity);
         return "redirect:/postList";

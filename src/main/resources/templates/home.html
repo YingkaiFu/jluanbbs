@@ -41,8 +41,8 @@
                 <h3 th:text="所有帖子"></h3>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" th:each="post:${posts}">
-                    <div class="bd-callout bd-callout-danger">
+                <li class="list-group-item" th:each="post:${postList}">
+                    <div>
                         <div>
                             <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
                         </div>
@@ -70,11 +70,11 @@
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <a th:href="@{addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
+                <a th:href="@{/addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
             </div>
             <div class="col" style="height: 300px">
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
-                <tr th:each="plate:${plates}">
+                <tr th:each="plate:${plateList}">
                     <td>
                         <a th:href="@{'/plate/'+${plate.plateId}}" class="btn btn-outline-success" role="button"
                            th:text="${plate.plateName}"></a>
