@@ -44,7 +44,7 @@
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <button type="button" class="btn btn-primary btn-block">发帖</button>
+                <a th:href="@{addNewPost}"  class="btn btn-outline-success" role="button">发帖</a>
             </div>
             <div class="col" style="height: 300px">
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
@@ -60,15 +60,5 @@
     </div>
 </div>
 
-<!--<script>-->
-    <!--$('#SignIn').on('show.bs.modal', function (event) {-->
-        <!--var button = $(event.relatedTarget) // Button that triggered the modal-->
-        <!--var modal = $(this)-->
-    <!--})-->
-    <!--$('#SignUp').on('show.bs.modal', function (event) {-->
-        <!--var button = $(event.relatedTarget) // Button that triggered the modal-->
-        <!--var modal = $(this)-->
-    <!--})-->
-<!--</script>-->
 </body>
 </html>

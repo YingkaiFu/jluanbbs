@@ -21,7 +21,7 @@ public class MainController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public String viewPlate(Model model){
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("postList",postService.findAll());
