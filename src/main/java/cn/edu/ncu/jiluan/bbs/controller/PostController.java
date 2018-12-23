@@ -4,16 +4,13 @@ import cn.edu.ncu.jiluan.bbs.entity.PlateEntity;
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
 import cn.edu.ncu.jiluan.bbs.service.PlateService;
 import cn.edu.ncu.jiluan.bbs.service.PostService;
-import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import javax.validation.Valid;
 import java.sql.Timestamp;

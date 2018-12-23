@@ -34,4 +34,17 @@ public class UserService {
         user.setPassword(user.getPassword());
         return userDao.save(user);
     }
+
+    public int login(String userName, String password) {
+        UserEntity user = findUserEntityByUserName(userName);
+        if(user==null){
+            return 1;
+        }
+        else {
+            if (user.getPassword().equals(password)){
+                return 0;
+            }
+            else return -1;
+        }
+    }
 }

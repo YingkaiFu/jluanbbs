@@ -14,16 +14,16 @@
         <div class="col-3">
         </div>
         <div class="col-6">
-            <form th:action="@{/login}" method="POST">
+            <form th:action="@{/login}" th:object="${current}" method="post">
                 <h3 class="form-signin-heading" th:text="Welcome"></h3>
                 <div class="form-group">
                     <label for="username">用户名</label>
-                    <input type="text" id="username" name="username" th:placeholder="username"
+                    <input type="text" th:field="*{userName}" id="username" name="username" th:placeholder="username"
                            class="form-control"/> <br/>
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
-                    <input type="password" th:placeholder="Password"
+                    <input type="password" th:field="*{password}" th:placeholder="Password"
                            id="password" name="password" class="form-control"/> <br/>
                 </div>
                 <div align="center" th:if="${param.error}">
