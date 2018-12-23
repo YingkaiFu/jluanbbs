@@ -27,4 +27,13 @@ public class MainController {
         model.addAttribute("plateList",plateService.findAll());
         return "home";
     }
+
+    @RequestMapping("adminPage")
+    public String viewPlate_Mgr(Model model){
+        List<PlateEntity> plate_list = plateService.findAll();
+        List<PostEntity> post_list = postService.findAll();
+        model.addAttribute("plates",plate_list);
+        model.addAttribute("posts",post_list);
+        return "adminPage";
+    }
 }

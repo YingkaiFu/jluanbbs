@@ -21,6 +21,9 @@ public class PostService {
         postDao.deletePostEntityByPostId(postId);
     }
 
+    public PostEntity findPostEntityByPostId(Integer postId){
+        return postDao.findPostEntityByPostId(postId);
+    }
     public PostEntity addPost(PostEntity postEntity){
         return postDao.save(postEntity);
     }
