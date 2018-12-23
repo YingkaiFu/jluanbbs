@@ -34,7 +34,7 @@
                 <li class="list-group-item" th:each="post:${posts}">
                     <div>
                         <div>
-                            <a class="mb-1" th:text="${post.postTopic}"></a>
+                            <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
                         </div>
                         <div>
                             <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
