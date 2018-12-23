@@ -12,10 +12,8 @@
     <nav class="navbar navbar-light bg-light">
         <a class="navbar-brand" href="#">jluanBBS</a>
         <div class="my-2 my-sm-0">
-            <a href="login" class="btn btn-outline-success" role="button">登陆
-            </a>
-            <a href="registration" class="btn btn-outline-success" role="button">注册
-            </a>
+            <a href="login" class="btn btn-outline-success" role="button">登陆</a>
+            <a href="registration" class="btn btn-outline-success" role="button">注册 </a>
         </div>
     </nav>
 </div>
@@ -52,8 +50,8 @@
 
                 <tr th:each="plate:${plateList}">
                     <td>
-                        <a th:href="@{'/plate/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
-                            th:text="${plate.plateName}"></a>
+                        <a th:href="@{'/plate/'+${plate.plateId}}" class="btn btn-outline-success" role="button"
+                           th:text="${plate.plateName}"></a>
 
                     </td>
                 </tr>

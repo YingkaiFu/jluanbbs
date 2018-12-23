@@ -23,10 +23,8 @@ public class MainController {
 
     @RequestMapping("/")
     public String viewPlate(Model model){
-        List<PlateEntity> plate_list = plateService.findAll();
-        List<PostEntity> post_list = postService.findAll();
-        model.addAttribute("plates",plate_list);
-        model.addAttribute("posts",post_list);
+        model.addAttribute("postList",postService.findAll());
+        model.addAttribute("plateList",plateService.findAll());
         return "home";
     }
 }
