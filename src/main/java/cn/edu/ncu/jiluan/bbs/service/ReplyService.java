@@ -21,4 +21,7 @@ public class ReplyService {
     public List<ReplyEntity> findReplyEntitiesByPostId(Integer postId){
         return replyDao.findReplyEntitiesByPostId(postId);
     }
+    public void deleteReplyEntitiesByPostId(Integer postId){
+        replyDao.deleteReplyEntitiesByPostId(postId);
+    }
 }

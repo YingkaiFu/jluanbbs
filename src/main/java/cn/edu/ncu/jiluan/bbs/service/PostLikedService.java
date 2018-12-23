@@ -18,4 +18,8 @@ public class PostLikedService {
     public List<PostLikedEntity> findAll(){
         return postLikedDao.findAll();
     }
+
+    public void deleteReplyEntitiesByPostId(Integer postId){
+        postLikedDao.deletePostLikedEntitiesByPostId(postId);
+    }
 }

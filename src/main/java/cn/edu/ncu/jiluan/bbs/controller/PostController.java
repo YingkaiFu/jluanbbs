@@ -3,9 +3,7 @@ package cn.edu.ncu.jiluan.bbs.controller;
 import cn.edu.ncu.jiluan.bbs.entity.PlateEntity;
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
 import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
-import cn.edu.ncu.jiluan.bbs.service.PlateService;
-import cn.edu.ncu.jiluan.bbs.service.PostService;
-import cn.edu.ncu.jiluan.bbs.service.UserService;
+import cn.edu.ncu.jiluan.bbs.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,6 +29,11 @@ public class PostController {
     private PlateService plateService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private ReplyService replyService;
+    @Autowired
+    private PostLikedService postLikedService;
+
 
     @RequestMapping(value = "/postList",method = RequestMethod.GET)
     public String  findAll(Model model){
@@ -49,6 +52,9 @@ public class PostController {
     @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
     public String deletePostEntityByPostId2(@PathVariable Integer postId){
         postService.deletePostEntityByPostId(postId);
+        replyService.deleteReplyEntitiesByPostId(postId);
+        postLikedService.deleteReplyEntitiesByPostId(postId);
+
         return "redirect:/adminPage";
     }
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
