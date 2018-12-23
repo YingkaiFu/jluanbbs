@@ -6,6 +6,7 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 <div class="container-fluid" style="background-color: #ffc107">
@@ -37,11 +38,11 @@
                             <span class="small text-muted" th:text="喜欢+${post.likes}"></span>
                             <span class="small text-muted" th:text="最后回复+${post.replies}"></span>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div style="text-align: right">
+                            <a th:href="@{'/postDel/'+${post.postId}}" class="btn btn-outline-danger" role="button" >删除</a>
                         </div>
-                        <div class="col-md-4">
-                            <div style="text-align: right">
-                                <a th:href="@{'/postDel/'+${post.postId}}"  class="btn btn-outline-danger" role="button">删除</a>
-                            </div>
                         </div>
                     </div>
                 </li>
@@ -66,6 +67,8 @@
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>
