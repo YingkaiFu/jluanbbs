@@ -26,9 +26,9 @@ public class UserController {
      @Return List<UserEntity>
      */
     @RequestMapping(value = "userMgr",method = RequestMethod.GET)
-    public List<UserEntity> findAll(Model model){
+    public String findAll(Model model){
         model.addAttribute("userList",userService.findAll());
-        return userService.findAll();
+        return "userMgr";
     }
 
     @RequestMapping(value = "/userDel/{userId}",method = RequestMethod.GET)

@@ -37,10 +37,10 @@ public class PostController {
 
     }
 
-    @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
-    public String deletePostEntityByPostId(@PathVariable Integer postId){
+    @RequestMapping(value = "/plateMgr/{plateId}/postDel/{postId}",method = RequestMethod.GET)
+    public String deletePostEntityByPostId(@PathVariable Integer plateId, @PathVariable Integer postId){
         postService.deletePostEntityByPostId(postId);
-        return "postMgr";
+        return "redirect:/plateMgr/{plateId}";
     }
 
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
@@ -56,5 +56,7 @@ public class PostController {
         postService.addPost(postEntity);
         return "redirect:/postList";
     }
+
+
 
 }
