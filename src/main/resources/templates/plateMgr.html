@@ -21,10 +21,10 @@
     <div class="row">
         <div class="col-md-8 " style="height: 900px;">
             <div class="container">
-                <h3 th:text="${plate.plateName}"></h3>
+                <h3 th:text="${thisPlate.plateName}"></h3>
             </div>
             <ul class="list-group">
-                <li class="list-group-item" th:each="post:${posts}">
+                <li class="list-group-item" th:each="post:${postList}">
                     <div class="row">
                         <div class="col-md-8 ">
                             <div>
@@ -37,7 +37,8 @@
 
                         </div>
                         <div class="col-md-4 ">
-                            <div style="text-align: right"><a th:href="@{'/plateMgr/'+${plate.plateId}+'/postDel/'+${post.postId}}"  class="btn btn-outline-danger" role="button">删除</a>
+                            <div style="text-align: right">
+                                <a th:href="@{'/plateMgr/'+${thisPlate.plateId}+'/postDel/'+${post.postId}}"  class="btn btn-outline-danger" role="button">删除</a>
                             </div>
                         </div>
                     </div>
@@ -48,7 +49,7 @@
             <div class="col" style="height: 300px">
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
 
-                <tr th:each="plate:${plates}">
+                <tr th:each="plate:${plateList}">
                     <td>
                         <a th:href="@{'/plateMgr/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
                            th:text="${plate.plateName}"></a>

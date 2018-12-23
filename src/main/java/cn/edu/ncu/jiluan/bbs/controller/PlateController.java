@@ -26,9 +26,9 @@ public class PlateController {
 
     @RequestMapping(value = "/plateMgr/{plateId}",method = RequestMethod.GET)
     public String MgrPostEntityByPostId(@PathVariable Integer plateId, Model model){
-        model.addAttribute("posts",plateService.findPostEntitiesByPlateId(plateId));
-        model.addAttribute("plates",plateService.findAll());
-        model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+        model.addAttribute("plateList",plateService.findAll());
+        model.addAttribute("thisPlate",plateService.findPlateEntityByPlateId(plateId));
         return "plateMgr";
     }
 
