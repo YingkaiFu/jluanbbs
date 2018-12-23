@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="alternate" media="only screen and (max-width: 640px)"
+          href="http://bbs.tianya.cn/m/post-934-195858-1.shtml">
+    <link type="text/css" charset="utf-8" rel="stylesheet"
+          href="http://static.tianyaui.com/global/ty/resources/css/TY.ui.bbsPost_cb951b7.css?_v=">
+    <link th:href="@{/css/TY.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/bbs_wenda_021721f.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/nav2_0.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/bbs_article_fdaad25.css}" rel="stylesheet" type="text/css">
+
+    <link th:href="@{/css/styles.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/styles01.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/huifu.css}" type="text/css">
+
+    <!--<link rel="stylesheet" type="text/css" href="resources/css/common.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="resources/css/index.css">-->
+    <!--<link rel="shortcut icon" href="favicon.ico" />-->
+    <link th:href="@{/css/bbs_wenda_021721f.css}" rel="stylesheet" type="text/css">
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/jquery-ui-1.8.10.custom.min.js}"></script>
+    <script th:src="@{/js/prototypePre.js}"></script>
+    <script th:src="@{/js/document.js}"></script>
+    <script th:src="@{/js/prototypePost.js}"></script>
+    <script th:src="@{/js/data.js}"></script>
+    <script th:src="@{/js/index.js}"></script>
+    <script th:src="@{/js/hiufu.js}"></script>
+    <!--<script type="text/javascript" src="js/reply.js"></script>-->
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">jluanBBS</a>
+
+        <div class="my-2 my-sm-0" th:if="${session.userName==null}">
+            <a href="/login" class="btn btn-outline-success" role="button">登陆
+            </a>
+            <a href="/registration" class="btn btn-outline-success" role="button">注册
+            </a>
+        </div>
+
+        <div class="my-2 my-sm-0" th:if="${session.userName}">
+            <a href="/logOut" class="btn btn-outline-success" role="button">注销</a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <blockquote class="blockquote text-center">
+        <p class="mb-0" th:text="${post.getPostTopic()}"></p>
+        <footer class="blockquote-footer" th:text="${post.userByUserId.userName}+${post.postTime}+${post.getViews()}">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+    <div class="form-group">
+        <!--<label for="exampleFormControlTextarea1">主题</label>-->
+        <textarea class="form-control" th:text="${post.getPostCont()}" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+    <div >
+        <ul class="list-group">
+            <li class="list-group-item" th:each="reply:${replyList}">
+                <div>
+                    <div>
+                        <p class="mb-1"  th:text="${reply.getReplyCont()}"></p>
+                    </div>
+                    <div>
+                        <p class="text-muted" th:text="${reply.userByUserId.userName}"></p>
+                        <p class="text-muted" th:text="${reply.getReplyTime()}"></p>
+                  </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div>
+    <div id="doc">
+        <div id="bd" class="clearfix">
+            <div id="post_head" class="atl-head">
+                <h1 class="atl-title">
+                    <span class="s_title">
+                        <span style="font-weight:400;" id="title">标题（长度随着标题长度变化）</span></span>
+                </h1>
+                <div class="banner-img-mb10 ads-loc-holder"><!--全站通发帖子内页首帖上通栏950*70--></div>
+                <div class="atl-menu clearfix js-bbs-act">
+
+                    <div class="atl-info">
+                        <span id="header">楼主：用户名+发帖时间+总的回复数</span>
+                    </div>
+                </div>
+
+
+                <div class="mb15 cf">
+                    <div class="atl-pages">
+                        <form action="" method="get">
+
+                            <span>上页</span>
+                            <strong>1</strong>
+                            <a href="">2</a>
+                            <a href="">3</a>
+                            <a href="">4</a>
+                            …
+                            <a href="">总的页数</a>
+                            <a href="">下页</a>
+                            &nbsp;到<input name="page" class="pagetxt" type="text" bindcursor="true">页&nbsp;
+                            <input name="gopage" class="pagebtn" type="submit" maxlength="" value="确定"></form>
+                    </div>
+                    <div class="atl-pages host-pages"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="atl-main">
+            <div class="atl-item host-item">
+                <div class="atl-content">
+                    <div class="atl-con-hd clearfix">
+                        <div class="atl-con-hd-l"></div>
+                        <div class="atl-con-hd-r"></div>
+                    </div>
+                    <div class="atl-con-bd clearfix">
+
+                        <div class="bbs-content clearfix">
+                            　　帖子内容
+
+                        </div>
+
+
+                        <div class="action atl-reply">
+                            <a class="act-answer" href="javascript:void(0);">我要回答</a>
+                        </div>
+                    </div>
+
+                    <div class="atl-con-ft clearfix">
+                        <div class="atl-con-ft-l"></div>
+                        <div class="atl-con-ft-r"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--楼主帖子
+
+        <!--回帖内容-->
+        <div class="atl-item">
+            <div class="atl-head" id="posthead">
+                <div class="atl-head-reply"></div>
+                <div class="atl-info">
+                    <span>作者：+回复时间 </span>
+                </div>
+            </div>
+
+            <div class="atl-content">
+                <div class="atl-con-hd clearfix">
+                    <div class="atl-con-hd-l"></div>
+                    <div class="atl-con-hd-r"></div>
+                </div>
+                <div class="atl-con-bd clearfix">
+                    <div class="bbs-content">
+                        　具体回复的内容
+                    </div>
+                    <div class="atl-reply" id="number">
+
+                        <span>X楼</span> |
+                        <span class="tuijian hasZan">
+								<a class="zan" href="javascript:void(0);">点赞</a>
+                                <span><em class="zn" data-number="170">170</em>个赞</span>
+                            </span>|
+                        <a href="javascript:;" class="a-link-2 ir-remark" title="插入评论">
+                            评论(数量)
+                        </a>
+                    </div>
+
+                    <div class="item-reply-view">
+                        <div class="ir-list">
+                            <ul>
+                                <li id="list"> <!-- style="display:none"-->
+                                    <p>
+                                        <a class="ir-user">
+                                            回帖的用户名
+                                        </a>
+                                        <span>回帖时间</span>&nbsp;
+                                        <a class="a-link2 ir-reply" href="javascript:void(0);">评论</a>
+                                    </p>
+                                    <span class="ir-content">评论 <a href="">某某某</a>：具体评论内容</span>
+                                    <div class="hf hf-on">
+                                        <textarea type="text" class="hf-text" autocomplete="off"
+                                                  maxlength="100">评论…</textarea>
+                                        <button class="hf-btn hf-btn-on">回复</button>
+                                        <span class="hf-nub">6/100</span>
+                                    </div>
+                                </li>
+
+
+                                <li id="itemreply-1081337" _rid="1081337" _replytime="2018-12-20 10:02:40"
+                                    _userid="8074732" _username="zxwang8776" style="display:none">
+                                    <!-- style="display:none"-->
+                                    <p>
+                                        <a class="ir-user" href="http://www.tianya.cn/8074732" target="_blank">
+                                            zxwang8776：
+                                        </a>
+                                        <span class="ir-power">
+                                            	<a class="a-link ir-report" href="javascript:void(0);">举报</a>&nbsp;
+                                            </span>
+                                        <span>2018-12-20 10:02:40</span>&nbsp;
+                                        <a class="a-link2 ir-reply" href="javascript:void(0);">评论</a>
+                                    </p>
+                                    <span class="ir-content">我在毛时代，大学毕业，第一年，46元一月的工资，一年后转正，变成56元。工作5，6年，没有钱回家看父母，因为一张火车票要22元，来回44元。</span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="atl-con-ft clearfix">
+                    <div class="atl-con-ft-l"></div>
+                    <div class="atl-con-ft-r"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="post-div clearfix">
+            <div class="bbsPostLogin"><a href="" id="">登录</a> |
+                <a href="">注册</a>
+            </div>
+            <div id="bbsPost" style="position: relative;">
+                <div id="editorToolBar" class="editorToolBar">
+                    <span class="friend">朋友</span>
+                    <span class="photo">图片</span>
+                    <span class="emotion">表情</span>
+                    <span class="draft">草稿箱</span>
+                </div>
+                <div style="position: relative; width: 632px; height: 213px;">
+                    <textarea id="textAreaContainer" class="textAreaContainer" style="width: 630px;" bindcursor="true">
+                    </textarea>
+                </div>
+                <p class="post-p">
+                    <span style="color:#8A8A8A;" class="fl mt10">请遵守论坛公约言论规则，不得违反国家法律法规</span>
+                    <button class="save-btn">保存草稿</button>
+                    <button class="common-submitBtn" type="button" title="Ctrl+Enter快捷发表">回复(Ctrl+Enter)</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -18,4 +18,7 @@ public class ReplyService {
     public List<ReplyEntity> findAll(){
         return replyDao.findAll();
     }
+    public List<ReplyEntity> findReplyEntitiesByPostId(Integer postId){
+        return replyDao.findReplyEntitiesByPostId(postId);
+    }
 }
