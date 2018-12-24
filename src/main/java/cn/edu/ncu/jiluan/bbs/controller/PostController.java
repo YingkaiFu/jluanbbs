@@ -72,6 +72,19 @@ public class PostController {
         return "redirect:/postList";
     }
 
+    @RequestMapping(value = "toEditPost/{postId}", method = RequestMethod.GET)
+    public String toEditPost(Model model,@PathVariable Integer postId){
+        PostEntity postEntity = postService.findPostEntityByPostId(postId);
+        model.addAttribute("post",postEntity);
+        return "postEdit";
+    }
+
+    @RequestMapping(value = "editPost",method = RequestMethod.POST)
+    public String editPost(PostEntity postEntity){
+        postService.editPost(postEntity);
+        return "redirect:/postList";
+    }
+
 
 
 }
