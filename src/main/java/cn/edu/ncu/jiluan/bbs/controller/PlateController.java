@@ -18,10 +18,8 @@ public class PlateController {
         model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
-        return "plateInfo";
+        return "fragments/plateInfo";
     }
-
-
 
     @RequestMapping(value = "/plateMgr/{plateId}",method = RequestMethod.GET)
     public String MgrPostEntityByPostId(@PathVariable Integer plateId, Model model){

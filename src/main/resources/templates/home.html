@@ -9,43 +9,12 @@
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body>
+<body onload="getPosts(1)">
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container">
     <div class="row">
-        <i class="m"></i>
-        <div class="col-md-8 " style="height: 900px;">
-            <div class="container">
-                <h3 th:text="所有帖子"></h3>
-            </div>
-            <ul class="list-group">
-                <li class="list-group-item" th:each="post:${postList}">
-                    <div>
-                        <div>
-                            <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
-                        </div>
-                        <div class="row">
-                            <div class="col">
-                                <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
-                                <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
-
-                            </div>
-
-                            <div class="col" style="text-align: right">
-                                <i class="far fa-eye"></i>
-                                <span class="small text-muted" th:text="${post.views}"></span>
-                                <i class="fas fa-heart"></i>
-                                <i class="far fa-heart"></i>
-                                <span class="small text-muted" th:text="${post.likes}"></span>
-                                <i class="far fa-comment-dots"></i>
-                                <span class="small text-muted" th:text="${post.replies}"></span>
-                            </div>
-                        </div>
-
-                    </div>
-                </li>
-            </ul>
+        <div class="col-md-8 " style="height: 900px;" id="plateList">
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
@@ -55,7 +24,7 @@
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
                 <tr th:each="plate:${plateList}">
                     <td>
-                        <a th:href="@{'/plate/'+${plate.plateId}}" class="btn btn-outline-success" role="button"
+                        <a th:onclick="'javascript:getPosts('+${plate.plateId}+');'" class="btn btn-outline-success" role="button"
                            th:text="${plate.plateName}"></a>
                     </td>
                 </tr>
@@ -63,6 +32,11 @@
         </div>
     </div>
 </div>
-
+<script>
+    function getPosts(plateId) {
+        var url = '/plate/'+plateId;
+        $("#plateList").load(url);
+    }
+</script>
 </body>
 </html>

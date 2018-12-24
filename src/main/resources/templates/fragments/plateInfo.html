@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h3 th:text="${plate.plateName}"></h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item" th:each="post:${postList}">
+        <div>
+            <div>
+                <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="small text-muted" th:text="${post.userByUserId.userName}"></span>
+                    <span class="small text-muted" th:text="${post.plateByPlateId.plateName}"></span>
+
+                </div>
+
+                <div class="col" style="text-align: right">
+                    <i class="far fa-eye"></i>
+                    <span class="small text-muted" th:text="${post.views}"></span>
+                    <i class="fas fa-heart"></i>
+                    <i class="far fa-heart"></i>
+                    <span class="small text-muted" th:text="${post.likes}"></span>
+                    <i class="far fa-comment-dots"></i>
+                    <span class="small text-muted" th:text="${post.replies}"></span>
+                </div>
+            </div>
+
+        </div>
+    </li>
+</ul>
+</body>
+</html>
