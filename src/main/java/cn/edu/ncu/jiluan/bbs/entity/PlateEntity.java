@@ -12,6 +12,7 @@ public class PlateEntity {
     private String plateName;
     private String plateImage;
     private Collection<PostEntity> postsByPlateId;
+    private Collection<UserEntity> usersByPlateId;
 
     @Id
     @Column(name = "plate_id", nullable = false)
@@ -73,5 +74,15 @@ public class PlateEntity {
 
     public void setPostsByPlateId(Collection<PostEntity> postsByPlateId) {
         this.postsByPlateId = postsByPlateId;
+    }
+
+    @OneToMany(mappedBy = "plateByPlateId")
+    @JsonManagedReference
+    public Collection<UserEntity> getUsersByPlateId() {
+        return usersByPlateId;
+    }
+
+    public void setUsersByPlateId(Collection<UserEntity> usersByPlateId) {
+        this.usersByPlateId = usersByPlateId;
     }
 }

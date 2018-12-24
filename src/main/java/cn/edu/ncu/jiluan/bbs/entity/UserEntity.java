@@ -29,6 +29,8 @@ public class UserEntity {
     private String password;
     private Integer userMajor;
     private String tel;
+    private Integer plateId;
+    private PlateEntity plateByPlateId;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -197,16 +199,6 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "user_major")
-    public Integer getUserMajor() {
-        return userMajor;
-    }
-
-    public void setUserMajor(Integer userMajor) {
-        this.userMajor = userMajor;
-    }
-
-    @Basic
     @Column(name = "tel")
     public String getTel() {
         return tel;
@@ -214,5 +206,26 @@ public class UserEntity {
 
     public void setTel(String tel) {
         this.tel = tel;
+    }
+
+    @Basic
+    @Column(name = "plate_id")
+    public Integer getPlateId() {
+        return plateId;
+    }
+
+    public void setPlateId(Integer plateId) {
+        this.plateId = plateId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "plate_id", referencedColumnName = "plate_id")
+    @JsonBackReference
+    public PlateEntity getPlateByPlateId() {
+        return plateByPlateId;
+    }
+
+    public void setPlateByPlateId(PlateEntity plateByPlateId) {
+        this.plateByPlateId = plateByPlateId;
     }
 }
