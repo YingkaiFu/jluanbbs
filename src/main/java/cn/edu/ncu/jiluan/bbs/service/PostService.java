@@ -21,6 +21,10 @@ public class PostService {
         postDao.deletePostEntityByPostId(postId);
     }
 
+    public List<PostEntity> findPostEntitiesByIspost(Byte isPost){
+        return postDao.findPostEntitiesByIspost(isPost);
+    }
+
     public PostEntity findPostEntityByPostId(Integer postId){
         return postDao.findPostEntityByPostId(postId);
     }

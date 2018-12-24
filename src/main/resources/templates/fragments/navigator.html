@@ -15,6 +15,8 @@
         <div class="my-2 my-sm-0" th:if="${session.userName==null}">
             <a href="/" class="btn btn-outline-success" role="button">首页
             </a>
+            <a href="/question" class="btn btn-outline-success" role="button">问答
+            </a>
             <a href="/login" class="btn btn-outline-success" role="button">登陆
             </a>
             <a href="/registration" class="btn btn-outline-success" role="button">注册
@@ -23,8 +25,10 @@
 
         <div class="my-2 my-sm-0" th:if="${session.userName}">
 
-            <span class="text-muted" th:text="当前登用户+${session.userName}"></span>
+            <span class="text-muted" th:text="用户 +${session.userName}"></span>
             <a href="/" class="btn btn-outline-success" role="button">首页
+            </a>
+            <a href="/question" class="btn btn-outline-success" role="button">问答
             </a>
             <a th:href="@{'/user/userInfo/'+${session.userId}}" class="btn btn-outline-success" role="button">个人中心
             </a>

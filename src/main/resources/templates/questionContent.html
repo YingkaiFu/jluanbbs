@@ -19,14 +19,6 @@
         <footer class="blockquote-footer" th:text="作者+${post.userByUserId.userName}+发布时间+${post.postTime}+访问量+${post.getViews()}">
             Someone famous in <cite title="Source Title">Source Title</cite></footer>
     </blockquote>
-    <div class="list-group">
-        <ul class="list-group ">
-            <!--<label for="exampleFormControlTextarea1">主题</label>-->
-            <li class="list-group-item bg-light" th:text="${post.getPostCont()}"
-                id="exampleFormControlTextarea1" rows="3">
-            </li>
-        </ul>
-    </div>
     <div>
         <ul class="list-group">
             <li class="list-group-item p-3 mb-2" th:each="reply:${replyList}">

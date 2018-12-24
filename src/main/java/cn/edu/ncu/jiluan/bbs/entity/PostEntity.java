@@ -20,7 +20,7 @@ public class PostEntity {
     private String postTopic;
     private String postCont;
     @Column(columnDefinition="datetime default getdate()")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp postTime;
     private int views;
     private int likes;
@@ -29,12 +29,14 @@ public class PostEntity {
     private Integer plateId;
     private Integer userId;
     @Column(columnDefinition="datetime default getdate()")
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Timestamp lastReply;
     private PlateEntity plateByPlateId;
     private UserEntity userByUserId;
     private Collection<PostLikedEntity> postLikedsByPostId;
     private Collection<ReplyEntity> repliesByPostId;
+    private Byte isPicked;
+    private Byte ispost;
 
     @Id
     @Column(name = "post_id", nullable = false)
@@ -57,7 +59,7 @@ public class PostEntity {
     }
 
     @Basic
-    @Column(name = "post_cont", nullable = true, length = 255)
+    @Column(name = "post_cont", nullable = false, length = 255)
     public String getPostCont() {
         return postCont;
     }
@@ -67,7 +69,7 @@ public class PostEntity {
     }
 
     @Basic
-    @Column(name = "post_time", nullable = false, insertable=false, updatable=false)
+    @Column(name = "post_time", nullable = true, insertable=false, updatable=false)
     public Timestamp getPostTime() {
         return postTime;
     }
@@ -161,7 +163,7 @@ public class PostEntity {
 
     @Basic
 
-    @Column(name = "last_reply")
+    @Column(name = "last_reply", nullable = true)
     public Timestamp getLastReply() {
         return lastReply;
     }
@@ -169,7 +171,6 @@ public class PostEntity {
     public void setLastReply(Timestamp lastReply) {
         this.lastReply = lastReply;
     }
-
 
     @ManyToOne
     @JoinColumn(name = "plate_id", referencedColumnName = "plate_id", insertable = false, updatable = false)
@@ -211,5 +212,25 @@ public class PostEntity {
 
     public void setRepliesByPostId(Collection<ReplyEntity> repliesByPostId) {
         this.repliesByPostId = repliesByPostId;
+    }
+
+    @Basic
+    @Column(name = "is_picked", nullable = true)
+    public Byte getIsPicked() {
+        return isPicked;
+    }
+
+    public void setIsPicked(Byte isPicked) {
+        this.isPicked = isPicked;
+    }
+
+    @Basic
+    @Column(name = "ispost", nullable = true)
+    public Byte getIspost() {
+        return ispost;
+    }
+
+    public void setIspost(Byte ispost) {
+        this.ispost = ispost;
     }
 }
