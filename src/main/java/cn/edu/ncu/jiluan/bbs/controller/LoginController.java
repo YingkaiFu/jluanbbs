@@ -40,7 +40,7 @@ public class LoginController {
         if(n==0) {
             //获取session并将userName存入session对象
             session.setAttribute("userName", userEntity.getUserName());
-            session.setAttribute("userId", userEntity.getUserId());
+            session.setAttribute("userId", userService.findUserEntityByUserName(userEntity.getUserName()).getUserId());
             if(userEntity.getUserName().equals("admin"))
                 return "redirect:/adminPage";
             return "redirect:/";

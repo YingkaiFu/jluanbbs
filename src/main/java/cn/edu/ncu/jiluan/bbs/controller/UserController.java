@@ -29,7 +29,7 @@ public class UserController {
     @Autowired
     private PostService postService;
 
-    @RequestMapping(value = "userInfo/{userId}")
+    @RequestMapping(value = "userInfo/{userId}",method = RequestMethod.GET)
     public String findUserEntityByUserId(Model model, @PathVariable Integer userId){
         model.addAttribute("user", userService.findUserEntityByUserId(userId));
         model.addAttribute("plates",plateService.findAll());
