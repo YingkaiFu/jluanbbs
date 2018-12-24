@@ -81,7 +81,9 @@
             <!--<label for="comment">主题</label>-->
             <textarea th:field="*{replyCont}"  class="form-control" id="comment" rows="3" placeholder="请输入你的评论"></textarea>
             <button type="submit" class="btn button btn-success">评论</button>
-
+            <div th:if="${session.userId==post.userId}">
+                <a th:href="@{'/toEditPost/'+${post.postId}}" type="button" class="btn button btn-info">更改</a>
+            </div>
         </div>
     </form>
 </div>
