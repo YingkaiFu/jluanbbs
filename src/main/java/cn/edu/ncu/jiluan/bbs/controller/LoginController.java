@@ -21,83 +21,73 @@ public class LoginController {
     private UserService userService;
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
-    public ModelAndView toLogin(){
+    public ModelAndView toLogin() {
         ModelAndView modelAndView = new ModelAndView();
         UserEntity user = new UserEntity();
-        modelAndView.addObject("current",user);
+        modelAndView.addObject("current", user);
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
 
-
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
-    public String Login(@Valid UserEntity userEntity, HttpServletRequest request, Model model){
+    public String Login(@Valid UserEntity userEntity, HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
-        String message="";
-        int n = userService.login(userEntity.getUserName(),userEntity.getPassword());
-        HttpSession session=request.getSession();
-        if(n==0) {
+        String message = "";
+        int n = userService.login(userEntity.getUserName(), userEntity.getPassword());
+        HttpSession session = request.getSession();
+        if (n == 0) {
             //获取session并将userName存入session对象
             session.setAttribute("userName", userEntity.getUserName());
             session.setAttribute("userId", userService.findUserEntityByUserName(userEntity.getUserName()).getUserId());
-            if(userEntity.getUserName().equals("admin"))
+            if (userEntity.getUserName().equals("admin"))
                 return "redirect:/adminPage";
             return "redirect:/";
-        }
-        else{
-            if(n==1){
-                message="该用户未注册";
+        } else {
+            if (n == 1) {
+                message = "该用户未注册";
                 return "redirect:/registration";
             }
         }
         return "redirect:/login";
     }
+
     @RequestMapping(value = {"/logOut"}, method = RequestMethod.GET)
-    public String Login(HttpServletRequest request, Model model){
+    public String Login(HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
-        HttpSession session=request.getSession();
+        HttpSession session = request.getSession();
         session.removeAttribute("userName");//获取session并将userName存入session对象
         session.removeAttribute("userId");
         return "redirect:/";
     }
 
-    @RequestMapping(value="/registration", method = RequestMethod.GET)
-    public ModelAndView registration(){
-        ModelAndView modelAndView = new ModelAndView();
-        UserEntity user = new UserEntity();
-        modelAndView.addObject("user", user);
-        modelAndView.setViewName("registration");
-        return modelAndView;
+    @RequestMapping(value = "/registration", method = RequestMethod.GET)
+    public String registration(Model model) {
+        model.addAttribute("Message", "");
+        model.addAttribute("user", new UserEntity());
+        return "registration";
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public ModelAndView createNewUser(@Valid UserEntity user, BindingResult bindingResult) {
-        ModelAndView modelAndView = new ModelAndView();
+    public String createNewUser(@Valid UserEntity user,Model model) {
         System.out.println(user.getUserName());
         UserEntity userExists = userService.findUserEntityByUserName(user.getUserName());
+        System.out.println(userExists);
         if (userExists != null) {
-            bindingResult
-                    .rejectValue("userName", "error.user",
-                            "该用户名已经被注册了");
-        }
-        if (bindingResult.hasErrors()) {
-            modelAndView.setViewName("registration");
+            model.addAttribute("Message", "注册失败");
+            return "redirect:/registration";
         } else {
             userService.saveUser(user);
-            modelAndView.addObject("successMessage", "注册成功");
-            modelAndView.addObject("user", new UserEntity());
-            modelAndView.setViewName("registration");
-
+            model.addAttribute("Message", "注册成功");
+            return "redirect:/login";
         }
-        return modelAndView;
     }
 
-    @RequestMapping(value="/admin/home", method = RequestMethod.GET)
-    public ModelAndView home(){
+    @RequestMapping(value = "/admin/home", method = RequestMethod.GET)
+    public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("userName", "Welcome");
-        modelAndView.addObject("adminMessage","Content Available Only for Users with Admin Role");
+        modelAndView.addObject("adminMessage", "Content Available Only for Users with Admin Role");
         modelAndView.setViewName("emm");
         return modelAndView;
     }
