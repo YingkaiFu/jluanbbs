@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+
+<div>
+    <form th:action="@{/editUser}" th:object="${user}" method="post">
+        <div class="form-group" style="margin-top: 30px">
+            <div th:text="'用户名：     '+${user.userName}"></div>
+
+            <div th:text="性别"></div>
+            <select th:field="*{gender}" class="form-control" id="userGender">
+                   <option th:text="男" th:value="1"></option>
+                   <option th:text="女" th:value="0"></option>
+            </select>
+
+            <!--<div class="form-group" style="margin-top: 30px">-->
+                <!--<div th:text="'出生年月:     TODO'"></div>-->
+            <!--</div>-->
+            <div th:text="工作地区"></div>
+                <select th:field="*{provinceId}" class="form-control" id="userLocation">
+                    <option th:each="province:${provinceList}" th:text="${province.provinceName}" th:value="${province.provinceId}"></option>
+                </select>
+
+            <div th:text="工作性质"></div>
+                <select th:field="*{plateId}" class="form-control" id="userPlateId">
+                    <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"></option>
+                </select>
+
+            <div th:text="联系方式"></div>
+            <textarea  th:field="*{tel}"  class="form-control" id="userTel" ></textarea>
+
+
+            <textarea hidden th:field="*{password}" th:value="${user.password}" class="form-control" id="userPassword" ></textarea>
+            <textarea hidden th:field="*{userName}" th:value="${user.userName}" class="form-control" id="userName" ></textarea>
+            <textarea hidden th:field="*{userId}" th:value="${user.userId}" class="form-control" id="userId" ></textarea>
+
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="margin-left: 25px">提交更改</button>
+    </form>
+
+</div>
+</body>
+</html>
