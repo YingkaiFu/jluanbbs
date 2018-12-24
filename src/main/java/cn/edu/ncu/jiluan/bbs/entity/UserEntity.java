@@ -18,8 +18,8 @@ public class UserEntity {
     private byte gender;
     private Date birthday;
     private String icon;
-    private Integer provinceId;
-    private Integer cityId;
+    private Integer provinceId=1;
+    private Integer cityId=1;
 
     private Collection<PostEntity> postsByUserId;
     private Collection<PostLikedEntity> postLikedsByUserId;
@@ -27,6 +27,8 @@ public class UserEntity {
     private ProvinceEntity provinceByProvinceId;
     private CityEntity cityByCityId;
     private String password;
+    private Integer userMajor;
+    private String tel;
 
     @Id
     @Column(name = "user_id", nullable = false)
@@ -192,5 +194,25 @@ public class UserEntity {
                 "userId=" + userId +
                 ", userName='" + userName + '\'' +
                 '}';
+    }
+
+    @Basic
+    @Column(name = "user_major")
+    public Integer getUserMajor() {
+        return userMajor;
+    }
+
+    public void setUserMajor(Integer userMajor) {
+        this.userMajor = userMajor;
+    }
+
+    @Basic
+    @Column(name = "tel")
+    public String getTel() {
+        return tel;
+    }
+
+    public void setTel(String tel) {
+        this.tel = tel;
     }
 }
