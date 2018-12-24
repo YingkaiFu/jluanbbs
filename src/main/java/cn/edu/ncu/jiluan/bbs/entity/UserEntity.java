@@ -73,7 +73,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "icon", nullable = false, length = 256)
+    @Column(name = "icon", nullable = true, length = 256)
     public String getIcon() {
         return icon;
     }
@@ -199,7 +199,7 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "tel")
+    @Column(name = "tel", nullable = true, length = 20)
     public String getTel() {
         return tel;
     }
