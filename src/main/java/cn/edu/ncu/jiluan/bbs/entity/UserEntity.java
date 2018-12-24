@@ -219,7 +219,7 @@ public class UserEntity {
     }
 
     @ManyToOne
-    @JoinColumn(name = "plate_id", referencedColumnName = "plate_id")
+    @JoinColumn(name = "plate_id", referencedColumnName = "plate_id", insertable = false, updatable = false)
     @JsonBackReference
     public PlateEntity getPlateByPlateId() {
         return plateByPlateId;
