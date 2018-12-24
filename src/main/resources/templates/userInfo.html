@@ -77,16 +77,7 @@
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <a th:href="@{addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
-            </div>
-            <div class="col" style="height: 300px">
-                <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
-                <tr th:each="plate:${plates}">
-                    <td>
-                        <a th:href="@{'/plate/'+${plate.plateId}}"  class="btn btn-outline-success" role="button"
-                           th:text="${plate.plateName}"></a>
-                    </td>
-                </tr>
+                <a th:href="${session.userName.equals(user.userName)} ? ('/userEdit/'+${user.userId}) : ''" th:text="${session.userName.equals(user.userName)} ? '修改信息' : '加为好友'" class="btn btn-primary btn-block" role="button"></a>
             </div>
         </div>
     </div>
