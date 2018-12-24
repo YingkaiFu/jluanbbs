@@ -24,4 +24,7 @@ public class ReplyService {
     public void deleteReplyEntitiesByPostId(Integer postId){
         replyDao.deleteReplyEntitiesByPostId(postId);
     }
+    public ReplyEntity addReply(ReplyEntity replyEntity){
+        return replyDao.save(replyEntity);
+    }
 }

@@ -1,5 +1,6 @@
 package cn.edu.ncu.jiluan.bbs.controller;
 
+import cn.edu.ncu.jiluan.bbs.entity.ReplyEntity;
 import cn.edu.ncu.jiluan.bbs.service.PostService;
 import cn.edu.ncu.jiluan.bbs.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ public class ViewController {
     public String GetPostContent(@PathVariable Integer postId, Model model){
         model.addAttribute("post",postService.findPostEntityByPostId(postId));
         model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
+        model.addAttribute("reply",new ReplyEntity());
         return "postContent";
     }
 }

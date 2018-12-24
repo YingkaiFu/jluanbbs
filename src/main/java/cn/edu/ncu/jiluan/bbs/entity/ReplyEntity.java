@@ -11,6 +11,8 @@ public class ReplyEntity {
     private int replyId;
     private String replyCont;
     private Integer replyRef;
+    @Column(columnDefinition="datetime default getdate()")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Timestamp replyTime;
     private Integer userId;
     private Integer postId;

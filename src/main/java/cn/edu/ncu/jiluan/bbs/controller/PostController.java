@@ -28,8 +28,6 @@ public class PostController {
     @Autowired
     private PlateService plateService;
     @Autowired
-    private UserService userService;
-    @Autowired
     private ReplyService replyService;
     @Autowired
     private PostLikedService postLikedService;
@@ -46,6 +44,8 @@ public class PostController {
     @RequestMapping(value = "/plateMgr/{plateId}/postDel/{postId}",method = RequestMethod.GET)
     public String deletePostEntityByPostId1(@PathVariable Integer plateId, @PathVariable Integer postId){
         postService.deletePostEntityByPostId(postId);
+        replyService.deleteReplyEntitiesByPostId(postId);
+        postLikedService.deleteReplyEntitiesByPostId(postId);
         return "redirect:/plateMgr/{plateId}";
     }
 
@@ -67,9 +67,7 @@ public class PostController {
     @RequestMapping(value = "/addPost",method = RequestMethod.POST)
     public String postAdd(@Valid PostEntity postEntity, HttpServletRequest request){
         HttpSession session=request.getSession();
-        UserEntity user = userService.findUserEntityByUserName((String)session.getAttribute("userName"));
-        postEntity.setUserId(user.getUserId());
-        postEntity.setPostTime(new Timestamp(System.currentTimeMillis()));
+        postEntity.setUserId((Integer)session.getAttribute("userId"));
         postService.addPost(postEntity);
         return "redirect:/postList";
     }
