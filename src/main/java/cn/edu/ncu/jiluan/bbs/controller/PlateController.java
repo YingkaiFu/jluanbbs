@@ -15,7 +15,7 @@ public class PlateController {
 
     @RequestMapping(value = "/plate/{plateId}",method = RequestMethod.GET)
     public String findPostEntitiesByPlateId(@PathVariable Integer plateId, Model model){
-        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId,Byte.valueOf("0")));
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
         return "fragments/plateInfo";
@@ -23,7 +23,7 @@ public class PlateController {
 
     @RequestMapping(value = "/plateMgr/{plateId}",method = RequestMethod.GET)
     public String MgrPostEntityByPostId(@PathVariable Integer plateId, Model model){
-        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId,Byte.valueOf("0")));
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("thisPlate",plateService.findPlateEntityByPlateId(plateId));
         return "plateMgr";

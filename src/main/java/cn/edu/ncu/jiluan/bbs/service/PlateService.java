@@ -21,8 +21,8 @@ public class PlateService    {
         return plateDao.findAll();
     }
 
-    public List<PostEntity> findPostEntitiesByPlateId(Integer plateId){
-        return postDao.findPostEntitiesByPlateId(plateId);
+    public List<PostEntity> findPostEntitiesByPlateId(Integer plateId, Byte isPost){
+        return postDao.findPostEntitiesByPlateIdAndIspost(plateId,isPost);
     }
 
     public PlateEntity findPlateEntityByPlateId(Integer plateId){

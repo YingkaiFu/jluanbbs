@@ -73,14 +73,18 @@ public class PostController {
 
     @RequestMapping(value = "/toEditPost/{postId}", method = RequestMethod.GET)
     public String toEditPost(Model model,@PathVariable Integer postId){
-        PostEntity postEntity = postService.findPostEntityByPostId(postId);
+        PostEntity postEntity = postService.findPostEntityByPostId(postId,Byte.valueOf("0"));
         model.addAttribute("post",postEntity);
         return "postEdit";
     }
 
     @RequestMapping(value = "/editPost",method = RequestMethod.POST)
-    public String editPost(PostEntity postEntity){
+    public String editPost(PostEntity postEntity,HttpServletRequest request){
+        HttpSession session=request.getSession();
         postService.editPost(postEntity);
+        System.out.println(session.getAttribute("userName"));
+        if(session.getAttribute("userName").equals("admin"))
+            return "redirect:/adminPage";
         return "redirect:/postList";
     }
 

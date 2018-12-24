@@ -12,9 +12,9 @@ import java.util.List;
  */
 public interface PostDao extends JpaRepository<PostEntity, Integer> {
 
-    List<PostEntity> findPostEntitiesByPlateId(Integer plateId);
+    List<PostEntity> findPostEntitiesByPlateIdAndIspost(Integer plateId,Byte isPost);
 
-    PostEntity findPostEntityByPostId(Integer postId);
+    PostEntity findPostEntityByPostIdAndIspost(Integer postId,Byte isPost);
 
     List<PostEntity> findPostEntitiesByIspost(Byte isPost);
 
