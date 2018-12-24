@@ -2,25 +2,34 @@ package cn.edu.ncu.jiluan.bbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 
 @Entity
+@DynamicInsert(value = true)
+@DynamicUpdate(value = true)
 @Table(name = "post", schema = "bbs", catalog = "")
 public class PostEntity {
     private int postId;
     private String postTopic;
     private String postCont;
+    @Column(columnDefinition="datetime default getdate()")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Timestamp postTime;
     private int views;
     private int likes;
     private int replies;
 
-    private Timestamp lastreply;
     private Integer plateId;
     private Integer userId;
+    @Column(columnDefinition="datetime default getdate()")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Timestamp lastReply;
     private PlateEntity plateByPlateId;
     private UserEntity userByUserId;
@@ -58,7 +67,7 @@ public class PostEntity {
     }
 
     @Basic
-    @Column(name = "post_time", nullable = false)
+    @Column(name = "post_time", nullable = false, insertable=false, updatable=false)
     public Timestamp getPostTime() {
         return postTime;
     }
