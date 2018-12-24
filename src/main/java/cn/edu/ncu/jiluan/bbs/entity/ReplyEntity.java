@@ -1,16 +1,22 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
+@DynamicInsert(value = true)
+@DynamicUpdate(value = true)
 @Table(name = "reply", schema = "bbs", catalog = "")
 public class ReplyEntity {
     private int replyId;
     private String replyCont;
     private Integer replyRef;
+    @Column(columnDefinition="datetime default getdate()")
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Timestamp replyTime;
     private Integer userId;
     private Integer postId;

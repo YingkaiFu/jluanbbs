@@ -4,23 +4,34 @@ import cn.edu.ncu.jiluan.bbs.entity.ReplyEntity;
 import cn.edu.ncu.jiluan.bbs.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 
 /**
  * Created by krito on 2018/12/20
  */
 @Controller
-@RequestMapping(value = "reply")
 public class ReplyController {
     @Autowired
-    private ReplyService service;
+    private ReplyService replyService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
     public List<ReplyEntity> findAll(){
-        return service.findAll();
+        return replyService.findAll();
+    }
+
+    @RequestMapping(value = "/post/{postId}/addReply", method = RequestMethod.POST)
+    public String addReply(@Valid ReplyEntity replyEntity, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        replyEntity.setUserId((Integer)session.getAttribute("userId"));
+        replyService.addReply(replyEntity);
+        return "redirect:/post/{postId}";
     }
 }

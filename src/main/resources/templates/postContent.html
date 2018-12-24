@@ -76,11 +76,12 @@
         </ul>
     </div>
     <p class="mb-0">评论</p>
-    <form method="post">
+    <form th:action="@{${post.postId}+'/addReply'}" th:object="${reply}" method="post">
         <div class="form-group">
-            <!--<label for="exampleFormControlTextarea1">主题</label>-->
-            <textarea class="form-control" id="comment" rows="3" placeholder="请输入你的评论"></textarea>
+            <!--<label for="comment">主题</label>-->
+            <textarea th:field="*{replyCont}"  class="form-control" id="comment" rows="3" placeholder="请输入你的评论"></textarea>
             <button type="submit" class="btn button btn-success">评论</button>
+
         </div>
     </form>
 </div>
@@ -149,7 +150,7 @@
             </div>
         </div>
 
-        <!--楼主帖子
+        <!--楼主帖子-->
 
         <!--回帖内容-->
         <div class="atl-item">
