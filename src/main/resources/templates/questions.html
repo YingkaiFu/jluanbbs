@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item" th:each="question:${questions}">
+            <div>
+                <div>
+                    <a class="mb-1" th:href="@{'/question/'+${question.postId}}" th:text="${question.postTopic}"></a>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <span class="small text-muted" th:text="${question.userByUserId.userName}"></span>
+                    </div>
+
+                    <div class="col" style="text-align: right">
+                        <i class="far fa-eye"></i>
+                        <span class="small text-muted" th:text="${question.views}"></span>
+                        <i class="far fa-comment-dots"></i>
+                        <span class="small text-muted" th:text="${question.replies}"></span>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>>
+</body>
+</html>

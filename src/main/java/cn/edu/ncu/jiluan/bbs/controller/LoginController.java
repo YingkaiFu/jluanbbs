@@ -1,6 +1,9 @@
 package cn.edu.ncu.jiluan.bbs.controller;
 
 import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
+import cn.edu.ncu.jiluan.bbs.service.CityService;
+import cn.edu.ncu.jiluan.bbs.service.PlateService;
+import cn.edu.ncu.jiluan.bbs.service.ProvinceService;
 import cn.edu.ncu.jiluan.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,15 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private PlateService plateService;
+
+    @Autowired
+    private ProvinceService provinceService;
+
+    @Autowired
+    private CityService cityService;
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public ModelAndView toLogin() {
@@ -64,6 +76,9 @@ public class LoginController {
     @RequestMapping(value = "/registration", method = RequestMethod.GET)
     public String registration(Model model) {
         model.addAttribute("Message", "");
+        model.addAttribute("plates", plateService.findAll());
+        model.addAttribute("provinces", provinceService.findAll());
+        model.addAttribute("cities", cityService.findAll());
         model.addAttribute("user", new UserEntity());
         return "registration";
     }
