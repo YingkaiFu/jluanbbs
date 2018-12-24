@@ -20,21 +20,36 @@
             <div class="col" style="height: 50px">
                 <a th:href="@{/addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
             </div>
-            <div class="col" style="height: 300px">
+            <div class="col">
                 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
                 <tr th:each="plate:${plateList}">
                     <td>
-                        <a th:onclick="'javascript:getPosts('+${plate.plateId}+');'" class="btn btn-outline-success" role="button"
+                        <a th:onclick="'javascript:getPosts('+${plate.plateId}+');'" class="btn btn-outline-success"
+                           role="button"
                            th:text="${plate.plateName}"></a>
                     </td>
                 </tr>
+            </div>
+            <div class="col" style="padding-top: 20px">
+                <button type="button" class="btn btn-outline-danger btn-block disabled">问答</button>
+            </div>
+            <div class="col" th:each="ques:${quesList}">
+                <div class="card">
+                    <div class="card-body">
+                        <blockquote class="blockquote text-center">
+                            <a th:href="@{'/question/'+${ques.postId}}" class="mb-0" th:text="${ques.postTopic}"></a>
+                            <footer class="blockquote-footer" th:text="${ques.userByUserId.userName}">
+                            </footer>
+                        </blockquote>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 <script>
     function getPosts(plateId) {
-        var url = '/plate/'+plateId;
+        var url = '/plate/' + plateId;
         $("#plateList").load(url);
     }
 </script>

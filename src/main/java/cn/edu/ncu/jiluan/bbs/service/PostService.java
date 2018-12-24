@@ -25,8 +25,8 @@ public class PostService {
         return postDao.findPostEntitiesByIspost(isPost);
     }
 
-    public PostEntity findPostEntityByPostId(Integer postId){
-        return postDao.findPostEntityByPostId(postId);
+    public PostEntity findPostEntityByPostId(Integer postId, Byte isPost){
+        return postDao.findPostEntityByPostIdAndIspost(postId,isPost);
     }
     public PostEntity addPost(PostEntity postEntity){
         return postDao.save(postEntity);

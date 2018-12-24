@@ -20,7 +20,7 @@ public class ViewController {
 
     @RequestMapping(value = "/post/{postId}",method = RequestMethod.GET)
     public String GetPostContent(@PathVariable Integer postId, Model model){
-        model.addAttribute("post",postService.findPostEntityByPostId(postId));
+        model.addAttribute("post",postService.findPostEntityByPostId(postId,Byte.valueOf("0")));
         model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
         model.addAttribute("reply",new ReplyEntity());
         return "postContent";

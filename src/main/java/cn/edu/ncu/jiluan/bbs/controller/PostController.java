@@ -73,7 +73,7 @@ public class PostController {
 
     @RequestMapping(value = "toEditPost/{postId}", method = RequestMethod.GET)
     public String toEditPost(Model model,@PathVariable Integer postId){
-        PostEntity postEntity = postService.findPostEntityByPostId(postId);
+        PostEntity postEntity = postService.findPostEntityByPostId(postId,Byte.valueOf("0"));
         model.addAttribute("post",postEntity);
         return "postEdit";
     }
