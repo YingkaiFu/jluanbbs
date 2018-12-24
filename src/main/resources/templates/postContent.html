@@ -46,9 +46,13 @@
     <form th:action="@{${post.postId}+'/addReply'}" th:object="${reply}" method="post">
         <div class="form-group">
             <!--<label for="comment">主题</label>-->
-            <textarea th:field="*{replyCont}" class="form-control" id="comment" rows="3"
-                      placeholder="请输入你的评论"></textarea>
-            <button type="submit" class="btn button btn-success">评论</button>
+
+            <textarea th:field="*{replyCont}"  class="form-control" id="comment" rows="3" placeholder="请输入你的评论"></textarea>
+            <div style="float: left"><button type="submit" class="btn button btn-success">评论</button></div>
+            <div style="float: right" th:if="${session.userId==post.userId}">
+                <a th:href="@{'/toEditPost/'+${post.postId}}" role="button" class="btn button btn-info">更改</a>
+            </div>
+
         </div>
     </form>
 </div>

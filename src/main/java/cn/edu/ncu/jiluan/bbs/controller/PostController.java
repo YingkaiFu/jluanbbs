@@ -54,7 +54,6 @@ public class PostController {
         postService.deletePostEntityByPostId(postId);
         replyService.deleteReplyEntitiesByPostId(postId);
         postLikedService.deleteReplyEntitiesByPostId(postId);
-
         return "redirect:/adminPage";
     }
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
@@ -79,9 +78,13 @@ public class PostController {
         return "postEdit";
     }
 
-    @RequestMapping(value = "editPost",method = RequestMethod.POST)
-    public String editPost(PostEntity postEntity){
+    @RequestMapping(value = "/editPost",method = RequestMethod.POST)
+    public String editPost(PostEntity postEntity,HttpServletRequest request){
+        HttpSession session=request.getSession();
         postService.editPost(postEntity);
+        System.out.println(session.getAttribute("userName"));
+        if(session.getAttribute("userName").equals("admin"))
+            return "redirect:/adminPage";
         return "redirect:/postList";
     }
 

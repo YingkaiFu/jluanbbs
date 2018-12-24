@@ -13,7 +13,7 @@
 </div>
 
 <div>
-    <form th:action="@{/addPost}" th:object="${post}" method="post">
+    <form th:action="@{/editPost}" th:object="${post}" method="post">
         <div class="form-group" style="margin-top: 30px">
             <label for="theme" style="margin-left: 20px">主题：</label>
             <textarea type="text" th:field="*{postTopic}" th:placeholder="${post.postTopic}" class="form-control" id="theme" style="width: 80%; margin: 10px auto auto 20px" ></textarea>
