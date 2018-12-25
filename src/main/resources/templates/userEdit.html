@@ -14,39 +14,55 @@
 
 <div>
     <form th:action="@{/editUser}" th:object="${user}" method="post">
-        <div class="form-group" style="margin-top: 30px">
-            <div th:text="'用户名：     '+${user.userName}"></div>
+        <div class="row">
+            <div class="col-3"></div>
+            <div class="col-6">
+                <div class="form-group" style="margin-top: 30px">
+                    <div th:text="'用户名：     '+${user.userName}"></div>
 
-            <div th:text="性别"></div>
-            <select th:field="*{gender}" class="form-control" id="userGender">
-                   <option th:text="男" th:value="1"></option>
-                   <option th:text="女" th:value="0"></option>
-            </select>
+                    <div class="form-group">
+                        <label class="validation-message">性别</label>
+                        <select th:field="*{gender}" class="form-control" id="userGender">
+                            <option th:text="男" th:value="1"></option>
+                            <option th:text="女" th:value="0"></option>
+                        </select>
+                    </div>
 
-            <!--<div class="form-group" style="margin-top: 30px">-->
-                <!--<div th:text="'出生年月:     TODO'"></div>-->
-            <!--</div>-->
-            <div th:text="工作地区"></div>
-                <select th:field="*{provinceId}" class="form-control" id="userLocation">
-                    <option th:each="province:${provinceList}" th:text="${province.provinceName}" th:value="${province.provinceId}"></option>
-                </select>
+                    <!--<div class="form-group" style="margin-top: 30px">-->
+                    <!--<div th:text="'出生年月:     TODO'"></div>-->
+                    <!--</div>-->
 
-            <div th:text="工作性质"></div>
-                <select th:field="*{plateId}" class="form-control" id="userPlateId">
-                    <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"></option>
-                </select>
-
-            <div th:text="联系方式"></div>
-            <textarea  th:field="*{tel}"  class="form-control" id="userTel" ></textarea>
+                    <div class="form-group">
+                        <label class="validation-message">工作地区</label>
+                        <select th:field="*{provinceId}" class="form-control" id="userLocation">
+                            <option th:each="province:${provinceList}" th:text="${province.provinceName}" th:value="${province.provinceId}"></option>
+                        </select>
+                    </div>
 
 
-            <textarea hidden th:field="*{password}" th:value="${user.password}" class="form-control" id="userPassword" ></textarea>
-            <textarea hidden th:field="*{userName}" th:value="${user.userName}" class="form-control" id="userName" ></textarea>
-            <textarea hidden th:field="*{userId}" th:value="${user.userId}" class="form-control" id="userId" ></textarea>
+                    <div class="form-group">
+                        <label class="validation-message">工作地区</label>
+                        <select th:field="*{plateId}" class="form-control" id="userPlateId">
+                            <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"></option>
+                        </select>
+                    </div>
 
+                    <div class="form-group">
+                        <label class="validation-message">电话</label>
+                        <input type="text" th:field="*{tel}" id="userTel"
+                               class="form-control"/>
+                    </div>
+                    <textarea hidden th:field="*{password}" th:value="${user.password}" class="form-control" id="userPassword" ></textarea>
+                    <textarea hidden th:field="*{userName}" th:value="${user.userName}" class="form-control" id="userName" ></textarea>
+                    <textarea hidden th:field="*{userId}" th:value="${user.userId}" class="form-control" id="userId" ></textarea>
+
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="margin-left: 25px">提交更改</button>
+            </div>
+            <div class="col-3"></div>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="margin-left: 25px">提交更改</button>
     </form>
 
 </div>
