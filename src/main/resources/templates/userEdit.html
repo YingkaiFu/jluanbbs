@@ -41,7 +41,7 @@
 
 
                     <div class="form-group">
-                        <label class="validation-message">工作地区</label>
+                        <label class="validation-message">工作性质</label>
                         <select th:field="*{plateId}" class="form-control" id="userPlateId">
                             <option th:each="plate:${plateList}" th:text="${plate.plateName}" th:value="${plate.plateId}"></option>
                         </select>
@@ -50,7 +50,7 @@
                     <div class="form-group">
                         <label class="validation-message">电话</label>
                         <input type="text" th:field="*{tel}" id="userTel"
-                               class="form-control"/>
+                               class="form-control" maxlength="20"/>
                     </div>
                     <textarea hidden th:field="*{password}" th:value="${user.password}" class="form-control" id="userPassword" ></textarea>
                     <textarea hidden th:field="*{userName}" th:value="${user.userName}" class="form-control" id="userName" ></textarea>

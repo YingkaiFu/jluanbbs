@@ -21,12 +21,12 @@
                 <div class="form-group">
                     <label for="username">用户名</label>
                     <input type="text" th:field="*{userName}" id="username" name="username" th:placeholder="username"
-                           class="form-control"/> <br/>
+                           class="form-control" maxlength="100"/> <br/>
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
                     <input type="password" th:field="*{password}" th:placeholder="Password"
-                           id="password" name="password" class="form-control"/> <br/>
+                           id="password" name="password" class="form-control" maxlength="15"/> <br/>
                 </div>
                 <div align="center" th:if="${param.error}">
                     <p style="font-size: 20; color: #FF1C19;">账号和密码不匹配，请重新输入</p>
