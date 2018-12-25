@@ -46,7 +46,7 @@
             </a>
         </li>
         <!-- 迭代生成页码 -->
-        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
+        <li th:if="${page.totalPages > 0}" class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
             data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''" >
             <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="'/userMgr/'+${i - 1}">
                 <span data-th-text="${i}"></span>

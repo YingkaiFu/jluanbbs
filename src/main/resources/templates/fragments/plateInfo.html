@@ -54,7 +54,7 @@
         </div>
     </li>
 
-    <ul class="pagination" th:align="center">
+    <ul th:if="${postList.totalPages > 0}" class="pagination" th:align="center">
         <!-- 上一页 -->
         <li class="page-item" data-th-classappend="*{postList.isFirst()} ? 'disabled' : ''">
             <a th:href="@{'/plate/'+ ${plate.plateId} + '/' + ${(postList.number - 1)}}" class="page-link" data-th-attr="pageIndex=${postList.number} - 1" aria-label="Previous">
@@ -62,6 +62,7 @@
             </a>
         </li>
         <!-- 迭代生成页码 -->
+
         <li class="page-item" data-th-each="i : ${#numbers.sequence(1, postList.totalPages)}"
             data-th-classappend="${(postList.number + 1) eq i} ? 'active' : ''" >
             <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="'/plate/'+ ${plate.plateId} + '/' + ${i - 1}">
