@@ -19,6 +19,10 @@ public class PostService {
     @Autowired
     private PostDao postDao;
 
+    public Page<PostEntity> findAllOrderByLastReplyDesc(Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "lastReply");
+        return postDao.findAll(pageable);
+    }
     public Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Integer page, Integer size){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "lastReply");
         return postDao.findAllByPlateIdOrderByIsPickedDesc(plateId, pageable);
