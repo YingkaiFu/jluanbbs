@@ -64,8 +64,7 @@
         <!-- 迭代生成页码 -->
         <li class="page-item" data-th-each="i : ${#numbers.sequence(1, postList.totalPages)}"
             data-th-classappend="${(postList.number + 1) eq i} ? 'active' : ''" >
-
-            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{'/plate/'+ ${plate.plateId}+ '/' + ${i - 1}}">
+            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="'/plate/'+ ${plate.plateId} + '/' + ${i - 1}">
                 <span data-th-text="${i}"></span>
             </a>
         </li>
