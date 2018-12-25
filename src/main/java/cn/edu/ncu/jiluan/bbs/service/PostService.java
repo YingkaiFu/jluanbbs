@@ -47,10 +47,20 @@ public class PostService {
     public PostEntity editPost(PostEntity postEntity){
         return postDao.save(postEntity);
     }
-    public void editPicked(int postId){
-        postDao.editPicked(Byte.valueOf("1"),postId);
+
+    public void editPicked(int postId, boolean isEnable){
+        if(isEnable == false)
+            postDao.editPicked(Byte.valueOf("1"),postId);
+        else
+            postDao.editPicked(Byte.valueOf("0"),postId);
+
     }
 
-    public void editGood(int postId){ postDao.editGood(Byte.valueOf("1"),postId); };
+    public void editGood(int postId, boolean isEnable){
+        if(isEnable == false)
+            postDao.editGood(Byte.valueOf("1"),postId);
+        else
+            postDao.editGood(Byte.valueOf("0"),postId);
+    };
 
 }

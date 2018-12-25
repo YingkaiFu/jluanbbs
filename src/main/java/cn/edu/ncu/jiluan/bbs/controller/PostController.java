@@ -88,15 +88,24 @@ public class PostController {
         return "redirect:/postList";
     }
     @RequestMapping(value = "/toPick/{postId}")
-    public String pickPost(@PathVariable Integer postId){
-        postService.editPicked(postId);
+    public String toPick(@PathVariable Integer postId){
+        postService.editPicked(postId, false);
+        return "redirect:/adminPage";
+    }
+    @RequestMapping(value = "/noPick/{postId}")
+    public String noPick(@PathVariable Integer postId){
+        postService.editPicked(postId, true);
         return "redirect:/adminPage";
     }
     @RequestMapping(value = "/toGood/{postId}")
-    public String goodPost(@PathVariable Integer postId){
-        postService.editGood(postId);
+    public String toGood(@PathVariable Integer postId){
+        postService.editGood(postId,false);
         return "redirect:/adminPage";
     }
-
+    @RequestMapping(value = "/noGood/{postId}")
+    public String noGood(@PathVariable Integer postId){
+        postService.editGood(postId,true);
+        return "redirect:/adminPage";
+    }
 
 }
