@@ -40,8 +40,8 @@
                         </div>
                         <div class="col-md-5">
                             <div style="text-align: right">
-                                <a th:href="@{'/toGood/'+${post.postId}}" class="btn btn-outline-primary" role="button">加精</a>
-                                <a th:href="@{'/toPick/'+${post.postId}}"  class="btn btn-outline-primary" role="button">置顶</a>
+                                <a th:href="@{${(${post.isPicked} ? '/noPick' : '/toPick')}+${post.postId}}" th:text="${(${post.isPicked} ? '取消置顶' : '置顶')}" class="btn btn-outline-primary" role="button">加精</a>
+                                <a th:href="@{${(${post.isPicked} ? '/noPick' : '/toPick')}+${post.postId}}" th:text="${(${post.isPicked} ? '取消置顶' : '置顶')}" class="btn btn-outline-primary" role="button">置顶</a>
                                 <a th:href="@{'/toEditPost/'+${post.postId}}"  class="btn btn-outline-danger" role="button">更改</a>
                                 <a th:href="@{'/postDel/'+${post.postId}}"  class="btn btn-outline-danger" role="button">删除</a>
                             </div>
