@@ -19,6 +19,9 @@ public class PostService {
     @Autowired
     private PostDao postDao;
 
+    public List<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId){
+        return postDao.findAllByPlateIdOrderByIsPickedDesc(plateId);
+    }
     public List<PostEntity> findAll(){ return postDao.findAll(); }
     public Long count() {return postDao.count();}
     public Page<PostEntity> findAllPagedOrderByPostId(Integer page, Integer size){
@@ -42,5 +45,8 @@ public class PostService {
     }
     public PostEntity editPost(PostEntity postEntity){
         return postDao.save(postEntity);
+    }
+    public void editPicked(int postId){
+        postDao.editPicked(Byte.valueOf("1"),postId);
     }
 }

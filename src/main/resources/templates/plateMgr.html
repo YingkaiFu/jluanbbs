@@ -41,7 +41,7 @@
                         <div class="col-md-5 ">
                             <div style="text-align: right">
                                 <a  class="btn btn-outline-primary" role="button">加精</a>
-                                <a  class="btn btn-outline-primary" role="button">置顶</a>
+                                <a th:href="@{'/toPick/'+${post.postId}}"  class="btn btn-outline-primary" role="button">置顶</a>
                                 <a th:href="@{'/toEditPost/'+${post.postId}}"  class="btn btn-outline-danger" role="button">更改</a>
                                 <a th:href="@{'/plateMgr/'+${thisPlate.plateId}+'/postDel/'+${post.postId}}"  class="btn btn-outline-danger" role="button">删除</a>
 
