@@ -32,17 +32,25 @@ public class PostController {
 
 
     @RequestMapping(value = "/postList",method = RequestMethod.GET)
-    public String  findAll(Model model){
+    public String  findAll(Model model,HttpServletRequest request){
+        HttpSession session=request.getSession();
         model.addAttribute("postList",postService.findAll());
         model.addAttribute("plateList",plateService.findAll());
+        session.removeAttribute("toPick");
+        session.removeAttribute("toGood");
+        session.removeAttribute("delFlag");
         return "home";
     }
 
     @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
-    public String deletePostEntityByPostId2(@PathVariable Integer postId){
+    public String deletePostEntityByPostId2(@PathVariable Integer postId,HttpServletRequest request){
         replyService.deleteReplyEntitiesByPostId(postId);
         postLikedService.deleteReplyEntitiesByPostId(postId);
         postService.deletePostEntityByPostId(postId);
+        HttpSession session=request.getSession();
+        session.removeAttribute("toPick");
+        session.removeAttribute("toGood");
+        session.setAttribute("delFlag",1);
         return "redirect:/";
     }
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
@@ -79,23 +87,49 @@ public class PostController {
         return "redirect:/postList";
     }
     @RequestMapping(value = "/toPick/{postId}")
-    public String toPick(@PathVariable Integer postId){
+    public String toPick(@PathVariable Integer postId,HttpServletRequest request){
         postService.editPicked(postId, false);
+        HttpSession session=request.getSession();
+        session.setAttribute("toPick",1);
+        session.removeAttribute("toGood");
+        session.removeAttribute("delFlag");
         return "redirect:/";
     }
     @RequestMapping(value = "/noPick/{postId}")
-    public String noPick(@PathVariable Integer postId) {
+    public String noPick(@PathVariable Integer postId,HttpServletRequest request) {
         postService.editPicked(postId, true);
+        HttpSession session=request.getSession();
+        session.setAttribute("toPick",0);
+        session.removeAttribute("toGood");
+        session.removeAttribute("delFlag");
         return "redirect:/";
     }
     @RequestMapping(value = "/toGood/{postId}")
-    public String toGood(@PathVariable Integer postId){
+    public String toGood(@PathVariable Integer postId,HttpServletRequest request){
         postService.editGood(postId,false);
+        HttpSession session=request.getSession();
+        session.setAttribute("toGood",1);
+        session.removeAttribute("toPick");
+        session.removeAttribute("delFlag");
         return "redirect:/";
     }
     @RequestMapping(value = "/noGood/{postId}")
-    public String noGood(@PathVariable Integer postId){
+    public String noGood(@PathVariable Integer postId,HttpServletRequest request){
         postService.editGood(postId,true);
+        HttpSession session=request.getSession();
+        session.setAttribute("toGood",0);
+        session.removeAttribute("toPick");
+        session.removeAttribute("delFlag");
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/first")
+    public String firstPlate(HttpServletRequest request){
+        HttpSession session=request.getSession();
+        session.removeAttribute("toPick");
+        session.removeAttribute("toGood");
+        session.removeAttribute("delFlag");
+        System.out.println("\n\n\n\n\nje");
         return "redirect:/";
     }
 

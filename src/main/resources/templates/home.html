@@ -9,6 +9,26 @@
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
+<body onload="getPosts(9,0);loadPlates();loadQuestions()">
+<div th:if="${session.userName} eq 'admin'" >
+    <script th:inline="javascript" th:if="${session.toPick}==1">
+        alert("置顶成功！");
+    </script>
+    <script th:if="${session.toPick}==0">
+        alert("取消置顶成功！");
+    </script>
+    <script th:if="${session.toGood}==1">
+        alert("加精成功！");
+    </script>
+    <script th:if="${session.toGood}==0">
+        alert("取消加精成功！");
+    </script>
+    <script th:if="${session.delFlag}==1">
+        alert("删除帖子成功");
+    </script>
+</div>
+
+
 <body onload="getPosts(9, 0);loadPlates();loadQuestions()">
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>

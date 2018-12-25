@@ -9,6 +9,15 @@
 </head>
 
 <body>
+<script th:if="${session.regFlag}==1">
+    alert("注册成功！");
+</script>
+<script th:if="${session.Message}==-1">
+    alert("用户名或密码不正确！");
+</script>
+<script th:if="${session.Message}==1">
+    alert("该用户不存在！");
+</script>
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container" style="padding-top: 100px">
@@ -20,16 +29,13 @@
                 <h3 class="form-signin-heading" th:text="Welcome"></h3>
                 <div class="form-group">
                     <label for="username">用户名</label>
-                    <input type="text" th:field="*{userName}" id="username" name="username" th:placeholder="username"
-                           class="form-control" maxlength="100"/> <br/>
+                    <input type="text" th:field="*{userName}" maxlength="100" required="required" id="username" name="username" th:placeholder="username"
+                           class="form-control"/> <br/>
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
-                    <input type="password" th:field="*{password}" th:placeholder="Password"
-                           id="password" name="password" class="form-control" maxlength="15"/> <br/>
-                </div>
-                <div align="center" th:if="${param.error}">
-                    <p style="font-size: 20; color: #FF1C19;">账号和密码不匹配，请重新输入</p>
+                    <input type="password" th:field="*{password}" required="required" th:placeholder="Password"
+                           maxlength="15"  id="password" name="password" class="form-control"/> <br/>
                 </div>
                 <button type="submit" class="btn btn-primary">登陆</button>
             </form>
@@ -40,5 +46,7 @@
     </div>
 
 </div>
+
+
 </body>
 </html>

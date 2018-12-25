@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.jws.WebParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -23,7 +25,8 @@ public class MainController {
     private PostService postService;
 
     @RequestMapping("/")
-    public String viewPlate(){
+    public String viewPlate(HttpServletRequest request){
+        HttpSession session=request.getSession();
         return "home";
     }
 
