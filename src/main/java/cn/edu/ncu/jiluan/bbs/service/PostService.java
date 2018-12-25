@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -60,7 +61,6 @@ public class PostService {
             postDao.editPicked(Byte.valueOf("1"),postId);
         else
             postDao.editPicked(Byte.valueOf("0"),postId);
-
     }
 
     public void editGood(int postId, boolean isEnable){
@@ -68,6 +68,10 @@ public class PostService {
             postDao.editGood(Byte.valueOf("1"),postId);
         else
             postDao.editGood(Byte.valueOf("0"),postId);
+    }
+
+    public void editLastReply(int postId, Timestamp timestamp){
+        postDao.editLastReply(postId, timestamp);
     }
 
 }

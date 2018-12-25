@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import javax.transaction.Transactional;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -31,6 +32,11 @@ public interface PostDao extends JpaRepository<PostEntity, Integer>, JpaSpecific
     @Transactional
     @Query(value="UPDATE PostEntity ps SET ps.isGood=:isGood WHERE ps.postId= :id")
     void editGood(@Param("isGood")Byte isGood,@Param("id") int post_id);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE  PostEntity ps SET ps.lastReply=:lastReply WHERE ps.postId= :id")
+    void editLastReply(@Param("id") int post_id,@Param("lastReply")Timestamp lastReply);
 
     @Modifying
     @Transactional
