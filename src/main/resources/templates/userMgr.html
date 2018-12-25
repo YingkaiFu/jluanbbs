@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107">
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">查看用户信息</a><h5>欢迎您，管理员</h5>
+        <div class="my-2 my-sm-0">
+            <a href="/" class="btn btn-outline-success" role="button">登出
+            </a>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">编号</th>
+            <th scope="col">用户名</th>
+            <th scope="col">性别</th>
+            <th scope="col">生日</th>
+            <th scope="col">省</th>
+            <th scope="col">市</th>
+            <th scope="col">工作性质</th>
+            <th scope="col">联系电话</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user:${page}">
+            <td th:text="${user.userId}"></td>
+            <td th:text="${user.userName}"></td>
+            <td th:text="${user.gender}"></td>
+            <td th:text="${user.birthday}"></td>
+            <td th:text="${user.provinceByProvinceId.provinceName}"></td>
+            <td th:text="${user.cityByCityId.cityName}"></td>
+            <td th:text="${user.plateByPlateId.plateName}"></td>
+            <td th:text="${user.tel}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul class="pagination" th:align="center">
+        <!-- 上一页 -->
+        <li class="page-item" data-th-classappend="*{page.isFirst()} ? 'disabled' : ''">
+            <a th:href="@{'/userMgr/'+ ${(page.number - 1)}}" class="page-link" data-th-attr="pageIndex=${page.number} - 1" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+            </a>
+        </li>
+        <!-- 迭代生成页码 -->
+        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages - 1)}"
+            data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''" >
+
+            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{'/userMgr/'+ ${i - 1}}">
+                <span data-th-text="${i}"></span>
+            </a>
+        </li>
+        <!-- 下一页 -->
+        <li class="page-item" data-th-classappend="*{page.isLast()} ? 'disabled' : ''">
+            <a th:href="@{'/userMgr/'+ ${page.number + 1}}" class="page-link" data-th-attr="pageIndex=${page.number} + 1" aria-label="Next">
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+</body>
+</html>

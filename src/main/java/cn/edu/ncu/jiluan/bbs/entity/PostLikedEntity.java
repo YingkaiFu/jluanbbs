@@ -1,5 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,6 +10,8 @@ import javax.persistence.*;
 public class PostLikedEntity {
     private int postId;
     private int userId;
+    private PostEntity postByPostId;
+    private UserEntity userByUserId;
 
     @Id
     @Column(name = "post_id", nullable = false)
@@ -47,5 +51,27 @@ public class PostLikedEntity {
         int result = postId;
         result = 31 * result + userId;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", referencedColumnName = "post_id", nullable = false, insertable = false, updatable = false)
+    @JsonBackReference
+    public PostEntity getPostByPostId() {
+        return postByPostId;
+    }
+
+    public void setPostByPostId(PostEntity postByPostId) {
+        this.postByPostId = postByPostId;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", nullable = false, insertable = false, updatable = false)
+    @JsonBackReference
+    public UserEntity getUserByUserId() {
+        return userByUserId;
+    }
+
+    public void setUserByUserId(UserEntity userByUserId) {
+        this.userByUserId = userByUserId;
     }
 }

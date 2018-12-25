@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.userName}+'的个人空间'">用户个人信息</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 " style="height: 900px;">
+            <div class="container">
+                <h3 th:text="${user.userName}+'的个人空间'">用户信息</h3>
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'用户名：     '+${user.userName}">
+                            用户名：     123
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'性别：      '+(${user.gender} ? '男' : '女')">
+                            性别：      男
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'出生年月：   '+${user.birthday}">
+                            出生年月：   1999-06-12
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'工作地点：    '+${user.provinceByProvinceId.provinceName}+${user.cityByCityId.cityName}">
+                            工作地点：   北京市北京市
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'工作性质：    '+${user.plateByPlateId.plateName}">
+                            工作性质：   Java
+                        </div>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    <div>
+                        <div th:text="'联系电话：    '+${user.tel}">
+                            联系电话：   15879039576
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-4" style="height: 300px;">
+            <div class="col" style="height: 50px">
+                <a th:href="${session.userName.equals(user.userName)} ? ('/toEditUser/'+${user.userId}) : ''" th:text="${session.userName.equals(user.userName)} ? '修改信息' : '加为好友'" class="btn btn-primary btn-block" role="button"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

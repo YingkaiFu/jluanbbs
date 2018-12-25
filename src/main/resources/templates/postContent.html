@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+<div class="container">
+    <blockquote class="blockquote text-center">
+        <p class="mb-0" th:text="${post.getPostTopic()}"></p>
+        <footer class="blockquote-footer" th:text="作者+${post.userByUserId.userName}+发布时间+${post.postTime}+访问量+${post.getViews()}">
+            Someone famous in <cite title="Source Title">Source Title</cite></footer>
+    </blockquote>
+    <div class="list-group">
+        <ul class="list-group ">
+            <!--<label for="exampleFormControlTextarea1">主题</label>-->
+            <li class="list-group-item bg-light" th:text="${post.getPostCont()}"
+                id="exampleFormControlTextarea1" rows="3">
+            </li>
+        </ul>
+    </div>
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item p-3 mb-2" th:each="reply:${replyList}">
+                <div>
+                    <div>
+                        <p class="mb-1" th:text="${reply.getReplyCont()}"></p>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-muted" th:text="${reply.userByUserId.userName}"></p>
+                        <p class="text-muted" th:text="${reply.getReplyTime()}"></p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <p class="mb-0">评论</p>
+    <form th:action="@{${post.postId}+'/addReply'}" th:object="${reply}" method="post">
+        <div class="form-group">
+            <!--<label for="comment">主题</label>-->
+
+            <textarea th:field="*{replyCont}"  class="form-control" id="comment" rows="3" placeholder="请输入你的评论"></textarea>
+            <div style="float: left"><button type="submit" class="btn button btn-success">评论</button></div>
+            <div style="float: right" th:if="${session.userId==post.userId}">
+                <a th:href="@{'/toEditPost/'+${post.postId}}" role="button" class="btn button btn-info">更改</a>
+            </div>
+
+        </div>
+    </form>
+</div>
+</body>
+</html>

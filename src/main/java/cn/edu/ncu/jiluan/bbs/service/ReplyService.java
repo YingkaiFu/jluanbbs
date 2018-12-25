@@ -18,4 +18,13 @@ public class ReplyService {
     public List<ReplyEntity> findAll(){
         return replyDao.findAll();
     }
+    public List<ReplyEntity> findReplyEntitiesByPostId(Integer postId){
+        return replyDao.findReplyEntitiesByPostId(postId);
+    }
+    public void deleteReplyEntitiesByPostId(Integer postId){
+        replyDao.deleteReplyEntitiesByPostId(postId);
+    }
+    public ReplyEntity addReply(ReplyEntity replyEntity){
+        return replyDao.save(replyEntity);
+    }
 }

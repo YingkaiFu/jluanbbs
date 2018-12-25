@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div class="container">
+    <h3 th:text="${plate.plateName}"></h3>
+</div>
+<ul class="list-group">
+    <li class="list-group-item" th:each="post:${postList}">
+        <div>
+            <div>
+                <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="badge badge-primary" th:text="${post.userByUserId.userName}"></span>
+                    <span class="badge badge-secondary" th:text="${post.plateByPlateId.plateName}"></span>
+
+                </div>
+
+                <div class="col" style="text-align: right">
+                    <i class="far fa-eye"></i>
+                    <span class="small text-muted" th:text="${post.views}"></span>
+                    <i class="fas fa-heart"></i>
+                    <i class="far fa-heart"></i>
+                    <span class="small text-muted" th:text="${post.likes}"></span>
+                    <i class="far fa-comment-dots"></i>
+                    <span class="small text-muted" th:text="${post.replies}"></span>
+                </div>
+            </div>
+
+        </div>
+    </li>
+
+    <ul class="pagination" th:align="center">
+        <!-- 上一页 -->
+        <li class="page-item" data-th-classappend="*{postList.isFirst()} ? 'disabled' : ''">
+            <a th:href="@{'/plate/'+ ${plate.plateId} + '/' + ${(postList.number - 1)}}" class="page-link" data-th-attr="pageIndex=${postList.number} - 1" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+            </a>
+        </li>
+        <!-- 迭代生成页码 -->
+        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, postList.totalPages)}"
+            data-th-classappend="${(postList.number + 1) eq i} ? 'active' : ''" >
+
+            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{'/plate/'+ ${plate.plateId}+ '/' + ${i - 1}}">
+                <span data-th-text="${i}"></span>
+            </a>
+        </li>
+        <!-- 下一页 -->
+        <li class="page-item" data-th-classappend="*{postList.isLast()} ? 'disabled' : ''">
+            <a th:href="@{'/plate/'+ ${plate.plateId} + '/' + ${postList.number + 1}}" class="page-link" data-th-attr="pageIndex=${postList.number} + 1" aria-label="Next">
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
+    
+</ul>
+</body>
+</html>

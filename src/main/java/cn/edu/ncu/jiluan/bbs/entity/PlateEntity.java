@@ -1,6 +1,9 @@
 package cn.edu.ncu.jiluan.bbs.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "plate", schema = "bbs", catalog = "")
@@ -8,6 +11,8 @@ public class PlateEntity {
     private int plateId;
     private String plateName;
     private String plateImage;
+    private Collection<PostEntity> postsByPlateId;
+    private Collection<UserEntity> usersByPlateId;
 
     @Id
     @Column(name = "plate_id", nullable = false)
@@ -59,5 +64,25 @@ public class PlateEntity {
         result = 31 * result + (plateName != null ? plateName.hashCode() : 0);
         result = 31 * result + (plateImage != null ? plateImage.hashCode() : 0);
         return result;
+    }
+
+    @OneToMany(mappedBy = "plateByPlateId")
+    @JsonManagedReference
+    public Collection<PostEntity> getPostsByPlateId() {
+        return postsByPlateId;
+    }
+
+    public void setPostsByPlateId(Collection<PostEntity> postsByPlateId) {
+        this.postsByPlateId = postsByPlateId;
+    }
+
+    @OneToMany(mappedBy = "plateByPlateId")
+    @JsonManagedReference
+    public Collection<UserEntity> getUsersByPlateId() {
+        return usersByPlateId;
+    }
+
+    public void setUsersByPlateId(Collection<UserEntity> usersByPlateId) {
+        this.usersByPlateId = usersByPlateId;
     }
 }
