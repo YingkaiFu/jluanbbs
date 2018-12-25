@@ -17,9 +17,7 @@
             <th scope="col">编号</th>
             <th scope="col">用户名</th>
             <th scope="col">性别</th>
-            <th scope="col">生日</th>
-            <th scope="col">省</th>
-            <th scope="col">市</th>
+            <th scope="col">工作地点</th>
             <th scope="col">工作性质</th>
             <th scope="col">联系电话</th>
         </tr>
@@ -29,9 +27,7 @@
             <td th:text="${user.userId}"></td>
             <td th:text="${user.userName}"></td>
             <td th:text="${user.gender}?'男':'女'"></td>
-            <td th:text="${user.birthday}"></td>
             <td th:text="${user.provinceByProvinceId.provinceName}"></td>
-            <td th:text="${user.cityByCityId.cityName}"></td>
             <td th:text="${user.plateByPlateId.plateName}"></td>
             <td th:text="${user.tel}"></td>
         </tr>
@@ -60,9 +56,5 @@
         </li>
     </ul>
 </div>
-
-
-
-
 </body>
 </html>
