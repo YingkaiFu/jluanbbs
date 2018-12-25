@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container-fluid" style="background-color: #ffc107" data-th-fragment="nav">
-    <nav class="navbar navbar-light bg-light">
+    <header class="navbar navbar-light bg-light bd-navbar">
         <a class="navbar-brand" href="#">JluanBBS</a>
 
         <div class="my-2 my-sm-0" th:if="${session.userName==null}">
@@ -30,11 +30,13 @@
             </a>
             <a href="/question" class="btn btn-outline-success" role="button">问答
             </a>
+            <a href="/view" class="btn btn-outline-success" role="button">数据分析
+            </a>
             <a th:href="@{'/userInfo/'+${session.userId}}" class="btn btn-outline-success" role="button">个人中心
             </a>
             <a href="/logOut" class="btn btn-outline-success" role="button">注销</a>
         </div>
-    </nav>
+    </header>
 </div>
 </body>
 </html>

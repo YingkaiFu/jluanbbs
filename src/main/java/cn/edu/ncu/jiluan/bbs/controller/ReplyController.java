@@ -32,6 +32,7 @@ public class ReplyController {
         HttpSession session = request.getSession();
         replyEntity.setUserId((Integer)session.getAttribute("userId"));
         replyService.addReply(replyEntity);
+        replyService.updatePostRepliesCount(replyEntity.getPostId());
         return "redirect:/post/{postId}";
     }
 
@@ -40,6 +41,7 @@ public class ReplyController {
         HttpSession session = request.getSession();
         replyEntity.setUserId((Integer)session.getAttribute("userId"));
         replyService.addReply(replyEntity);
+        replyService.updatePostRepliesCount(replyEntity.getPostId());
         return "redirect:/question/{postId}";
     }
 }

@@ -20,13 +20,13 @@
                 <h3 class="form-signin-heading" th:text="Welcome"></h3>
                 <div class="form-group">
                     <label for="username">用户名</label>
-                    <input type="text" th:field="*{userName}" required="required" id="username" name="username" th:placeholder="username"
+                    <input type="text" th:field="*{userName}" maxlength="100" required="required" id="username" name="username" th:placeholder="username"
                            class="form-control"/> <br/>
                 </div>
                 <div class="form-group">
                     <label for="password">密码</label>
                     <input type="password" th:field="*{password}" required="required" th:placeholder="Password"
-                           id="password" name="password" class="form-control"/> <br/>
+                           maxlength="15"  id="password" name="password" class="form-control"/> <br/>
                 </div>
                 <button type="submit" class="btn btn-primary">登陆</button>
             </form>

@@ -38,14 +38,6 @@ public class PostController {
         return "home";
     }
 
-    @RequestMapping(value = "/plateMgr/{plateId}/postDel/{postId}",method = RequestMethod.GET)
-    public String deletePostEntityByPostId1(@PathVariable Integer plateId, @PathVariable Integer postId){
-        replyService.deleteReplyEntitiesByPostId(postId);
-        postLikedService.deleteReplyEntitiesByPostId(postId);
-        postService.deletePostEntityByPostId(postId);
-        return "redirect:/plateMgr/{plateId}";
-    }
-
     @RequestMapping(value = "/postDel/{postId}",method = RequestMethod.GET)
     public String deletePostEntityByPostId2(@PathVariable Integer postId){
         replyService.deleteReplyEntitiesByPostId(postId);

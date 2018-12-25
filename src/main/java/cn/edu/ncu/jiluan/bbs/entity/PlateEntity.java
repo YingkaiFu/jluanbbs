@@ -8,9 +8,9 @@ import java.util.Collection;
 @Entity
 @Table(name = "plate", schema = "bbs", catalog = "")
 public class PlateEntity {
-    private int plateId;
-    private String plateName;
-    private String plateImage;
+    protected int plateId;
+    protected String plateName;
+    protected String plateImage;
     private Collection<PostEntity> postsByPlateId;
     private Collection<UserEntity> usersByPlateId;
 

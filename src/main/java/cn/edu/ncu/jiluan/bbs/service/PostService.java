@@ -19,8 +19,12 @@ public class PostService {
     @Autowired
     private PostDao postDao;
 
-    public Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Integer page, Integer size){
+    public Page<PostEntity> findAllOrderByLastReplyDesc(Integer page, Integer size){
         Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "isPicked");
+        return postDao.findAll(pageable);
+    }
+    public Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "lastReply");
         return postDao.findAllByPlateIdOrderByIsPickedDesc(plateId, pageable);
     }
     public List<PostEntity> findAll(){ return postDao.findAll(); }
@@ -64,6 +68,6 @@ public class PostService {
             postDao.editGood(Byte.valueOf("1"),postId);
         else
             postDao.editGood(Byte.valueOf("0"),postId);
-    };
+    }
 
 }

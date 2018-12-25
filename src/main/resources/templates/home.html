@@ -9,7 +9,7 @@
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body onload="getPosts(1);loadPlates();loadQuestions()">
+<body onload="getPosts(9, 0);loadPlates();loadQuestions()">
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container">
@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <a th:href="@{/addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
+                <a th:href="${session.userId}==null ? '/login' : '/addNewPost'" class="btn btn-primary btn-block" role="button">发帖</a>
             </div>
             <div th:if="${session.userName} eq 'admin'" class="col" style="height: 90px">
                 <a href="/userMgr/0" class="btn btn-primary btn-block" role="button">查看用户名单</a>
@@ -35,8 +35,8 @@
     </div>
 </div>
 <script>
-    function getPosts(plateId) {
-        var url = '/plate/' + plateId+'/0';
+    function getPosts(plateId, pageId) {
+        var url = '/plate/' + plateId+'/'+pageId;
         $("#postList").load(url);
     }
     function loadPlates() {

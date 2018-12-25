@@ -13,7 +13,7 @@
 <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
 <tr th:each="plate:${plateList}">
     <td>
-        <a th:onclick="'javascript:getPosts('+${plate.plateId}+');'" class="btn btn-outline-success"
+        <a th:onclick="'javascript:getPosts('+${plate.plateId}+', 0);'" class="btn btn-outline-success"
            role="button"
            th:text="${plate.plateName}"></a>
     </td>
