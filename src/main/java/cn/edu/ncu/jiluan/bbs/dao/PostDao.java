@@ -19,7 +19,7 @@ public interface PostDao extends JpaRepository<PostEntity, Integer>, JpaSpecific
 
     Page<PostEntity> findPostEntitiesByPlateId(Integer plateId, Pageable pageable);
 
-    PostEntity findPostEntityByPostId(Integer postId);
+    PostEntity findPostEntityByPostIdAndIspost(Integer postId,Byte isPost);
 
     List<PostEntity> findPostEntitiesByIspost(Byte isPost);
 

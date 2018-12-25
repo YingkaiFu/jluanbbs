@@ -44,9 +44,12 @@ public class UserService {
     public Long count() {return userDao.count();}
 
 
-    public UserEntity saveUser(UserEntity user) {
-        user.setPassword(user.getPassword());
-        return userDao.save(user);
+    public UserEntity saveUser(UserEntity userEntity) {
+        return userDao.save(userEntity);
+    }
+
+    public UserEntity editUser(UserEntity userEntity){
+        return userDao.save(userEntity);
     }
 
     public int login(String userName, String password) {

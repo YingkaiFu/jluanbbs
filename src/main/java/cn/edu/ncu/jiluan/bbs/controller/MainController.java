@@ -25,6 +25,7 @@ public class MainController {
     public String viewPlate(Model model){
         model.addAttribute("postList",postService.findAll());
         model.addAttribute("plateList",plateService.findAll());
+        model.addAttribute("quesList",postService.findPostEntitiesByIspost(Byte.valueOf("1")));
         return "home";
     }
 

@@ -32,6 +32,13 @@ public class UserController {
     @Autowired
     private PostService postService;
 
+    @Autowired
+    private ProvinceService provinceService;
+
+    @Autowired
+    private CityService cityService;
+
+
     @RequestMapping(value = "userInfo/{userId}",method = RequestMethod.GET)
     public String findUserEntityByUserId(Model model, @PathVariable Integer userId){
         model.addAttribute("user", userService.findUserEntityByUserId(userId));
@@ -58,6 +65,20 @@ public class UserController {
     public String deleteUserEntityByUserId(@PathVariable Integer userId){
         userService.deleteUserEntityByUserId(userId);
         return "userMgr";
+    }
+
+    @RequestMapping(value = "/toEditUser/{userId}", method = RequestMethod.GET)
+    public String toEditUser(Model model, @PathVariable Integer userId){
+        model.addAttribute("user", userService.findUserEntityByUserId(userId));
+        model.addAttribute("provinceList",provinceService.findAll());
+        model.addAttribute("plateList",plateService.findAll());
+        return "userEdit";
+    }
+
+    @RequestMapping(value = "/editUser",method = RequestMethod.POST)
+    public String editUser(UserEntity userEntity){
+        userService.editUser(userEntity);
+        return "redirect:/";
     }
 
 

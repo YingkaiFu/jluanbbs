@@ -8,21 +8,7 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="background-color: #ffc107">
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">jluanBBS</a>
-
-        <div class="my-2 my-sm-0" th:if="${session.userName==null}">用户名
-            <a href="/login" class="btn btn-outline-success" role="button">登陆
-            </a>
-            <a href="/registration" class="btn btn-outline-success" role="button">注册
-            </a>
-        </div>
-
-        <div class="my-2 my-sm-0" th:if="${session.userName}">用户名
-            <a href="/logOut" class="btn btn-outline-success" role="button">注销</a>
-        </div>
-    </nav>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container">
     <div class="row">
@@ -77,7 +63,7 @@
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <a th:href="${session.userName.equals(user.userName)} ? ('/userEdit/'+${user.userId}) : ''" th:text="${session.userName.equals(user.userName)} ? '修改信息' : '加为好友'" class="btn btn-primary btn-block" role="button"></a>
+                <a th:href="${session.userName.equals(user.userName)} ? ('/toEditUser/'+${user.userId}) : ''" th:text="${session.userName.equals(user.userName)} ? '修改信息' : '加为好友'" class="btn btn-primary btn-block" role="button"></a>
             </div>
         </div>
     </div>
