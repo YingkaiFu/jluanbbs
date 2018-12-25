@@ -4,6 +4,8 @@ import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
 import cn.edu.ncu.jiluan.bbs.service.PlateService;
 import cn.edu.ncu.jiluan.bbs.service.PostService;
 import cn.edu.ncu.jiluan.bbs.service.UserService;
+import cn.edu.ncu.jiluan.bbs.service.ProvinceService;
+
 import org.apache.tomcat.util.buf.UEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -35,8 +37,6 @@ public class UserController {
     @Autowired
     private ProvinceService provinceService;
 
-    @Autowired
-    private CityService cityService;
 
 
     @RequestMapping(value = "userInfo/{userId}",method = RequestMethod.GET)
