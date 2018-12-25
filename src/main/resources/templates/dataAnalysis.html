@@ -38,7 +38,8 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="plateInfo:${plateInfoList}" >
+    <tr th:each="plateInfo:${plateInfoList}" th:if="${plateInfo.plateId!=9}">
+
         <th th:text="${plateInfo.plateName}" />
         <td th:text="${plateInfo.getPostCount()}" />
         <td th:text="${plateInfo.getReplyCount()}" />
