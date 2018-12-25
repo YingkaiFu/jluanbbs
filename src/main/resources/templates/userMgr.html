@@ -32,8 +32,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="user:${userList}">
-            <th scope="row" th:text="${user.userId}"></th>
+        <tr th:each="user:${page}">
+            <td th:text="${user.userId}"></td>
             <td th:text="${user.userName}"></td>
             <td th:text="${user.gender}"></td>
             <td th:text="${user.birthday}"></td>
@@ -44,7 +44,32 @@
         </tr>
         </tbody>
     </table>
+
+    <ul class="pagination" th:align="center">
+        <!-- 上一页 -->
+        <li class="page-item" data-th-classappend="*{page.isFirst()} ? 'disabled' : ''">
+            <a th:href="@{'/userMgr/'+ ${(page.number - 1)}}" class="page-link" data-th-attr="pageIndex=${page.number} - 1" aria-label="Previous">
+                <span aria-hidden="true">«</span>
+            </a>
+        </li>
+        <!-- 迭代生成页码 -->
+        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages - 1)}"
+            data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''" >
+
+            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{'/userMgr/'+ ${i - 1}}">
+                <span data-th-text="${i}"></span>
+            </a>
+        </li>
+        <!-- 下一页 -->
+        <li class="page-item" data-th-classappend="*{page.isLast()} ? 'disabled' : ''">
+            <a th:href="@{'/userMgr/'+ ${page.number + 1}}" class="page-link" data-th-attr="pageIndex=${page.number} + 1" aria-label="Next">
+                <span aria-hidden="true">»</span>
+            </a>
+        </li>
+    </ul>
 </div>
+
+
 
 
 </body>

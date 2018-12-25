@@ -27,9 +27,8 @@ public class UserEntity {
     private ProvinceEntity provinceByProvinceId;
     private CityEntity cityByCityId;
     private String password;
-    private Integer userMajor;
     private String tel;
-    private Integer plateId;
+    private Integer plateId=9;
     private PlateEntity plateByPlateId;
 
     @Id

@@ -3,8 +3,13 @@ package cn.edu.ncu.jiluan.bbs.service;
 import cn.edu.ncu.jiluan.bbs.dao.UserDao;
 import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Book;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -30,6 +35,13 @@ public class UserService {
     public void deleteUserEntityByUserId(Integer userId){
         userDao.deleteUserEntityByUserId(userId);
     }
+
+    public Page<UserEntity> findAllPagedOrderById(Integer page, Integer size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.DEFAULT_DIRECTION, "userId");
+        return userDao.findAll(pageable);
+    }
+
+    public Long count() {return userDao.count();}
 
 
     public UserEntity saveUser(UserEntity user) {

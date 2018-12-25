@@ -4,7 +4,9 @@ import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
 import cn.edu.ncu.jiluan.bbs.service.PlateService;
 import cn.edu.ncu.jiluan.bbs.service.PostService;
 import cn.edu.ncu.jiluan.bbs.service.UserService;
+import org.apache.tomcat.util.buf.UEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by krito on 2018/12/19
  */
 @Controller
-@RequestMapping(value = "user")
+@RequestMapping(value = "")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -37,9 +40,17 @@ public class UserController {
         return "userInfo";
     }
 
-    @RequestMapping(value = "userMgr",method = RequestMethod.GET)
-    public String findAll(Model model){
-        model.addAttribute("userList",userService.findAll());
+    @RequestMapping(value = "/userMgr/{page}",method = RequestMethod.GET)
+    public String findAll(Model model, @PathVariable Integer page){
+        model.addAttribute("indexPage", page);
+        Long temp = userService.count();
+        if (temp%20==0)
+            temp/=20;
+        else
+            temp=temp/20+1;
+        model.addAttribute("totalPage", temp);
+        Page<UserEntity> userEntities = userService.findAllPagedOrderById(page, 10);
+        model.addAttribute("page",userEntities);
         return "userMgr";
     }
 
