@@ -9,6 +9,15 @@
 </head>
 
 <body>
+<script th:if="${session.regFlag}==1">
+    alert("注册成功！");
+</script>
+<script th:if="${session.Message}==-1">
+    alert("用户名或密码不正确！");
+</script>
+<script th:if="${session.Message}==1">
+    alert("该用户不存在！");
+</script>
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container" style="padding-top: 100px">

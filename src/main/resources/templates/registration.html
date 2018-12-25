@@ -9,6 +9,9 @@
 </head>
 
 <body>
+<script th:if="${session.regFlag}==0">
+    alert("注册失败，用户名已存在！");
+</script>
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container" style="padding-top: 100px">
