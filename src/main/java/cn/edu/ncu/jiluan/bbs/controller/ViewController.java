@@ -22,12 +22,12 @@ public class ViewController {
     @Autowired
     private ReplyService replyService;
 
-    @RequestMapping(value = "/post/{postId}",method = RequestMethod.GET)
-    public String GetPostContent(@PathVariable Integer postId, Model model, HttpServletRequest request){
+    @RequestMapping(value = "/post/{postId}/{page}",method = RequestMethod.GET)
+    public String GetPostContent(@PathVariable Integer postId,@PathVariable Integer page, Model model, HttpServletRequest request){
         PostEntity post = postService.findPostEntityByPostId(postId, Byte.valueOf("0"));
         HttpSession session = request.getSession();
         model.addAttribute("post", post);
-        model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
+        model.addAttribute("replyList",replyService.findReplyEntitiesByPostIdOrderByReplyId(postId, page, 10));
         model.addAttribute("reply",new ReplyEntity());
         postService.addView(postId);
         return "postContent";

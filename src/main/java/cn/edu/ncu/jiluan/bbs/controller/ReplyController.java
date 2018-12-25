@@ -32,14 +32,14 @@ public class ReplyController {
         return replyService.findAll();
     }
 
-    @RequestMapping(value = "/post/{postId}/addReply", method = RequestMethod.POST)
+    @RequestMapping(value = "/post/{postId}/{postId}/addReply", method = RequestMethod.POST)
     public String addReply(@Valid ReplyEntity replyEntity, HttpServletRequest request, @PathVariable int postId){
         HttpSession session = request.getSession();
         replyEntity.setUserId((Integer)session.getAttribute("userId"));
         replyService.addReply(replyEntity);
         replyService.updatePostRepliesCount(replyEntity.getPostId());
-        postService.editLastReply(postId, new Timestamp(System.currentTimeMillis()));
-        return "redirect:/post/{postId}";
+        postService.editLastReply(postId, new Timestamp(System.currentTimeMillis()+14*60*60*1000));
+        return "redirect:/post/{postId}/0";
     }
 
     @RequestMapping(value = "/question/{postId}/addReply", method = RequestMethod.POST)
