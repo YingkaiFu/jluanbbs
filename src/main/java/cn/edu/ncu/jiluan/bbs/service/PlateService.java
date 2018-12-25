@@ -5,6 +5,9 @@ import cn.edu.ncu.jiluan.bbs.dao.PostDao;
 import cn.edu.ncu.jiluan.bbs.entity.PlateEntity;
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +24,9 @@ public class PlateService    {
         return plateDao.findAll();
     }
 
-    public List<PostEntity> findPostEntitiesByPlateId(Integer plateId){
-        return postDao.findPostEntitiesByPlateId(plateId);
+    public Page<PostEntity> findPostEntitiesByPlateId(Integer plateId, Integer page, Integer size){
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "postId");
+        return postDao.findPostEntitiesByPlateId(plateId, pageRequest);
     }
 
     public PlateEntity findPlateEntityByPlateId(Integer plateId){

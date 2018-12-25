@@ -41,17 +41,12 @@
                 <div class="form-group">
                     <label class="validation-message">工作省份</label>
                     <select th:field="*{provinceId}" class="form-control" id="workProvince" style="width: 80%;margin: 10px auto auto 20px" >
-                        <option th:each="province:${provinces}" th:text="${province.provinceName}" th:value="${province.provinceId}"
-                        ></option>
+                        <option th:each="province:${provinces}" th:text="${province.provinceName}" th:value="${province.provinceId}">
+
+                        </option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <label class="validation-message">工作城市</label>
-                    <select th:field="*{cityId}" class="form-control" id="workCity" style="width: 80%;margin: 10px auto auto 20px" >
-                        <option th:each="city:${cities}" th:text="${city.cityName}" th:value="${city.cityId}"
-                        ></option>
-                    </select>
-                </div>
+
                 <button type="submit" class="btn btn-primary btn-block">注册</button>
                 <h2><span class="text-success" th:text="${Message}"></span></h2>
             </form>

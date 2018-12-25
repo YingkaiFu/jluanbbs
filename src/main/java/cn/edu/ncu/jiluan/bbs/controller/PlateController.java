@@ -13,17 +13,17 @@ public class PlateController {
     @Autowired
     private PlateService plateService;
 
-    @RequestMapping(value = "/plate/{plateId}",method = RequestMethod.GET)
-    public String findPostEntitiesByPlateId(@PathVariable Integer plateId, Model model){
-        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+    @RequestMapping(value = "/plate/{plateId}/{page}",method = RequestMethod.GET)
+    public String findPostEntitiesByPlateId(@PathVariable Integer plateId, @PathVariable Integer page, Model model){
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId, page, 10));
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("plate",plateService.findPlateEntityByPlateId(plateId));
         return "fragments/plateInfo";
     }
 
-    @RequestMapping(value = "/plateMgr/{plateId}",method = RequestMethod.GET)
-    public String MgrPostEntityByPostId(@PathVariable Integer plateId, Model model){
-        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId));
+    @RequestMapping(value = "/plateMgr/{plateId}/{page}",method = RequestMethod.GET)
+    public String MgrPostEntityByPostId(@PathVariable Integer plateId, @PathVariable Integer page, Model model){
+        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId, page, 10));
         model.addAttribute("plateList",plateService.findAll());
         model.addAttribute("thisPlate",plateService.findPlateEntityByPlateId(plateId));
         return "plateMgr";
