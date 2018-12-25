@@ -19,11 +19,14 @@ public interface ReplyDao extends JpaRepository<ReplyEntity, Integer> {
     @Transactional
     void deleteReplyEntitiesByPostId(Integer postId);
 
-    void countReplyEntityByPostId(Integer postId);
+    int countReplyEntityByPostId(Integer postId);
 
 
     @Query(value="SELECT count(reply_id) FROM reply,post WHERE reply.post_id = post.post_id AND post.plate_id = ?1", nativeQuery = true)
     Integer countReplyEntityByPlateId(int plateId);
 
-
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE post ps SET ps.replies=?1 WHERE ps.post_id= ?2 ", nativeQuery = true)
+    void updatePostRepliesCount(int replies, int postId);
 }
