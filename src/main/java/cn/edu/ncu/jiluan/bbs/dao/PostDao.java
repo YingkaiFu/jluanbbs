@@ -28,6 +28,12 @@ public interface PostDao extends JpaRepository<PostEntity, Integer>, JpaSpecific
     @Query(value="UPDATE PostEntity ps SET ps.isPicked=:isPicked WHERE ps.postId= :id")
     void editPicked(@Param("isPicked")Byte isPicked,@Param("id") int post_id);
 
+    @Modifying
+    @Transactional
+    @Query(value="UPDATE PostEntity ps SET ps.isGood=:isGood WHERE ps.postId= :id")
+    void editGood(@Param("isGood")Byte isGood,@Param("id") int post_id);
+
+
     List<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId);
 
     @Modifying

@@ -37,6 +37,7 @@ public class PostEntity {
     private Collection<ReplyEntity> repliesByPostId;
     private Byte isPicked;
     private Byte ispost;
+    private Byte isGood;
 
     @Id
     @Column(name = "post_id", nullable = false)
@@ -232,5 +233,15 @@ public class PostEntity {
 
     public void setIspost(Byte ispost) {
         this.ispost = ispost;
+    }
+
+    @Basic
+    @Column(name = "is_good", nullable = true)
+    public Byte getIsGood() {
+        return isGood;
+    }
+
+    public void setIsGood(Byte isGood) {
+        this.isGood = isGood;
     }
 }

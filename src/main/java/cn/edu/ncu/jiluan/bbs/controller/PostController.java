@@ -88,12 +88,15 @@ public class PostController {
         return "redirect:/postList";
     }
     @RequestMapping(value = "/toPick/{postId}")
-    public String pickPost(@PathVariable Integer postId,HttpServletRequest request){
-        HttpSession session=request.getSession();
+    public String pickPost(@PathVariable Integer postId){
         postService.editPicked(postId);
-        if(session.getAttribute("userName").equals("admin"))
-            return "redirect:/adminPage";
-        return "redirect:/postList";
+        return "redirect:/adminPage";
     }
+    @RequestMapping(value = "/toGood/{postId}")
+    public String goodPost(@PathVariable Integer postId){
+        postService.editGood(postId);
+        return "redirect:/adminPage";
+    }
+
 
 }

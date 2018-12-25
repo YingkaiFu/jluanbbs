@@ -49,4 +49,7 @@ public class PostService {
     public void editPicked(int postId){
         postDao.editPicked(Byte.valueOf("1"),postId);
     }
+
+    public void editGood(int postId){ postDao.editGood(Byte.valueOf("1"),postId); };
+
 }
