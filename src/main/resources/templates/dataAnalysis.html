@@ -33,13 +33,15 @@
     <thead>
     <tr>
         <th></th>
-        <th>发帖数量</th>
+        <th>发帖数</th>
+        <th>回帖数</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="plateInfo:${plateInfoList}" >
         <th th:text="${plateInfo.plateName}" />
         <td th:text="${plateInfo.getPostCount()}" />
+        <td th:text="${plateInfo.getReplyCount()}" />
     </tr>
 
 </table>
@@ -52,7 +54,7 @@
             type: 'column'
         },
         title: {
-            text: '从 HTML 表格中提取数据并生成图表'
+            text: '各版块热度表'
             // 该功能依赖 data.js 模块，详见https://www.hcharts.cn/docs/data-modules
         },
         yAxis: {
