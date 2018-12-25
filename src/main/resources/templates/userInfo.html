@@ -33,7 +33,7 @@
                 </li>
                 <li class="list-group-item">
                     <div>
-                        <div th:text="'出生年月：   '+${user.birthday}">
+                        <div th:text="'出生年月：   '+(${user.birthday}!=null?${user.birthday}:'请填写您的生日')">
                             出生年月：   1999-06-12
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                 </li>
                 <li class="list-group-item">
                     <div>
-                        <div th:text="'联系电话：    '+${user.tel}">
+                        <div th:text="'联系电话：    '+(${user.tel}!=null?${user.tel}:'请填写您的电话')">
                             联系电话：   15879039576
                         </div>
                     </div>

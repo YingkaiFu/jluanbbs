@@ -24,13 +24,13 @@
                 <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-5">
                     <span class="badge badge-primary" th:text="${post.userByUserId.userName}"></span>
                     <span class="badge badge-secondary" th:text="${post.plateByPlateId.plateName}"></span>
 
                 </div>
 
-                <div class="col" style="text-align: right">
+                <div class="col-md-7" style="text-align: right">
                     <i class="far fa-eye"></i>
                     <span class="small text-muted" th:text="${post.views}"></span>
                     <i class="fas fa-heart"></i>
@@ -40,14 +40,14 @@
                     <span class="small text-muted" th:text="${post.replies}"></span>
                     <a th:if="${session.userName} eq 'admin'"
                        th:href="(${post.isGood} ? '/noGood/' : '/toGood/') + ${post.postId}"
-                       th:text="( ${post.isGood} ? '取消加精' : '加精')" class="btn-sm btn-outline-primary "
+                       th:text="( ${post.isGood} ? '取消加精' : '加精')" class="btn btn-outline-primary btn-sm"
                        role="button"></a>
                     <a th:if="${session.userName} eq 'admin'"
                        th:href="(${post.isPicked} ? '/noPick/' : '/toPick/') + ${post.postId}"
-                       th:text="( ${post.isPicked} ? '取消置顶' : '置顶')" class="btn-sm btn-outline-primary "
+                       th:text="( ${post.isPicked} ? '取消置顶' : '置顶')" class="btn btn-outline-primary btn-sm"
                        role="button"></a>
-                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/toEditPost/'+${post.postId}}"  class="btn-sm btn-outline-danger" role="button">更改</a>
-                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/postDel/'+${post.postId}}"  class="btn-sm btn-outline-danger" role="button">删除</a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/toEditPost/'+${post.postId}}"  class="btn btn-outline-danger btn-sm" role="button">更改</a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/postDel/'+${post.postId}}"  class="btn btn-outline-danger btn-sm" role="button">删除</a>
                 </div>
             </div>
 
