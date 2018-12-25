@@ -1,6 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.dao;
 
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
+import javafx.geometry.Pos;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,7 +29,7 @@ public interface PostDao extends JpaRepository<PostEntity, Integer>, JpaSpecific
     @Query(value="UPDATE PostEntity ps SET ps.isPicked=:isPicked WHERE ps.postId= :id")
     void editPicked(@Param("isPicked")Byte isPicked,@Param("id") int post_id);
 
-    List<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId);
+    Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Pageable pageable);
 
     @Modifying
     @Transactional

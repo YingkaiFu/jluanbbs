@@ -19,8 +19,9 @@ public class PostService {
     @Autowired
     private PostDao postDao;
 
-    public List<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId){
-        return postDao.findAllByPlateIdOrderByIsPickedDesc(plateId);
+    public Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "isPicked");
+        return postDao.findAllByPlateIdOrderByIsPickedDesc(plateId, pageable);
     }
     public List<PostEntity> findAll(){ return postDao.findAll(); }
     public Long count() {return postDao.count();}

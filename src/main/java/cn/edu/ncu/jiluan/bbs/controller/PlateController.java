@@ -19,8 +19,8 @@ public class PlateController {
 
     @RequestMapping(value = "/plate/{plateId}/{page}", method = RequestMethod.GET)
     public String findPostEntitiesByPlateId(@PathVariable Integer plateId, @PathVariable Integer page, Model model) {
-        model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId, page, 10));
-        model.addAttribute("postList", postService.findAllByPlateIdOrderByIsPickedDesc(plateId));
+        //model.addAttribute("postList",plateService.findPostEntitiesByPlateId(plateId, page, 10));
+        model.addAttribute("postList", postService.findAllByPlateIdOrderByIsPickedDesc(plateId, page, 10));
 
         model.addAttribute("plateList", plateService.findAll());
         model.addAttribute("plate", plateService.findPlateEntityByPlateId(plateId));
