@@ -16,6 +16,8 @@ public class PlateService    {
     @Autowired
     private PlateDao plateDao;
 
+    @Autowired
+    private PostDao postDao;
 
     @Autowired
     private ReplyDao replyDao;

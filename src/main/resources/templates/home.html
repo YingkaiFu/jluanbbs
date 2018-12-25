@@ -18,7 +18,7 @@
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <a th:href="@{/addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
+                <a th:href="${session.userId}==null ? '/login' : '/addNewPost'" class="btn btn-primary btn-block" role="button">发帖</a>
             </div>
             <div th:if="${session.userName} eq 'admin'" class="col" style="height: 90px">
                 <a href="/userMgr/0" class="btn btn-primary btn-block" role="button">查看用户名单</a>
