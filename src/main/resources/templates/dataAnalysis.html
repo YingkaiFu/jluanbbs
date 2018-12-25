@@ -16,19 +16,20 @@
             padding: 4px 20px;
         }
     </style>
-    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
-    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
-    <script src="https://img.hcharts.cn/highcharts-plugins/highcharts-zh_CN.js"></script>
-    <script src="http://cdn.hcharts.cn/highcharts/modules/data.js"></script>
+    <script th:src="@{/js/highcharts.js}"></script>
+    <script th:src="@{/js/exporting.js}"></script>
+    <script th:src="@{/js/highcharts-zh_CN.js}"></script>
+    <script th:src="@{/js/data.js}"></script>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 
 </head>
 <body>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-<p>数据表格</p>
-<table id="datatable">
+<table hidden id="datatable">
     <thead>
     <tr>
         <th></th>
