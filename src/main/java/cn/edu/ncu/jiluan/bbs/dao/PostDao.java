@@ -43,4 +43,7 @@ public interface PostDao extends JpaRepository<PostEntity, Integer>, JpaSpecific
     @Modifying
     @Transactional
     void deletePostEntityByPostId(Integer postId);
+
+    long countPostEntityByPlateId(Integer plateId);
+
 }

@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"><link rel="icon" href="https://static.jianshukeji.com/highcharts/images/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        /* css 代码  */
+        #datatable {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+            border-spacing: 0;
+            font-size: 12px;
+        }
+        td,th {
+            border: 1px solid #ccc;
+            padding: 4px 20px;
+        }
+    </style>
+    <script th:src="@{/js/highcharts.js}"></script>
+    <script th:src="@{/js/exporting.js}"></script>
+    <script th:src="@{/js/highcharts-zh_CN.js}"></script>
+    <script th:src="@{/js/data.js}"></script>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+
+</head>
+<body>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<table hidden id="datatable">
+    <thead>
+    <tr>
+        <th></th>
+        <th>发帖数</th>
+        <th>回帖数</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="plateInfo:${plateInfoList}" >
+        <th th:text="${plateInfo.plateName}" />
+        <td th:text="${plateInfo.getPostCount()}" />
+        <td th:text="${plateInfo.getReplyCount()}" />
+    </tr>
+
+</table>
+<script>
+    var chart = Highcharts.chart('container', {
+        data: {
+            table: 'datatable'
+        },
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: '各版块热度表'
+            // 该功能依赖 data.js 模块，详见https://www.hcharts.cn/docs/data-modules
+        },
+        yAxis: {
+            allowDecimals: false,
+            title: {
+                text: '个',
+                rotation: 0
+            }
+        },
+        tooltip: {
+            formatter: function () {
+                return '<b>' + this.series.name + '</b><br/>' +
+                    this.point.y + ' 个' + this.point.name.toLowerCase();
+            }
+        }
+    });
+</script>
+</body>
+</html>
