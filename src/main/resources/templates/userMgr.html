@@ -8,14 +8,7 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="background-color: #ffc107">
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">查看用户信息</a><h5>欢迎您，管理员</h5>
-        <div class="my-2 my-sm-0">
-            <a href="/" class="btn btn-outline-success" role="button">登出
-            </a>
-        </div>
-    </nav>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container">
     <table class="table">
@@ -35,7 +28,7 @@
         <tr th:each="user:${page}">
             <td th:text="${user.userId}"></td>
             <td th:text="${user.userName}"></td>
-            <td th:text="${user.gender}"></td>
+            <td th:text="${user.gender}?'男':'女'"></td>
             <td th:text="${user.birthday}"></td>
             <td th:text="${user.provinceByProvinceId.provinceName}"></td>
             <td th:text="${user.cityByCityId.cityName}"></td>

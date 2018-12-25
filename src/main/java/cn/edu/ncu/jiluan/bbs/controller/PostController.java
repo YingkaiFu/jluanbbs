@@ -1,9 +1,10 @@
 package cn.edu.ncu.jiluan.bbs.controller;
 
-import cn.edu.ncu.jiluan.bbs.entity.PlateEntity;
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
-import cn.edu.ncu.jiluan.bbs.entity.UserEntity;
-import cn.edu.ncu.jiluan.bbs.service.*;
+import cn.edu.ncu.jiluan.bbs.service.PlateService;
+import cn.edu.ncu.jiluan.bbs.service.PostLikedService;
+import cn.edu.ncu.jiluan.bbs.service.PostService;
+import cn.edu.ncu.jiluan.bbs.service.ReplyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,12 +12,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.sql.Timestamp;
-import java.util.List;
 
 /**
  * Created by krito on 2018/12/20
@@ -53,7 +51,7 @@ public class PostController {
         replyService.deleteReplyEntitiesByPostId(postId);
         postLikedService.deleteReplyEntitiesByPostId(postId);
         postService.deletePostEntityByPostId(postId);
-        return "redirect:/adminPage";
+        return "redirect:/";
     }
     @RequestMapping(value = "/addNewPost",method = RequestMethod.GET)
     public String getPlate(Model model){
@@ -86,27 +84,21 @@ public class PostController {
     @RequestMapping(value = "/toPick/{postId}")
     public String toPick(@PathVariable Integer postId){
         postService.editPicked(postId, false);
-        return "redirect:/adminPage";
+        return "redirect:/";
     }
     @RequestMapping(value = "/noPick/{postId}")
-    public String noPick(@PathVariable Integer postId){
+    public String noPick(@PathVariable Integer postId) {
         postService.editPicked(postId, true);
-        return "redirect:/adminPage";
-    public String pickPost(@PathVariable Integer postId){
-        postService.editPicked(postId);
         return "redirect:/";
     }
     @RequestMapping(value = "/toGood/{postId}")
     public String toGood(@PathVariable Integer postId){
         postService.editGood(postId,false);
-        return "redirect:/adminPage";
+        return "redirect:/";
     }
     @RequestMapping(value = "/noGood/{postId}")
     public String noGood(@PathVariable Integer postId){
         postService.editGood(postId,true);
-        return "redirect:/adminPage";
-    public String goodPost(@PathVariable Integer postId){
-        postService.editGood(postId);
         return "redirect:/";
     }
 
