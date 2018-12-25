@@ -30,6 +30,9 @@ public class PostService {
         return postDao.findAll(pageable);
     }
 
+    public void addView(int post_id) {
+        postDao.addView(post_id);
+    }
     public void deletePostEntityByPostId(Integer postId){
         postDao.deletePostEntityByPostId(postId);
     }

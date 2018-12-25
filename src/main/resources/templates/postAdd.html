@@ -7,6 +7,7 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/wangEditor.min.js}"></script>
 </head>
 <body>
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
@@ -25,14 +26,43 @@
                     ></option>
             </select>
         </div>
+        <label style="margin-left: 20px">发帖内容：</label>
+        <div id="div1" class="col-10">
+            <p></p>
+        </div>
+
         <div class="form-group">
-            <label for="content" style="margin-left: 20px">发帖内容：</label>
-            <textarea  th:field="*{postCont}" class="form-control" id="content" rows="3"style="width: 80%;margin: 10px auto auto 20px"></textarea>
+            <textarea hidden id="text1" th:field="*{postCont}" style="width:100%; height:200px;"></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary" style="margin-left: 25px">发布</button>
-
     </form>
 </div>
+<script>
+    var E = window.wangEditor;
+    var editor = new E('#div1');
+    var $text1 = $('#text1');
+    editor.customConfig.menus = [
+        'head',  // 标题
+        'bold',  // 粗体
+        'fontSize',  // 字号
+        'fontName',  // 字体
+        'italic',  // 斜体
+        'underline',  // 下划线
+        'strikeThrough',  // 删除线
+        'foreColor',  // 文字颜色
+        'backColor',  // 背景颜色
+        'link',  // 插入链接
+        'list',  // 列表
+        'justify',  // 对齐方式
+        'quote',  // 引用
+        'emoticon',  // 表情
+    ]
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html);
+    }
+    editor.create();
+    $text1.val(editor.txt.html());
+</script>
 </body>
 </html>

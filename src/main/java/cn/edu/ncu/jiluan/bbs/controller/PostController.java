@@ -60,6 +60,11 @@ public class PostController {
         return "postAdd";
     }
 
+    @RequestMapping(value = "/editor")
+    public String editor(Model model) {
+        return "fragments/editor";
+    }
+
     @RequestMapping(value = "/addPost",method = RequestMethod.POST)
     public String postAdd(@Valid PostEntity postEntity, HttpServletRequest request){
         HttpSession session=request.getSession();
