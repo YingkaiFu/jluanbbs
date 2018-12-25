@@ -68,6 +68,6 @@ public class PostService {
             postDao.editGood(Byte.valueOf("1"),postId);
         else
             postDao.editGood(Byte.valueOf("0"),postId);
-    };
+    }
 
 }
