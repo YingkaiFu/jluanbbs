@@ -38,7 +38,6 @@ public class PostController {
         model.addAttribute("postList",postService.findAll());
         model.addAttribute("plateList",plateService.findAll());
         return "home";
-
     }
 
     @RequestMapping(value = "/plateMgr/{plateId}/postDel/{postId}",method = RequestMethod.GET)
@@ -82,20 +81,17 @@ public class PostController {
     public String editPost(PostEntity postEntity,HttpServletRequest request){
         HttpSession session=request.getSession();
         postService.editPost(postEntity);
-        System.out.println(session.getAttribute("userName"));
-        if(session.getAttribute("userName").equals("admin"))
-            return "redirect:/adminPage";
         return "redirect:/postList";
     }
     @RequestMapping(value = "/toPick/{postId}")
     public String pickPost(@PathVariable Integer postId){
         postService.editPicked(postId);
-        return "redirect:/adminPage";
+        return "redirect:/";
     }
     @RequestMapping(value = "/toGood/{postId}")
     public String goodPost(@PathVariable Integer postId){
         postService.editGood(postId);
-        return "redirect:/adminPage";
+        return "redirect:/";
     }
 
 
