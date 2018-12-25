@@ -34,7 +34,7 @@
         </tbody>
     </table>
 
-    <ul class="pagination" th:align="center">
+    <ul th:if="${page.totalPages > 0}" class="pagination" th:align="center">
         <!-- 上一页 -->
         <li class="page-item" data-th-classappend="*{page.isFirst()} ? 'disabled' : ''">
             <a th:href="@{'/userMgr/'+ ${(page.number - 1)}}" class="page-link" data-th-attr="pageIndex=${page.number} - 1" aria-label="Previous">
@@ -42,7 +42,7 @@
             </a>
         </li>
         <!-- 迭代生成页码 -->
-        <li th:if="${page.totalPages > 0}" class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
+        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
             data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''" >
             <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="'/userMgr/'+${i - 1}">
                 <span data-th-text="${i}"></span>
