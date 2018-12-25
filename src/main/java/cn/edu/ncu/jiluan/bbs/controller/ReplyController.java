@@ -34,4 +34,12 @@ public class ReplyController {
         replyService.addReply(replyEntity);
         return "redirect:/post/{postId}";
     }
+
+    @RequestMapping(value = "/question/{postId}/addReply", method = RequestMethod.POST)
+    public String addQuestionReply(@Valid ReplyEntity replyEntity, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        replyEntity.setUserId((Integer)session.getAttribute("userId"));
+        replyService.addReply(replyEntity);
+        return "redirect:/question/{postId}";
+    }
 }
