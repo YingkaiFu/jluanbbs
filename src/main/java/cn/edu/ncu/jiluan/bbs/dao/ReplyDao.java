@@ -16,4 +16,6 @@ public interface ReplyDao extends JpaRepository<ReplyEntity, Integer> {
     @Modifying
     @Transactional
     void deleteReplyEntitiesByPostId(Integer postId);
+
+    void countReplyEntityByPostId(Integer postId);
 }
