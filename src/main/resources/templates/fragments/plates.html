@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>JluanBBS</title>
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body th:fragment="plates">
+<button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
+<tr th:each="plate:${plateList}">
+    <td>
+        <a th:onclick="'javascript:getPosts('+${plate.plateId}+');'" class="btn btn-outline-success"
+           role="button"
+           th:text="${plate.plateName}"></a>
+    </td>
+</tr>
+</body>
+</html>

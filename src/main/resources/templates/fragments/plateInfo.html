@@ -38,6 +38,10 @@
                     <span class="small text-muted" th:text="${post.likes}"></span>
                     <i class="far fa-comment-dots"></i>
                     <span class="small text-muted" th:text="${post.replies}"></span>
+                    <a th:if="${session.userName} eq 'admin'" th:href="(${post.isPicked} ? '/noGood/' : '/toGood/') + ${post.postId}" th:text="( ${post.isPicked} ? '取消加精' : '加精')" class="btn-sm btn-outline-primary " role="button">加精</a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="(${post.isPicked} ? '/noPick/' : '/toPick/') + ${post.postId}" th:text="( ${post.isPicked} ? '取消置顶' : '置顶')" class="btn-sm btn-outline-primary " role="button">置顶</a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/toEditPost/'+${post.postId}}"  class="btn-sm btn-outline-danger" role="button">更改</a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/postDel/'+${post.postId}}"  class="btn-sm btn-outline-danger" role="button">删除</a>
                 </div>
             </div>
 

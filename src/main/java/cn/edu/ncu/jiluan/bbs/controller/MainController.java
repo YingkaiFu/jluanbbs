@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.jws.WebParam;
 import java.util.List;
 
 @Controller
@@ -22,13 +23,20 @@ public class MainController {
     private PostService postService;
 
     @RequestMapping("/")
-    public String viewPlate(Model model){
-        model.addAttribute("postList",postService.findAll());
-        model.addAttribute("plateList",plateService.findAll());
-        model.addAttribute("quesList",postService.findPostEntitiesByIspost(Byte.valueOf("1")));
+    public String viewPlate(){
         return "home";
     }
 
+    @RequestMapping("/plate")
+    public String getPlates(Model model){
+        model.addAttribute("plateList",plateService.findAll());
+        return "fragments/plates";
+    }
+    @RequestMapping("/questions")
+    public String getQuestions(Model model){
+        model.addAttribute("quesList",postService.findPostEntitiesByIspost(Byte.valueOf("1")));
+        return "fragments/question";
+    }
     @RequestMapping("adminPage")
     public String viewPlate_Mgr(Model model){
         model.addAttribute("postList",postService.findAll());

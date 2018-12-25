@@ -1,7 +1,6 @@
 package cn.edu.ncu.jiluan.bbs.dao;
 
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
-import javafx.geometry.Pos;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
