@@ -15,47 +15,61 @@
     <li class="list-group-item" th:each="post:${postList}">
         <div>
             <div>
+                <span th:if="${post.isPicked}==1">
+                    <span class="badge badge-danger" th:text="置顶"></span>
+                </span>
+                <span th:if="${post.isGood}==1">
+                    <span class="badge badge-danger" th:text="精"></span>
+                </span>
                 <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-md-5">
                     <span class="badge badge-primary" th:text="${post.userByUserId.userName}"></span>
                     <span class="badge badge-secondary" th:text="${post.plateByPlateId.plateName}"></span>
 
                 </div>
 
-                <div class="col" style="text-align: right">
+                <div class="col-md-7" style="text-align: right">
                     <i class="far fa-eye"></i>
                     <span class="small text-muted" th:text="${post.views}"></span>
-                    <i class="fas fa-heart"></i>
                     <i class="far fa-heart"></i>
                     <span class="small text-muted" th:text="${post.likes}"></span>
                     <i class="far fa-comment-dots"></i>
                     <span class="small text-muted" th:text="${post.replies}"></span>
+                    <a th:if="${session.userName} eq 'admin'"
+                       th:href="(${post.isGood} ? '/noGood/' : '/toGood/') + ${post.postId}"
+                       th:text="( ${post.isGood} ? '取消加精' : '加精')" class="btn btn-outline-primary btn-sm"
+                       role="button"></a>
+                    <a th:if="${session.userName} eq 'admin'"
+                       th:href="(${post.isPicked} ? '/noPick/' : '/toPick/') + ${post.postId}"
+                       th:text="( ${post.isPicked} ? '取消置顶' : '置顶')" class="btn btn-outline-primary btn-sm"
+                       role="button"></a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/toEditPost/'+${post.postId}}"  class="btn btn-outline-danger btn-sm" role="button">更改</a>
+                    <a th:if="${session.userName} eq 'admin'" th:href="@{'/postDel/'+${post.postId}}"  class="btn btn-outline-danger btn-sm" role="button">删除</a>
                 </div>
             </div>
 
         </div>
     </li>
 
-    <ul class="pagination" th:align="center">
+    <ul th:if="${postList.totalPages > 0}" class="pagination" th:align="center">
         <!-- 上一页 -->
         <li class="page-item" data-th-classappend="*{postList.isFirst()} ? 'disabled' : ''">
-            <a th:href="@{'/plate/'+ ${plate.plateId} + '/' + ${(postList.number - 1)}}" class="page-link" data-th-attr="pageIndex=${postList.number} - 1" aria-label="Previous">
+            <a th:onclick="'javascript:getPosts('+${plate.plateId}+','+${(postList.number - 1)}+');'" class="page-link" data-th-attr="pageIndex=${postList.number} - 1" aria-label="Previous">
                 <span aria-hidden="true">«</span>
             </a>
         </li>
         <!-- 迭代生成页码 -->
-        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, postList.totalPages)}"
+        <li class="page-item" th:each="i : ${#numbers.sequence(1, postList.totalPages)}"
             data-th-classappend="${(postList.number + 1) eq i} ? 'active' : ''" >
-
-            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{'/plate/'+ ${plate.plateId}+ '/' + ${i - 1}}">
-                <span data-th-text="${i}"></span>
+            <a class="page-link" th:onclick="'javascript:getPosts('+${plate.plateId}+','+${i - 1}+');'">
+                <span th:text="${i}"></span>
             </a>
         </li>
         <!-- 下一页 -->
         <li class="page-item" data-th-classappend="*{postList.isLast()} ? 'disabled' : ''">
-            <a th:href="@{'/plate/'+ ${plate.plateId} + '/' + ${postList.number + 1}}" class="page-link" data-th-attr="pageIndex=${postList.number} + 1" aria-label="Next">
+            <a th:onclick="'javascript:getPosts('+${plate.plateId}+','+${(postList.number + 1)}+');'" class="page-link" aria-label="Next">
                 <span aria-hidden="true">»</span>
             </a>
         </li>

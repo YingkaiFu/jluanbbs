@@ -9,48 +9,63 @@
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
-<body onload="getPosts(9)">
+<body onload="getPosts(9,0);loadPlates();loadQuestions()">
+<div th:if="${session.userName} eq 'admin'" >
+    <script th:inline="javascript" th:if="${session.toPick}==1">
+        alert("置顶成功！");
+    </script>
+    <script th:if="${session.toPick}==0">
+        alert("取消置顶成功！");
+    </script>
+    <script th:if="${session.toGood}==1">
+        alert("加精成功！");
+    </script>
+    <script th:if="${session.toGood}==0">
+        alert("取消加精成功！");
+    </script>
+    <script th:if="${session.delFlag}==1">
+        alert("删除帖子成功");
+    </script>
+</div>
+
+
+<body onload="getPosts(9, 0);loadPlates();loadQuestions()">
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-md-8 " style="height: 900px;" id="plateList">
+        <div class="col-md-8 " style="height: 900px;" id="postList">
         </div>
         <div class="col-md-4" style="height: 300px;">
             <div class="col" style="height: 50px">
-                <a th:href="@{/addNewPost}" class="btn btn-primary btn-block" role="button">发帖</a>
+                <a th:href="${session.userId}==null ? '/login' : '/addNewPost'" class="btn btn-primary btn-block" role="button">发帖</a>
             </div>
-            <div class="col">
-                <button type="button" class="btn btn-outline-info btn-block disabled">板块</button>
-                <tr th:each="plate:${plateList}">
-                    <td>
-                        <a th:onclick="'javascript:getPosts('+${plate.plateId}+');'" class="btn btn-outline-success"
-                           role="button"
-                           th:text="${plate.plateName}"></a>
-                    </td>
-                </tr>
+            <div th:if="${session.userName} eq 'admin'" class="col" style="height: 90px">
+                <a href="/userMgr/0" class="btn btn-primary btn-block" role="button">查看用户名单</a>
+                <a href="/" class="btn btn-primary btn-block" role="button">数据分析</a>
+            </div>
+            <div class="col" id="Plates">
             </div>
             <div class="col" style="padding-top: 20px">
                 <button type="button" class="btn btn-outline-danger btn-block disabled">问答</button>
             </div>
-            <div class="col" th:each="ques:${quesList}">
-                <div class="card">
-                    <div class="card-body">
-                        <blockquote class="blockquote text-center">
-                            <a th:href="@{'/question/'+${ques.postId}}" class="mb-0" th:text="${ques.postTopic}"></a>
-                            <footer class="blockquote-footer" th:text="${ques.userByUserId.userName}">
-                            </footer>
-                        </blockquote>
-                    </div>
-                </div>
+            <div class="col" id="questionList">
             </div>
         </div>
     </div>
 </div>
 <script>
-    function getPosts(plateId) {
-        var url = '/plate/' + plateId+'/0';
-        $("#plateList").load(url);
+    function getPosts(plateId, pageId) {
+        var url = '/plate/' + plateId+'/'+pageId;
+        $("#postList").load(url);
+    }
+    function loadPlates() {
+        var url = '/plate';
+        $('#Plates').load(url);
+    }
+    function loadQuestions() {
+        var url='/questions';
+        $('#questionList').load(url);
     }
 </script>
 </body>

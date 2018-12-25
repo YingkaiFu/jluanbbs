@@ -45,20 +45,24 @@ public class LoginController {
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
     public String Login(@Valid UserEntity userEntity, HttpServletRequest request, Model model) {
         ModelAndView modelAndView = new ModelAndView();
+
         String message = "";
         int n = userService.login(userEntity.getUserName(), userEntity.getPassword());
         HttpSession session = request.getSession();
+        session.removeAttribute("regFlag");
         if (n == 0) {
             //获取session并将userName存入session对象
             session.setAttribute("userName", userEntity.getUserName());
             session.setAttribute("userId", userService.findUserEntityByUserName(userEntity.getUserName()).getUserId());
-            if (userEntity.getUserName().equals("admin"))
-                return "redirect:/adminPage";
             return "redirect:/";
         } else {
             if (n == 1) {
-                message = "该用户未注册";
+                session.setAttribute("Message",1);
                 return "redirect:/registration";
+            }
+            if(n==-1){
+                session.setAttribute("Message",-1);
+                return "redirect:/login";
             }
         }
         return "redirect:/login";
@@ -84,16 +88,17 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
-    public String createNewUser(@Valid UserEntity user,Model model) {
+    public String createNewUser(@Valid UserEntity user,Model model,HttpServletRequest request) {
         System.out.println(user.getUserName());
+        HttpSession session=request.getSession();
         UserEntity userExists = userService.findUserEntityByUserName(user.getUserName());
         System.out.println(userExists);
         if (userExists != null) {
-            model.addAttribute("Message", "注册失败");
+            session.setAttribute("regFlag", "0");
             return "redirect:/registration";
         } else {
             userService.saveUser(user);
-            model.addAttribute("Message", "注册成功");
+            session.setAttribute("regFlag", "1");
             return "redirect:/login";
         }
     }

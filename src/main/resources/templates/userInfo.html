@@ -33,14 +33,7 @@
                 </li>
                 <li class="list-group-item">
                     <div>
-                        <div th:text="'出生年月：   '+${user.birthday}">
-                            出生年月：   1999-06-12
-                        </div>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <div>
-                        <div th:text="'工作地点：    '+${user.provinceByProvinceId.provinceName}+${user.cityByCityId.cityName}">
+                        <div th:text="'工作地点：    '+${user.provinceByProvinceId.provinceName}">
                             工作地点：   北京市北京市
                         </div>
                     </div>
@@ -54,7 +47,7 @@
                 </li>
                 <li class="list-group-item">
                     <div>
-                        <div th:text="'联系电话：    '+${user.tel}">
+                        <div th:text="'联系电话：    '+(${user.tel}!=null?${user.tel}:'请填写您的电话')">
                             联系电话：   15879039576
                         </div>
                     </div>

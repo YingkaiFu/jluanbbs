@@ -9,6 +9,11 @@
 </head>
 
 <body>
+<script th:if="${session.regFlag}==0">
+    alert("注册失败，用户名已存在！");
+</script>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
+</div>
 <div class="container" style="padding-top: 100px">
     <div class="row">
         <div class="col-3">
@@ -23,30 +28,33 @@
                 </div>
                 <div class="form-group">
                     <label class="validation-message">用户名</label>
-                    <input type="text" th:field="*{userName}" placeholder="Name"
+                    <input type="text" th:field="*{userName}" required="required" placeholder="Name"
                            class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label class="validation-message">密码</label>
-                    <input type="password" th:field="*{password}"
+                    <input type="password" th:field="*{password}" required="required" maxlength="15"
                            placeholder="Password" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label class="validation-message">工作性质</label>
-                    <select th:field="*{plateId}" class="form-control" id="workType" style="width: 80%;margin: 10px auto auto 20px" >
+                    <select th:field="*{plateId}" class="form-control" id="workType"  >
                         <option th:each="plate:${plates}" th:text="${plate.plateName}" th:value="${plate.plateId}"
                         ></option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label class="validation-message">工作省份</label>
-                    <select th:field="*{provinceId}" class="form-control" id="workProvince" style="width: 80%;margin: 10px auto auto 20px" >
+                    <select th:field="*{provinceId}" class="form-control" id="workProvince" >
                         <option th:each="province:${provinces}" th:text="${province.provinceName}" th:value="${province.provinceId}">
-
                         </option>
                     </select>
                 </div>
-
+                <div class="form-group">
+                    <label class="validation-message">电话</label>
+                    <input type="text" th:field="*{tel}" placeholder="Tel"
+                           class="form-control"/>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block">注册</button>
                 <h2><span class="text-success" th:text="${Message}"></span></h2>
             </form>

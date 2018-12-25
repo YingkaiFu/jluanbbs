@@ -1,5 +1,6 @@
 package cn.edu.ncu.jiluan.bbs.controller;
 
+import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
 import cn.edu.ncu.jiluan.bbs.entity.ReplyEntity;
 import cn.edu.ncu.jiluan.bbs.service.PostService;
 import cn.edu.ncu.jiluan.bbs.service.ReplyService;
@@ -20,9 +21,12 @@ public class ViewController {
 
     @RequestMapping(value = "/post/{postId}",method = RequestMethod.GET)
     public String GetPostContent(@PathVariable Integer postId, Model model){
-        model.addAttribute("post",postService.findPostEntityByPostId(postId,Byte.valueOf("0")));
+        PostEntity post = postService.findPostEntityByPostId(postId, Byte.valueOf("0"));
+
+        model.addAttribute("post", post);
         model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
         model.addAttribute("reply",new ReplyEntity());
+        postService.addView(postId);
         return "postContent";
     }
 

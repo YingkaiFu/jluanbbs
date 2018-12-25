@@ -7,8 +7,9 @@
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css">
     <script th:src="@{/js/jquery.min.js}"></script>
     <script th:src="@{/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/wangEditor.min.js}"></script>
 </head>
-<body>
+<body onload="loadEditor()">
 <div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 
@@ -19,21 +20,43 @@
             <textarea type="text" th:field="*{postTopic}" th:placeholder="${post.postTopic}" class="form-control" id="theme" style="width: 80%; margin: 10px auto auto 20px" ></textarea>
         </div>
         <div class="form-group">
-            <label for="content" style="margin-left: 20px">发帖内容：</label>
-            <textarea  th:field="*{postCont}" th:placeholder="${post.postCont}" class="form-control" id="content" rows="3"style="width: 80%;margin: 10px auto auto 20px"></textarea>
+            <label style="margin-left: 20px">发帖内容：</label>
+            <div class="col-10" id="div1">
+                <p></p>
+            </div>
+            <textarea hidden id="text1" th:field="*{postCont}" th:placeholder="${post.postCont}" class="form-control"
+                      rows="3" style="width: 80%;margin: 10px auto auto 20px"></textarea>
         </div>
         <div class="form-group">
-            <textarea hidden th:field="*{plateId}" th:placeholder="${post.plateId}" class="form-control" id="plateId" ></textarea>
-            <textarea hidden th:field="*{postId}" th:placeholder="${post.postId}" class="form-control" id="postId" ></textarea>
-            <textarea hidden th:field="*{userId}" th:placeholder="${post.userId}" class="form-control" id="userId" ></textarea>
+            <textarea hidden th:field="*{plateId}" th:placeholder="${post.plateId}" class="form-control"
+                      id="plateId"></textarea>
+            <textarea hidden th:field="*{postId}" th:placeholder="${post.postId}" class="form-control"
+                      id="postId"></textarea>
+            <textarea hidden th:field="*{userId}" th:placeholder="${post.userId}" class="form-control"
+                      id="userId"></textarea>
             <input hidden th:field="*{isPicked}" th:value="0">
             <input hidden th:field="*{ispost}" th:value="0">
-
         </div>
 
         <button type="submit" class="btn btn-primary" style="margin-left: 25px">更改</button>
 
     </form>
 </div>
+<script>
+    var E = window.wangEditor;
+    var editor = new E('#div1');
+    var $text1 = $('#text1');
+    editor.customConfig.onchange = function (html) {
+        $text1.val(html);
+    }
+    editor.create();
+    $text1.val(editor.txt.html());
+    editor.txt.html($text1.innerText);
+
+    function loadEditor() {
+        var url = '/editor';
+        $('#editor').load(url);
+    }
+</script>
 </body>
 </html>

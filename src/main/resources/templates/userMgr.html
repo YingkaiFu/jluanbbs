@@ -8,14 +8,7 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 <body>
-<div class="container-fluid" style="background-color: #ffc107">
-    <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="#">查看用户信息</a><h5>欢迎您，管理员</h5>
-        <div class="my-2 my-sm-0">
-            <a href="/" class="btn btn-outline-success" role="button">登出
-            </a>
-        </div>
-    </nav>
+<div class="container-fluid" style="background-color: #ffc107" data-th-replace="fragments/navigator::nav">
 </div>
 <div class="container">
     <table class="table">
@@ -24,9 +17,7 @@
             <th scope="col">编号</th>
             <th scope="col">用户名</th>
             <th scope="col">性别</th>
-            <th scope="col">生日</th>
-            <th scope="col">省</th>
-            <th scope="col">市</th>
+            <th scope="col">工作地点</th>
             <th scope="col">工作性质</th>
             <th scope="col">联系电话</th>
         </tr>
@@ -35,10 +26,8 @@
         <tr th:each="user:${page}">
             <td th:text="${user.userId}"></td>
             <td th:text="${user.userName}"></td>
-            <td th:text="${user.gender}"></td>
-            <td th:text="${user.birthday}"></td>
+            <td th:text="${user.gender}?'男':'女'"></td>
             <td th:text="${user.provinceByProvinceId.provinceName}"></td>
-            <td th:text="${user.cityByCityId.cityName}"></td>
             <td th:text="${user.plateByPlateId.plateName}"></td>
             <td th:text="${user.tel}"></td>
         </tr>
@@ -53,10 +42,9 @@
             </a>
         </li>
         <!-- 迭代生成页码 -->
-        <li class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages - 1)}"
+        <li th:if="${page.totalPages > 0}" class="page-item" data-th-each="i : ${#numbers.sequence(1, page.totalPages)}"
             data-th-classappend="${(page.number + 1) eq i} ? 'active' : ''" >
-
-            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="@{'/userMgr/'+ ${i - 1}}">
+            <a class="page-link" data-th-attr="pageIndex=${i} - 1" th:href="'/userMgr/'+${i - 1}">
                 <span data-th-text="${i}"></span>
             </a>
         </li>
@@ -68,9 +56,5 @@
         </li>
     </ul>
 </div>
-
-
-
-
 </body>
 </html>
