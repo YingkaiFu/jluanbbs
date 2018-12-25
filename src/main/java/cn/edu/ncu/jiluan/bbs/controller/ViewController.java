@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(value = "")
 public class ViewController {
@@ -20,9 +23,9 @@ public class ViewController {
     private ReplyService replyService;
 
     @RequestMapping(value = "/post/{postId}",method = RequestMethod.GET)
-    public String GetPostContent(@PathVariable Integer postId, Model model){
+    public String GetPostContent(@PathVariable Integer postId, Model model, HttpServletRequest request){
         PostEntity post = postService.findPostEntityByPostId(postId, Byte.valueOf("0"));
-
+        HttpSession session = request.getSession();
         model.addAttribute("post", post);
         model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
         model.addAttribute("reply",new ReplyEntity());
