@@ -25,7 +25,7 @@ public class PostService {
         return postDao.findAll(pageable);
     }
     public Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Integer page, Integer size){
-        Pageable pageable = PageRequest.of(page, size, Sort.Direction.DESC, "lastReply");
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "lastReply");
         return postDao.findAllByPlateIdOrderByIsPickedDesc(plateId, pageable);
     }
     public List<PostEntity> findAll(){ return postDao.findAll(); }
