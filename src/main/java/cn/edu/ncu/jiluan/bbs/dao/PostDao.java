@@ -1,6 +1,7 @@
 package cn.edu.ncu.jiluan.bbs.dao;
 
 import cn.edu.ncu.jiluan.bbs.entity.PostEntity;
+import javafx.geometry.Pos;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -35,6 +36,7 @@ public interface PostDao extends JpaRepository<PostEntity, Integer>, JpaSpecific
 
 
     List<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId);
+    Page<PostEntity> findAllByPlateIdOrderByIsPickedDesc(Integer plateId, Pageable pageable);
 
     @Modifying
     @Transactional
