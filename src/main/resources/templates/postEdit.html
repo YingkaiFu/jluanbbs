@@ -26,6 +26,9 @@
             <textarea hidden th:field="*{plateId}" th:placeholder="${post.plateId}" class="form-control" id="plateId" ></textarea>
             <textarea hidden th:field="*{postId}" th:placeholder="${post.postId}" class="form-control" id="postId" ></textarea>
             <textarea hidden th:field="*{userId}" th:placeholder="${post.userId}" class="form-control" id="userId" ></textarea>
+            <input hidden th:field="*{isPicked}" th:value="0">
+            <input hidden th:field="*{ispost}" th:value="0">
+
         </div>
 
         <button type="submit" class="btn btn-primary" style="margin-left: 25px">更改</button>
