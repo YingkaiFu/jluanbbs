@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping(value = "")
 public class ViewController {
@@ -19,12 +22,12 @@ public class ViewController {
     @Autowired
     private ReplyService replyService;
 
-    @RequestMapping(value = "/post/{postId}",method = RequestMethod.GET)
-    public String GetPostContent(@PathVariable Integer postId, Model model){
+    @RequestMapping(value = "/post/{postId}/{page}",method = RequestMethod.GET)
+    public String GetPostContent(@PathVariable Integer postId,@PathVariable Integer page, Model model, HttpServletRequest request){
         PostEntity post = postService.findPostEntityByPostId(postId, Byte.valueOf("0"));
-
+        HttpSession session = request.getSession();
         model.addAttribute("post", post);
-        model.addAttribute("replyList",replyService.findReplyEntitiesByPostId(postId));
+        model.addAttribute("replyList",replyService.findReplyEntitiesByPostIdOrderByReplyId(postId, page, 10));
         model.addAttribute("reply",new ReplyEntity());
         postService.addView(postId);
         return "postContent";

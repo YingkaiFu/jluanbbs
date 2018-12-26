@@ -37,6 +37,13 @@
                            placeholder="Password" class="form-control"/>
                 </div>
                 <div class="form-group">
+                    <label class="validation-message">性别</label>
+                    <select th:field="*{gender}" class="form-control" id="gender" >
+                        <option th:text="男" th:value="1"></option>
+                        <option th:text="女" th:value="0"></option>
+                    </select>
+                </div>
+                <div class="form-group">
                     <label class="validation-message">工作性质</label>
                     <select th:field="*{plateId}" class="form-control" id="workType"  >
                         <option th:each="plate:${plates}" th:text="${plate.plateName}" th:value="${plate.plateId}"

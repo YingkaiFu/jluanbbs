@@ -42,9 +42,31 @@
                 </div>
             </li>
         </ul>
+
+        <ul th:if="${replyList.totalPages > 0}" class="pagination" th:align="center">
+            <!-- 上一页 -->
+            <li class="page-item" data-th-classappend="*{replyList.isFirst()} ? 'disabled' : ''">
+                <a th:href="@{'/post/'+${post.postId}+'/'+${(replyList.number - 1)}}" class="page-link" data-th-attr="pageIndex=${replyList.number} - 1" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                </a>
+            </li>
+            <!-- 迭代生成页码 -->
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, replyList.totalPages)}"
+                data-th-classappend="${(replyList.number + 1) eq i} ? 'active' : ''" >
+                <a class="page-link" th:href="@{'/post/'+${post.postId}+'/'+${(i - 1)}}">
+                    <span th:text="${i}"></span>
+                </a>
+            </li>
+            <!-- 下一页 -->
+            <li class="page-item" data-th-classappend="*{replyList.isLast()} ? 'disabled' : ''">
+                <a th:href="@{'/post/'+${post.postId}+'/'+${(replyList.number + 1)}}" class="page-link" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                </a>
+            </li>
+        </ul>
     </div>
     <p class="mb-0">评论</p>
-    <form th:action="@{${post.postId}+'/addReply'}" th:object="${reply}" method="post">
+    <form th:if="${session.userId}" th:action="${post.postId}+'/addReply'" th:object="${reply}" method="post">
         <div class="form-group">
             <!--<label for="comment">主题</label>-->
             <div id="div1">
@@ -52,7 +74,7 @@
             </div>
             <textarea hidden id="text1" th:field="*{replyCont}" class="form-control" rows="3"
                       placeholder="请输入你的评论"></textarea>
-            <div style="float: left"><button type="submit" class="btn button btn-success">评论</button></div>
+            <div style="float: left" ><button type="submit" class="btn button btn-success">评论</button></div>
             <div style="float: right" th:if="${session.userId==post.userId}">
                 <a th:href="@{'/toEditPost/'+${post.postId}}" role="button" class="btn button btn-info">更改</a>
             </div>

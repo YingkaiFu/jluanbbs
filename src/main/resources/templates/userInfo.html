@@ -55,7 +55,7 @@
             </ul>
         </div>
         <div class="col-md-4" style="height: 300px;">
-            <div class="col" style="height: 50px">
+            <div class="col" style="height: 50px" th:if="${session.userId}">
                 <a th:href="${session.userName.equals(user.userName)} ? ('/toEditUser/'+${user.userId}) : ''" th:text="${session.userName.equals(user.userName)} ? '修改信息' : '加为好友'" class="btn btn-primary btn-block" role="button"></a>
             </div>
         </div>

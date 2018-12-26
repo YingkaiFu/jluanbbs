@@ -3,6 +3,10 @@ package cn.edu.ncu.jiluan.bbs.service;
 import cn.edu.ncu.jiluan.bbs.dao.ReplyDao;
 import cn.edu.ncu.jiluan.bbs.entity.ReplyEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
@@ -32,6 +36,11 @@ public class ReplyService {
     }
     public ReplyEntity addReply(ReplyEntity replyEntity){
         return replyDao.save(replyEntity);
+    }
+
+    public Page<ReplyEntity> findReplyEntitiesByPostIdOrderByReplyId(Integer postId, Integer page, Integer size){
+        Pageable pageable = PageRequest.of(page, size, Sort.Direction.ASC, "replyId");
+        return replyDao.findReplyEntitiesByPostIdOrderByReplyId(postId, pageable);
     }
 
     public void updatePostRepliesCount(int postId){

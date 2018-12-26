@@ -21,11 +21,11 @@
                 <span th:if="${post.isGood}==1">
                     <span class="badge badge-danger" th:text="精"></span>
                 </span>
-                <a class="mb-1" th:href="@{'/post/'+${post.postId}}" th:text="${post.postTopic}"></a>
+                <a class="mb-1" th:href="@{'/post/'+${post.postId}+'/0'}" th:text="${post.postTopic}"></a>
             </div>
             <div class="row">
                 <div class="col-md-5">
-                    <span class="badge badge-primary" th:text="${post.userByUserId.userName}"></span>
+                    <a class="badge badge-primary" th:text="${post.userByUserId.userName}" th:href="'/userInfo/'+${post.userId}"></a>
                     <span class="badge badge-secondary" th:text="${post.plateByPlateId.plateName}"></span>
 
                 </div>
